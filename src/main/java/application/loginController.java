@@ -2,7 +2,6 @@ package application;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +40,6 @@ public class loginController {
     	
     	try {
 			if(user.isLogin(txtd.getText(), txtpassword.getText())) {
-				JOptionPane.showMessageDialog(null, "Welcome, "+user.getusername());
 				username = user.getusername();
 				if(user.getusername().equals("admin")){
 					// if user is admin
@@ -85,7 +83,7 @@ public class loginController {
 				}
 				
 			}else {
-				JOptionPane.showMessageDialog(null, "Username or Password is INCORRECT.");
+
 				txtd.setText("");
 				txtpassword.setText("");
 			}

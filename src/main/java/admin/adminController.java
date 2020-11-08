@@ -6,9 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import javax.swing.JOptionPane;
-
 import application.dbconnect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,7 +67,7 @@ public class adminController {
 				labmobileno.setText(rs.getString("mobileno"));
 				labemail.setText(rs.getString("email"));
 			}else {
-				JOptionPane.showMessageDialog(null, "NO More data to show!!!");
+	
 			}
 			
 		} catch (SQLException e) {
@@ -96,11 +93,10 @@ public class adminController {
     					labname.setText(" ");
         				labmobileno.setText(" ");
         				labemail.setText(" ");
-        				JOptionPane.showMessageDialog(null, "NO More data to show!!!");
+        
     				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				
 				System.out.println("error in next() -- admnController.java");
 			}
     	
@@ -122,7 +118,7 @@ public class adminController {
 			
 			
 			
-			JOptionPane.showMessageDialog(null, "Approved!!!");
+	
 			
 			//resetting the lable's if their is any row otherwise make it blank
 			if(rs.next()) {
@@ -138,7 +134,7 @@ public class adminController {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e);
+	
 		}
 		
     }
@@ -150,7 +146,7 @@ public class adminController {
 			preparedstatement.setString(1, rs.getString("username"));
 			preparedstatement.executeUpdate();
 			
-			JOptionPane.showMessageDialog(null, "deleted successfully!!");
+
 			
 			//resetting the lable's if their is any row otherwise make it blank
 			if(rs.next()) {
@@ -166,7 +162,7 @@ public class adminController {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e);
+		
 		}
     }
 	
