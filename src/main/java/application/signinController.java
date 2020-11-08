@@ -13,8 +13,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.sql.*;
 
-import javax.swing.JOptionPane;
-
 public class signinController {
 	dbconnect db = new dbconnect();
 	Connection conn = db.connect();
@@ -68,7 +66,7 @@ public class signinController {
             
             int status = pstmt.executeUpdate();
             if(status == 1) {
-            	JOptionPane.showMessageDialog(null, "data inserted successfully.");
+           
             	txtfirstname.setText("");
             	txtlastname.setText("");
             	txtusername.setText("");
@@ -76,7 +74,7 @@ public class signinController {
             	txtemail.setText("");
             	txtmobileno.setText("");
             }else {
-            	JOptionPane.showMessageDialog(null, "data inserted unsuccessfully.");
+          
             }
             
 		} catch (SQLException e) {
