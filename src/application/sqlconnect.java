@@ -2,12 +2,18 @@ package application;
 
 import java.sql.*;
 
-public class dbconnect {
-	public Connection connect() {
+//import javax.swing.JOptionPane;
+
+public class sqlconnect {
+	
+	static Connection conn;
+	
+	public static Connection dbconnect() {
 		
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:AV.db");
+			conn = DriverManager.getConnection("jdbc:sqlite:BankingSystem.db");
+//			JOptionPane.showMessageDialog(null, "database connected");
 			return conn;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -21,4 +27,5 @@ public class dbconnect {
 			return null;
 		}
 	}
+
 }
