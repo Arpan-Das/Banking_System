@@ -6,10 +6,9 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javafx"/>
-	<classpathentry kind="lib" path="C:/JAVA_my-JAR/activation.jar"/>
-	<classpathentry kind="lib" path="C:/JAVA_my-JAR/mail.jar"/>
-	<classpathentry kind="lib" path="C:/JAVA_my-JAR/sqlite-jdbc-3.8.11.2.jar"/>
+	<classpathentry kind="lib" path="sqlite-jdbc-3.8.10.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
+	<classpathentry kind="lib" path="activation.jar"/>
+	<classpathentry kind="lib" path="mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
