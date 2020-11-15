@@ -31,7 +31,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class BankingSystemController implements Initializable {
     @FXML
-    private AnchorPane login2, login1, signup2, signup1, forgetpassword, forgetusername,emailverification;
+    private AnchorPane login2, login1, signup2, signup1, forgetpassword, forgetusername,emailverification, resetpassword;
 
     @FXML
     private Label gotologin, home, gotoforgetpassword, gotoforgetusername;
@@ -87,6 +87,11 @@ public class BankingSystemController implements Initializable {
     private TextField txt_forgetPasswordUsername, txt_forgetPasswordEmailid, txt_forgetPasswordMobileno;
     @FXML
     private Button but_forgetPasswordSubmit;
+    
+    //////////reset password
+    @FXML private PasswordField txt_resetPasswordNewPassword, txt_ResetRasswordConformPassword;
+    @FXML private Button but_resetPasswordUpdate;
+    @FXML private Label lab_resetPasswordStatus;
     
     Connection conn;
     ResultSet rs;
@@ -145,6 +150,7 @@ public class BankingSystemController implements Initializable {
     		forgetusername.setVisible(false);
     		forgetpassword.setVisible(false);
     		emailverification.setVisible(false);
+    		resetpassword.setVisible(false);
     		
     	}
     }
@@ -181,6 +187,8 @@ public class BankingSystemController implements Initializable {
     	}else if(event.getSource() == but_verify) {
     		
     		verify();
+    	}else if(event.getSource() == but_resetPasswordUpdate) {
+    		resetpassword();
     	}
     }
    
@@ -286,6 +294,14 @@ public class BankingSystemController implements Initializable {
 			if(rs.next()) {
 				// ////user id found
 				JOptionPane.showMessageDialog(null, "Hello "+ rs.getString("firstname")+", Your Username is "+rs.getString("username"));
+				login1.setVisible(true);
+	    		signup1.setVisible(true);
+	    		login2.setVisible(false);
+	    		signup2.setVisible(false);
+	    		forgetusername.setVisible(false);
+	    		forgetpassword.setVisible(false);
+	    		emailverification.setVisible(false);
+	    		resetpassword.setVisible(false);
 			}else {
 				///////// user id not found
 				JOptionPane.showMessageDialog(null, "Please Enter the Correct Details");
@@ -297,7 +313,7 @@ public class BankingSystemController implements Initializable {
 		}
 	}
 	
-	public void forgetpassword() {
+	public void forgetpassword(ActionEvent event) {
 		conn = sqlconnect.dbconnect();
 		try {
 			
@@ -317,6 +333,9 @@ public class BankingSystemController implements Initializable {
 			
 			if(rs.next()) {
 				// ////user id found
+				resetpassword.setVisible(true);
+				
+					
 				
 			}else {
 				///////// user id not found
@@ -327,7 +346,31 @@ public class BankingSystemController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	public void resetpassword() {
+		try {
+			if(txt_resetPasswordNewPassword.getText().equals(txt_ResetRasswordConformPassword.getText())) {
+				prst = conn.prepareStatement("update user set password = ? where accno = "+ rs.getInt("accno"));
+				prst.setString(1, txt_resetPasswordNewPassword.getText());
+				prst.execute();
+				JOptionPane.showMessageDialog(null,"Password Update Successfully.");
+				login1.setVisible(true);
+	    		signup1.setVisible(true);
+	    		login2.setVisible(false);
+	    		signup2.setVisible(false);
+	    		forgetusername.setVisible(false);
+	    		forgetpassword.setVisible(false);
+	    		emailverification.setVisible(false);
+	    		resetpassword.setVisible(false);
+				
+			}else {
+				lab_resetPasswordStatus.setText("Password do not match !!!");
+			}
+		}catch(Exception e) {
+			
+		}
+	}
 	
+
 	public void Random() {
     		Random rd = new Random();
     		hide.setText(""+rd.nextInt(10000 + 1));		
@@ -423,6 +466,7 @@ public class BankingSystemController implements Initializable {
 		forgetusername.setVisible(false);
 		forgetpassword.setVisible(false);
 		emailverification.setVisible(false);
+		resetpassword.setVisible(false);
 		
 		ObservableList<String> list = FXCollections.observableArrayList("Male", "Female", "Others");
 		drop_gender.setItems(list);

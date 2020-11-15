@@ -145,7 +145,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="txt_forgetPassordUsername" layoutX="375.0" layoutY="100.0" promptText="Username*" />
+            <TextField fx:id="txt_forgetPasswordUsername" layoutX="375.0" layoutY="100.0" promptText="Username*" />
             <Label alignment="CENTER_RIGHT" layoutX="257.0" layoutY="148.0" prefHeight="20.0" prefWidth="86.0" text="Email Id* :" textFill="WHITE" AnchorPane.rightAnchor="457.0">
                <font>
                   <Font size="14.0" />
@@ -230,5 +230,31 @@
          </children>
       </AnchorPane>
       <Button fx:id="but_exit" layoutX="748.0" layoutY="2.0" mnemonicParsing="false" onAction="#exit" text="Exit" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="resetpassword" layoutX="100.0" layoutY="110.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #286bb8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <Label layoutX="342.0" layoutY="31.0" text="Reset Password" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="269.0" layoutY="94.0" text="New Password* :" textFill="WHITE" AnchorPane.rightAnchor="420.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="241.0" layoutY="142.0" text="Conform Password* :" textFill="WHITE" AnchorPane.rightAnchor="420.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="but_resetPasswordUpdate" layoutX="351.0" layoutY="200.0" mnemonicParsing="false" onAction="#buttonhandler" prefHeight="25.0" prefWidth="98.0" text="Update" />
+            <Label fx:id="lab_resetPasswordStatus" layoutX="584.0" layoutY="139.0" prefHeight="31.0" prefWidth="163.0" textFill="#fffd00">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="txt_resetPasswordNewPassword" layoutX="418.0" layoutY="92.0" promptText="New Password*" />
+            <PasswordField fx:id="txt_ResetRasswordConformPassword" layoutX="418.0" layoutY="142.0" promptText="Conform Password*" />
+         </children></AnchorPane>
    </children>
 </AnchorPane>

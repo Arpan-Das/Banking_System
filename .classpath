@@ -9,7 +9,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javafx"/>
 	<classpathentry kind="lib" path="sqlite-jdbc-3.8.10.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
-	<classpathentry kind="lib" path="activation.jar"/>
-	<classpathentry kind="lib" path="mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TAAAN/eclipse-workspace/Banking_System/activation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TAAAN/eclipse-workspace/Banking_System/mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
