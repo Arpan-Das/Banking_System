@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,11 +15,17 @@ import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+
+import Admin.AdminPanelController;
+import User.UserPanelController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -28,6 +35,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class BankingSystemController implements Initializable {
     @FXML
@@ -158,7 +167,12 @@ public class BankingSystemController implements Initializable {
     public void buttonhandler(ActionEvent event) {
     	if(event.getSource() == but_login){
     		
-    		login();
+    		try {
+				login(event);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     		
     	}else if(event.getSource() == but_createaccount) {
     	
@@ -192,7 +206,7 @@ public class BankingSystemController implements Initializable {
     	}
     }
    
-    private void login() {
+    private void login(ActionEvent event) throws IOException {
 		// TODO Auto-generated method stub
 		conn = sqlconnect.dbconnect();
 		try {
@@ -205,9 +219,33 @@ public class BankingSystemController implements Initializable {
 				if(rs.getString("type").equals("Admin")) {
 					/////////////if user is admin
 					JOptionPane.showMessageDialog(null, "Welcome admin, "+ rs.getString("firstname"));
+					((Node)event.getSource()).getScene().getWindow().hide();
+					Stage primaryStage = new Stage();
+					FXMLLoader loader = new FXMLLoader();
+					Pane root = loader.load(getClass().getResource("/Admin/AdminPanel.fxml").openStream());
+					AdminPanelController userController = (AdminPanelController)loader.getController();
+					userController.GetAdmin(txt_loginusername.getText());
+					Scene scene = new Scene(root);
+					
+					primaryStage.setScene(scene);
+					
+					primaryStage.show();
+			 		
+					
 				}else {
 					////////////////if user is a client
 					JOptionPane.showMessageDialog(null, "Welcome, "+ rs.getString("firstname"));
+					((Node)event.getSource()).getScene().getWindow().hide();
+					Stage primaryStage = new Stage();
+					FXMLLoader loader = new FXMLLoader();
+					Pane root = loader.load(getClass().getResource("/User/UserPanel.fxml").openStream());
+					UserPanelController userpanelController = (UserPanelController)loader.getController();
+					userpanelController.GetAdmin(txt_loginusername.getText());
+					Scene scene = new Scene(root);
+					
+					primaryStage.setScene(scene);
+					
+					primaryStage.show();
 				}
 			}else {
 				////////////// user not found

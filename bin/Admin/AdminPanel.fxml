@@ -21,7 +21,7 @@
                   <Glow />
                </effect>
             </Label>
-            <Label fx:id="adminlbl" layoutX="278.0" layoutY="71.0" prefHeight="33.0" prefWidth="167.0" text="viveksingh9780" textAlignment="CENTER">
+            <Label fx:id="Adminlbl" layoutX="278.0" layoutY="71.0" prefHeight="33.0" prefWidth="167.0" text="viveksingh9780" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
@@ -39,12 +39,12 @@
             </ImageView>
             <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="518.0" layoutY="125.0" pickOnBounds="true">
                <image>
-                  <Image url="Images/images1.png" />
+                  <Image url="Images/userpic.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="68.0" layoutY="322.0" pickOnBounds="true">
                <image>
-                  <Image url="Images/img3.png" />
+                  <Image url="Images/istock.jpg" />
                </image>
             </ImageView>
             <Button layoutX="518.0" layoutY="453.0" mnemonicParsing="false" onAction="#out4" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FEEDBACKS" />

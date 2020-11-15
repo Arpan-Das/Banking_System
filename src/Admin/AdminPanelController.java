@@ -10,13 +10,14 @@ import javafx.stage.Stage;
 
 public class AdminPanelController {
 
-		@FXML
-		private Label adminLBL;
+
+	@FXML
+	private Label Adminlbl;
 
 		
 		public void GetAdmin(String admin) {
 			
-			adminLBL.setText(admin);
+			Adminlbl.setText(admin);
 
 	   }
 		

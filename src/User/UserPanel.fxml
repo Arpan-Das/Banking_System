@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.UserPanelController">
+   <children>
+      <Pane layoutX="50.0" layoutY="50.0" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #8fb7e7; -fx-border-color: #b38600; -fx-border-width: 5px;">
+         <children>
+            <Label layoutX="264.0" layoutY="10.0" prefHeight="52.0" prefWidth="215.0" text="User Panel">
+               <font>
+                  <Font name="Berlin Sans FB" size="46.0" />
+               </font>
+               <effect>
+                  <Glow />
+               </effect>
+            </Label>
+            <Label fx:id="userlbl" layoutX="286.0" layoutY="70.0" prefHeight="33.0" prefWidth="167.0" text="viveksingh9780" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Label>
+            <Button layoutX="327.0" layoutY="116.0" mnemonicParsing="false" onAction="#out" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
+            <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="57.0" layoutY="125.0" pickOnBounds="true">
+               <image>
+                  <Image url="Images/last5.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="535.0" layoutY="321.0" pickOnBounds="true">
+               <image>
+                  <Image url="Images/userfeedback.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="535.0" layoutY="125.0" pickOnBounds="true">
+               <image>
+                  <Image url="Images/moneytransefer.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="58.0" layoutY="322.0" pickOnBounds="true">
+               <image>
+                  <Image url="Images/loan.jpg" />
+               </image>
+            </ImageView>
+            <Button layoutX="535.0" layoutY="453.0" mnemonicParsing="false" onAction="#out4" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FEEDBACKS" />
+            <Button layoutX="58.0" layoutY="454.0" mnemonicParsing="false" onAction="#out3" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOANS" />
+            <Button layoutX="535.0" layoutY="257.0" mnemonicParsing="false" onAction="#out2" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="MONEY TRANSFER" />
+            <Button layoutX="58.0" layoutY="257.0" mnemonicParsing="false" onAction="#out1" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="ACTIVITY LOG" />
+            <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="299.0" layoutY="207.0" pickOnBounds="true">
+               <image>
+                  <Image url="Images/imagesty.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="299.0" layoutY="339.0" mnemonicParsing="false" onAction="#out5" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FIXED DEPOSIT" />
+            <Label fx:id="userbalance" layoutX="605.0" layoutY="14.0" prefHeight="33.0" prefWidth="139.0" text="1,22,889.04 Rs.">
+               <font>
+                  <Font name="Berlin Sans FB" size="21.0" />
+               </font></Label>
+         </children></Pane>
+      <Button layoutX="785.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT" />
+      <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onAction="#out" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="DASHBOAD" />
+   </children>
+</AnchorPane>
