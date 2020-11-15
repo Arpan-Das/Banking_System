@@ -4,6 +4,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -65,6 +66,23 @@ public class BankingSystemController implements Initializable {
     @FXML
     private Button but_cancel, but_sendotp, but_verify;
     
+    @FXML
+    private Button but_login;
+    
+    @FXML
+    private TextField txt_loginusername;
+    
+    @FXML
+    private PasswordField txt_loginpassword;
+    
+    
+    ///////////forget_username
+    @FXML
+    private TextField txt_forgetUsernameName,txt_forgetUsernameEmailid, txt_forgetUsernameMobileno;
+    
+    @FXML
+    private Button but_forgetUsernameSubmit;
+    
     Connection conn;
     ResultSet rs;
     PreparedStatement prst;
@@ -101,6 +119,7 @@ public class BankingSystemController implements Initializable {
     		forgetpassword.setVisible(true);
     		emailverification.setVisible(false);
     		
+    		
     	}else if(event.getSource() == gotoforgetusername) {
     		
     		login1.setVisible(false);
@@ -110,6 +129,7 @@ public class BankingSystemController implements Initializable {
     		forgetusername.setVisible(true);
     		forgetpassword.setVisible(false);
     		emailverification.setVisible(false);
+    		
     		
     	}else if(event.getSource() == home) {
     		
@@ -125,7 +145,11 @@ public class BankingSystemController implements Initializable {
     }
 
     public void buttonhandler(ActionEvent event) {
-    	if(event.getSource() == but_createaccount) {
+    	if(event.getSource() == but_login){
+    		
+    		login();
+    		
+    	}else if(event.getSource() == but_createaccount) {
     	
     		createaccount();
     		
@@ -155,7 +179,33 @@ public class BankingSystemController implements Initializable {
     	}
     }
    
-    public void verify() {
+    private void login() {
+		// TODO Auto-generated method stub
+		conn = sqlconnect.dbconnect();
+		try {
+			prst= conn.prepareStatement("select *from user where username = ? and password = ? ");
+			prst.setString(1, txt_loginusername.getText());
+			prst.setString(2, txt_loginpassword.getText());
+			rs = prst.executeQuery();
+			if(rs.next()) {
+				/////////////user is found
+				if(rs.getString("type").equals("Admin")) {
+					/////////////if user is admin
+					JOptionPane.showMessageDialog(null, "Welcome admin, "+ rs.getString("firstname"));
+				}else {
+					////////////////if user is a client
+					JOptionPane.showMessageDialog(null, "Welcome, "+ rs.getString("firstname"));
+				}
+			}else {
+				////////////// user not found
+				JOptionPane.showMessageDialog(null, "Username or Password is Incorrect!!!!");
+			}
+		} catch (SQLException e) {
+			
+		}
+	}
+
+	public void verify() {
 		// TODO Auto-generated method stub
 		if(txt_otp.getText().equals(hide.getText())) {
 			/////// if otp is correct then /////////
@@ -211,7 +261,38 @@ public class BankingSystemController implements Initializable {
     	    	
     }
     
-    public void Random() {
+	public void forgetusername() {
+		conn = sqlconnect.dbconnect();
+		try {
+			prst= conn.prepareStatement("select *from user where (firstname = ?) and (emailid = ? or mobileno = ?)");
+			prst.setString(1, txt_forgetUsernameName.getText());
+			
+			if(txt_forgetUsernameMobileno.getText().trim().isEmpty()) {
+				/////user enter the email id
+				prst.setString(2, txt_forgetUsernameEmailid.getText());
+				prst.setString(3, null);
+			}else {
+				//////user enter the mobile no
+				prst.setString(2, null);
+				prst.setString(3, txt_forgetUsernameMobileno.getText());
+			}
+			rs = prst.executeQuery();
+			
+			if(rs.next()) {
+				// ////user id found
+				JOptionPane.showMessageDialog(null, "Hello "+ rs.getString("firstname")+", Your Username is "+rs.getString("username"));
+			}else {
+				///////// user id not found
+				JOptionPane.showMessageDialog(null, "Please Enter the Correct Details");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void Random() {
     		Random rd = new Random();
     		hide.setText(""+rd.nextInt(10000 + 1));		
     }
@@ -246,7 +327,7 @@ public class BankingSystemController implements Initializable {
                     JOptionPane.showMessageDialog(null,"OTP send to your Email id"); 
                     }catch(Exception e)
                     {
-                        JOptionPane.showMessageDialog(null,"Please check your internet connection");
+                        JOptionPane.showMessageDialog(null,e);
                     }              
                 
             } catch (Exception e) {
@@ -311,4 +392,7 @@ public class BankingSystemController implements Initializable {
 		drop_gender.setItems(list);
 	}
     
+	public void exit(ActionEvent event) {
+		System.exit(0);
+	}
 }
