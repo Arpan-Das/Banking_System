@@ -79,9 +79,14 @@ public class BankingSystemController implements Initializable {
     ///////////forget_username
     @FXML
     private TextField txt_forgetUsernameName,txt_forgetUsernameEmailid, txt_forgetUsernameMobileno;
-    
     @FXML
     private Button but_forgetUsernameSubmit;
+    
+    ////////////forget_passowrd
+    @FXML
+    private TextField txt_forgetPasswordUsername, txt_forgetPasswordEmailid, txt_forgetPasswordMobileno;
+    @FXML
+    private Button but_forgetPasswordSubmit;
     
     Connection conn;
     ResultSet rs;
@@ -286,6 +291,37 @@ public class BankingSystemController implements Initializable {
 				JOptionPane.showMessageDialog(null, "Please Enter the Correct Details");
 			}
 			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void forgetpassword() {
+		conn = sqlconnect.dbconnect();
+		try {
+			
+			prst = conn.prepareStatement("select *from user where username = ? and (emailid =? or mobileno =?)");
+			prst.setString(1, txt_forgetPasswordUsername.getText());
+			
+			if(txt_forgetUsernameMobileno.getText().trim().isEmpty()) {
+				/////user enter the email id
+				prst.setString(2, txt_forgetPasswordEmailid.getText());
+				prst.setString(3, null);
+			}else {
+				//////user enter the mobile no
+				prst.setString(2, null);
+				prst.setString(3, txt_forgetPasswordMobileno.getText());
+			}
+			rs = prst.executeQuery();
+			
+			if(rs.next()) {
+				// ////user id found
+				
+			}else {
+				///////// user id not found
+				JOptionPane.showMessageDialog(null, "Please Enter the Correct Details");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

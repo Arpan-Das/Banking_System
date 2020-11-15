@@ -129,17 +129,40 @@
          <font>
             <Font name="System Bold" size="29.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="CLOSED_HAND" />
+         </cursor>
       </Label>
-      <AnchorPane fx:id="forgetpassword" layoutX="181.0" layoutY="69.0" style="-fx-background-color: #286bb8;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <AnchorPane fx:id="forgetpassword" layoutX="181.0" layoutY="69.0" style="-fx-background-color: #286bb8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
          <children>
             <Label layoutX="336.0" layoutY="38.0" text="Forgrt Password" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="257.0" layoutY="102.0" prefHeight="20.0" prefWidth="86.0" text="Username* :" textFill="WHITE" AnchorPane.rightAnchor="457.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txt_forgetPassordUsername" layoutX="375.0" layoutY="100.0" promptText="Username*" />
+            <Label alignment="CENTER_RIGHT" layoutX="257.0" layoutY="148.0" prefHeight="20.0" prefWidth="86.0" text="Email Id* :" textFill="WHITE" AnchorPane.rightAnchor="457.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txt_forgetPasswordEmailid" layoutX="375.0" layoutY="146.0" prefHeight="25.0" prefWidth="193.0" promptText="Email Id*" />
+            <Label alignment="CENTER_RIGHT" layoutX="257.0" layoutY="218.0" prefHeight="20.0" prefWidth="86.0" text="Mobile No.* :" textFill="WHITE" AnchorPane.rightAnchor="457.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txt_forgetPasswordMobileno" layoutX="375.0" layoutY="216.0" promptText="Mobile No.*" />
+            <Label layoutX="328.0" layoutY="185.0" text="-----------OR-----------" textFill="WHITE" />
+            <Button fx:id="but_forgetPasswordSubmit" layoutX="349.0" layoutY="277.0" mnemonicParsing="false" onAction="#forgetpassword" text="Submit" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="forgetusername" layoutX="233.0" layoutY="96.0" style="-fx-background-color: #286bb8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <AnchorPane fx:id="forgetusername" layoutX="233.0" layoutY="96.0" style="-fx-background-color: #286bb8;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
          <children>
             <Label layoutX="329.0" layoutY="39.0" prefHeight="27.0" prefWidth="149.0" text="Forgrt Username" textFill="WHITE">
                <font>
