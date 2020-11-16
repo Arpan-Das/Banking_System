@@ -39,12 +39,12 @@
             </ImageView>
             <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="518.0" layoutY="125.0" pickOnBounds="true">
                <image>
-                  <Image url="Images/userpic.jpg" />
+                  <Image url="Images/img1.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="68.0" layoutY="322.0" pickOnBounds="true">
                <image>
-                  <Image url="Images/istock.jpg" />
+                  <Image url="Images/img2.jpg" />
                </image>
             </ImageView>
             <Button layoutX="518.0" layoutY="453.0" mnemonicParsing="false" onAction="#out4" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FEEDBACKS" />

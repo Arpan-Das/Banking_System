@@ -29,22 +29,22 @@
             <Button layoutX="327.0" layoutY="116.0" mnemonicParsing="false" onAction="#out" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
             <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="57.0" layoutY="125.0" pickOnBounds="true">
                <image>
-                  <Image url="Images/last5.jpg" />
+                  <Image url="Images/img3.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="535.0" layoutY="321.0" pickOnBounds="true">
                <image>
-                  <Image url="Images/userfeedback.jpg" />
+                  <Image url="Images/img5.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="535.0" layoutY="125.0" pickOnBounds="true">
                <image>
-                  <Image url="Images/moneytransefer.jpg" />
+                  <Image url="Images/img7.jpg" />
                </image>
             </ImageView>
             <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="58.0" layoutY="322.0" pickOnBounds="true">
                <image>
-                  <Image url="Images/loan.jpg" />
+                  <Image url="Images/img8.jpg" />
                </image>
             </ImageView>
             <Button layoutX="535.0" layoutY="453.0" mnemonicParsing="false" onAction="#out4" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FEEDBACKS" />
@@ -53,7 +53,7 @@
             <Button layoutX="58.0" layoutY="257.0" mnemonicParsing="false" onAction="#out1" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="ACTIVITY LOG" />
             <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="299.0" layoutY="207.0" pickOnBounds="true">
                <image>
-                  <Image url="Images/imagesty.png" />
+                  <Image url="Images/img9.png" />
                </image>
             </ImageView>
             <Button layoutX="299.0" layoutY="339.0" mnemonicParsing="false" onAction="#out5" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FIXED DEPOSIT" />
