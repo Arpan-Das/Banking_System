@@ -15,18 +15,20 @@ import javafx.stage.Stage;
 
 public class UserPanelController implements Initializable {
 	
-	    @FXML
-		private Label userlbl;
-	    @FXML
-	    private Label userbalance;
+	    @FXML private Label userlbl;
+	    @FXML private Label accnolbl;
+	    @FXML private Label userbalance;
 	    
 
 			
-			public void GetAdmin(String user) {
+			public void SetName(String user) {
 				
 				userlbl.setText(user);
 
 		   }
+			public void SetAccno(String accno) {
+				accnolbl.setText(accno);
+			}
 			
 			 public void exxit(ActionEvent event) {
 					System.exit(0);	

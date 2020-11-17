@@ -16,17 +16,20 @@ import javafx.stage.StageStyle;
 public class AdminPanelController implements Initializable{
 
 
-	@FXML
-	private Label Adminlbl;
+	@FXML private Label Adminlbl;
+	
+	 
 
 		
-		public void GetAdmin(String admin) {
+		public void SetAdminName(String admin) {
 			
 			Adminlbl.setText(admin);
 
-	   }
+		}
 		
-		 public void exxit(ActionEvent event) {
+		
+		
+		public void exxit(ActionEvent event) {
 				System.exit(0);	
 				}
 		

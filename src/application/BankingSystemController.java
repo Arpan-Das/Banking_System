@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -224,7 +225,8 @@ public class BankingSystemController implements Initializable {
 					FXMLLoader loader = new FXMLLoader();
 					Pane root = loader.load(getClass().getResource("/Admin/AdminPanel.fxml").openStream());
 					AdminPanelController userController = (AdminPanelController)loader.getController();
-					userController.GetAdmin(txt_loginusername.getText());
+					userController.SetAdminName(rs.getString("firstname") + " " +rs.getString("lastname"));
+					
 					Scene scene = new Scene(root);
 					
 					primaryStage.setScene(scene);
@@ -240,7 +242,8 @@ public class BankingSystemController implements Initializable {
 					FXMLLoader loader = new FXMLLoader();
 					Pane root = loader.load(getClass().getResource("/User/UserPanel.fxml").openStream());
 					UserPanelController userpanelController = (UserPanelController)loader.getController();
-					userpanelController.GetAdmin(txt_loginusername.getText());
+					userpanelController.SetName(rs.getString("firstname") + " " +rs.getString("lastname"));
+					userpanelController.SetAccno(String.valueOf(rs.getInt("accno")));
 					Scene scene = new Scene(root);
 					
 					primaryStage.setScene(scene);
@@ -263,6 +266,8 @@ public class BankingSystemController implements Initializable {
 			JOptionPane.showMessageDialog(null, "Email id verified");
 			String sql = "insert into user(firstname, lastname,gender, dob, id, address, emailid, mobileno,username,password, datetime) values(?,?,?,?,?,?,?,?,?,?, datetime('now','localtime'))";
 			conn = sqlconnect.dbconnect();
+			String username = txt_username.getText();
+			int accno;
 			try {
 				prst = conn.prepareStatement(sql);
 				prst.setString(1, txt_firstname.getText());
@@ -279,7 +284,41 @@ public class BankingSystemController implements Initializable {
 				
 				if(!flag) {
 					JOptionPane.showMessageDialog(null, "Account Created");
+					///////////////////both the tables are created here i.e, user balance table and user txn table
+					try {
+					prst = conn.prepareStatement("select * from user where username = ?");
+					prst.setString(1, username);
+					rs = prst.executeQuery();
+					accno = rs.getInt("accno");
 					
+					// create table balance
+					String tablebalance ="CREATE TABLE IF NOT EXISTS " + username+accno + " (balance real default 0.0);";
+					try {
+						Statement stmt = conn.createStatement();
+						stmt.execute(tablebalance);
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e);
+					}
+					
+					// create table trx
+					String tabletrx ="create table IF NOT EXISTS " + "trx"+username+accno + " (date text, remarks text, type text, balance real)";
+					try {
+						Statement stmt = conn.createStatement();
+						stmt.execute(tabletrx);
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e);
+					}
+					
+					}catch(Exception e) {
+						JOptionPane.showMessageDialog(null, "inside create table"+e);
+					}
+					
+					
+					// back to home screen
 					login1.setVisible(true);
 					signup1.setVisible(true);
 					login2.setVisible(false);
@@ -304,6 +343,7 @@ public class BankingSystemController implements Initializable {
     			txt_username.getText().trim().isEmpty() || txt_password.getText().trim().isEmpty()) {
     		
     		JOptionPane.showMessageDialog(null, "Enter all the details.");
+    		
     	}else {
     		txt_emailverify.setText(txt_emailid.getText());
     		emailverification.setVisible(true);
