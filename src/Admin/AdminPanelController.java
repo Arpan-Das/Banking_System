@@ -70,10 +70,10 @@ public class AdminPanelController implements Initializable{
 				((Node)event.getSource()).getScene().getWindow().hide();
 				Stage primaryStage = new Stage();
 				FXMLLoader loader = new FXMLLoader();
-				Pane root = loader.load(getClass().getResource("/Frontend/Users.fxml").openStream());
+				Pane root = loader.load(getClass().getResource("/Admin/Users.fxml").openStream());
 				Scene scene = new Scene(root);
 				primaryStage.setScene(scene);
-				primaryStage.setTitle(" Pending Bills ");
+				primaryStage.initStyle(StageStyle.TRANSPARENT);
 				primaryStage.show();
 				
 			} catch (Exception e) {
