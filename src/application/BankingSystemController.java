@@ -399,7 +399,7 @@ public class BankingSystemController implements Initializable {
                     try
                     {
                     Transport transport = session.getTransport("smtp");
-                    transport.connect("smtp.gmail.com","ad0084763@gmail.com","Feeble@2000");
+                    transport.connect("smtp.gmail.com","ad0084763@gmail.com","Light@2020");
                     transport.sendMessage(message, message.getAllRecipients());
                     transport.close();
                                   
@@ -439,7 +439,7 @@ public class BankingSystemController implements Initializable {
                 try
                 {
                 Transport transport = session.getTransport("smtp");
-                transport.connect("smtp.gmail.com","ad0084763@gmail.com","Feeble@2000");
+                transport.connect("smtp.gmail.com","ad0084763@gmail.com","Light@2020");
                 transport.sendMessage(message, message.getAllRecipients());
                 transport.close();
                               
