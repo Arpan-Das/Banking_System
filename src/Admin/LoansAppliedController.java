@@ -28,30 +28,36 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class AdminComplaintsController implements Initializable {
+public class LoansAppliedController implements Initializable {
 	
 	@FXML
-    private TableView<complaints> table_complaints;
+    private TableView<loansapplied> table_loans;
 
     @FXML
-    private TableColumn<complaints, Integer> col_anumber;
+    private TableColumn<loansapplied, Integer> col_anumber;
 
     @FXML
-    private TableColumn<complaints, String> col_type;
+    private TableColumn<loansapplied, String> col_username;
+    
+    @FXML
+    private TableColumn<loansapplied, Integer> col_amount;
 
     @FXML
-    private TableColumn<complaints, String> col_remark;
+    private TableColumn<loansapplied, String> col_remark;
 	
     @FXML
     private TextField txt_anumber;
 
     @FXML
-    private TextField txt_type;
+    private TextField txt_username;
+    
+    @FXML
+    private TextField txt_amount;
 
     @FXML
     private TextArea txt_remark;
     
-    ObservableList<complaints> listM;
+    ObservableList<loansapplied> listM;
     
 
     int index = -1;
@@ -63,19 +69,20 @@ public class AdminComplaintsController implements Initializable {
     
     
     public void getSelected(MouseEvent event) {
-    	index = table_complaints.getSelectionModel().getSelectedIndex();
+    	index = table_loans.getSelectionModel().getSelectedIndex();
     	if(index <= -1) {
     		return;
     	}
     	txt_anumber.setText(col_anumber.getCellData(index).toString());
-    	txt_type.setText(col_type.getCellData(index).toString());
+    	txt_username.setText(col_username.getCellData(index).toString());
+    	txt_amount.setText(col_amount.getCellData(index).toString());
     	txt_remark.setText(col_remark.getCellData(index).toString());
 
     }
     
     
     @FXML
-    public void Delete_complaint(ActionEvent event) {
+    public void Delete_entry(ActionEvent event) {
     	conn = sqlconnect.dbconnect();
     	
     	try {
@@ -88,22 +95,24 @@ public class AdminComplaintsController implements Initializable {
 			
 			Update();
 			
-			txt_type.setText("");
+			txt_username.setText("");
 			txt_remark.setText("");
 			txt_anumber.setText("");
+			txt_amount.setText("");
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			JOptionPane.showMessageDialog(null, e);
 		}
     }
     
     public void Update() {
-    	col_anumber.setCellValueFactory(new PropertyValueFactory<complaints, Integer>("accno"));
-		col_type.setCellValueFactory(new PropertyValueFactory<complaints, String>("type"));
-		col_remark.setCellValueFactory(new PropertyValueFactory<complaints, String>("remark"));
-		listM = sqlconnect.getDatacomplaints();
-		table_complaints.setItems(listM);
+    	col_anumber.setCellValueFactory(new PropertyValueFactory<loansapplied, Integer>("accno"));
+		col_username.setCellValueFactory(new PropertyValueFactory<loansapplied, String>("username"));
+		col_amount.setCellValueFactory(new PropertyValueFactory<loansapplied, Integer>("amount"));
+		col_remark.setCellValueFactory(new PropertyValueFactory<loansapplied, String>("remark"));
+		listM = sqlconnect.getDataloansapplied();
+		table_loans.setItems(listM);
     }
 
 	public void exxit(ActionEvent event) {

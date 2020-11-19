@@ -4,6 +4,8 @@ import java.sql.*;
 
 import javax.swing.JOptionPane;
 
+import Admin.complaints;
+import Admin.loansapplied;
 import Admin.user;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,6 +62,14 @@ public class sqlconnect {
 		return list;
 	}
 
-
+    public static ObservableList<complaints>getDatacomplaints(){
+		return null;
+    	
+    }
      
+
+    public static ObservableList<loansapplied>getDataloansapplied(){
+		return null;
+    	
+    }
 }
