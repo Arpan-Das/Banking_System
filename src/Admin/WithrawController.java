@@ -190,7 +190,7 @@ public class WithrawController implements Initializable {
 //						normal();
 						conn.close();	
 						} catch (SQLException e) {
-							// TODO Auto-generated catch block
+							
 							JOptionPane.showMessageDialog(null, "debit"+e);
 						}
 				
@@ -275,7 +275,7 @@ public class WithrawController implements Initializable {
 			}
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			JOptionPane.showMessageDialog(null, e);
 		}
     	
@@ -327,7 +327,7 @@ public class WithrawController implements Initializable {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	// TODO Auto-generated method stub
+    	
     	combobox.setItems(list);
     	myrandcatcha = random();
 		randomlbl.setText(myrandcatcha);

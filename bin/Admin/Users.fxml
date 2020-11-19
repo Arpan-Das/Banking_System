@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.UsersController">
+<AnchorPane prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.UsersController">
    <children>
       <Pane layoutX="32.0" layoutY="110.0" prefHeight="530.0" prefWidth="1060.0" style="-fx-background-color: #8fb7e7; -fx-border-color: #b38600; -fx-border-width: 5px;">
          <children>
@@ -45,8 +45,8 @@
                </effect>
             </Label>
             <TextField fx:id="txt_anumber" editable="false" layoutX="21.0" layoutY="104.0" prefHeight="31.0" prefWidth="223.0" promptText="ACCOUNT NUMBER" />
-            <TextField fx:id="txt_name" layoutX="21.0" layoutY="148.0" prefHeight="31.0" prefWidth="223.0" promptText="NAME" />
-            <TextField fx:id="txt_gender" layoutX="21.0" layoutY="190.0" prefHeight="31.0" prefWidth="223.0" promptText="GENDER" />
+            <TextField fx:id="txt_name" editable="false" layoutX="21.0" layoutY="148.0" prefHeight="31.0" prefWidth="223.0" promptText="NAME" />
+            <TextField fx:id="txt_gender" editable="false" layoutX="21.0" layoutY="190.0" prefHeight="31.0" prefWidth="223.0" promptText="GENDER" />
             <TextField fx:id="txt_id" layoutX="21.0" layoutY="238.0" prefHeight="31.0" prefWidth="223.0" promptText="ID NUMBER" />
             <TextField fx:id="txt_username" layoutX="21.0" layoutY="281.0" prefHeight="31.0" prefWidth="223.0" promptText="USERNAME" />
             <TextField fx:id="txt_email" layoutX="21.0" layoutY="325.0" prefHeight="31.0" prefWidth="223.0" promptText="EMAIL" />
