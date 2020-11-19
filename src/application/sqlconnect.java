@@ -4,6 +4,10 @@ import java.sql.*;
 
 import javax.swing.JOptionPane;
 
+import Admin.user;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class sqlconnect {
 	
 	static Connection conn;
@@ -28,8 +32,31 @@ public class sqlconnect {
 		}
 	}
 	
-	
-	
+
+	public static ObservableList<user> getDatauser(){
+		Connection conn = dbconnect();
+		ObservableList<user> list = FXCollections.observableArrayList();
+		
+		try {
+			
+			//PreparedStatement ps = conn.prepareStatement("select * from user");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select *from user");
+			String name;
+			
+			while(rs.next()) {
+				if(rs.getString("type").equals("Client")) {
+					name = rs.getString("firstname")+" "+rs.getString("lastname");
+					list.add(new user(rs.getInt("accno"), name, rs.getString("gender"), rs.getString("dob"), rs.getString("id"), rs.getString("emailid"), rs.getString("mobileno"), rs.getString("username")));
+				}
+			}
+						
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "sqlldsjf "+e);
+		}
+		return list;
+	}
 
 
+     
 }

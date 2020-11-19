@@ -27,7 +27,7 @@
                </font>
             </Label>
             <Button layoutX="322.0" layoutY="119.0" mnemonicParsing="false" onAction="#out" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
-            <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="67.0" layoutY="125.0" pickOnBounds="true">
+                <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="67.0" layoutY="125.0" pickOnBounds="true">
                <image>
                   <Image url="Images/img4.jpg" />
                </image>

@@ -216,10 +216,13 @@ public class BankingSystemController implements Initializable {
 			prst.setString(2, txt_loginpassword.getText());
 			rs = prst.executeQuery();
 			if(rs.next()) {
-				/////////////user is found
+				//********************** user is found ***********************************/
 				if(rs.getString("type").equals("Admin")) {
-					/////////////if user is admin
+					
+					//******************** if user is admin ***********************************
+					
 					JOptionPane.showMessageDialog(null, "Welcome admin, "+ rs.getString("firstname"));
+					
 					((Node)event.getSource()).getScene().getWindow().hide();
 					Stage primaryStage = new Stage();
 					FXMLLoader loader = new FXMLLoader();
@@ -235,8 +238,10 @@ public class BankingSystemController implements Initializable {
 			 		
 					
 				}else {
-					////////////////if user is a client
+					// ************************ if user is a client **********************************
+					
 					JOptionPane.showMessageDialog(null, "Welcome, "+ rs.getString("firstname"));
+					
 					((Node)event.getSource()).getScene().getWindow().hide();
 					Stage primaryStage = new Stage();
 					FXMLLoader loader = new FXMLLoader();
@@ -251,9 +256,11 @@ public class BankingSystemController implements Initializable {
 					primaryStage.show();
 				}
 			}else {
-				////////////// user not found
+				//************************ user not found ****************************************
+				
 				JOptionPane.showMessageDialog(null, "Username or Password is Incorrect!!!!");
 			}
+			conn.close();
 		} catch (SQLException e) {
 			
 		}
@@ -262,8 +269,10 @@ public class BankingSystemController implements Initializable {
 	public void verify() {
 		// TODO Auto-generated method stub
 		if(txt_otp.getText().equals(hide.getText())) {
-			/////// if otp is correct then /////////
+			//************************* if otp is correct then ****************************************
+			
 			JOptionPane.showMessageDialog(null, "Email id verified");
+			
 			String sql = "insert into user(firstname, lastname,gender, dob, id, address, emailid, mobileno,username,password, datetime) values(?,?,?,?,?,?,?,?,?,?, datetime('now','localtime'))";
 			conn = sqlconnect.dbconnect();
 			String username = txt_username.getText();
@@ -284,7 +293,7 @@ public class BankingSystemController implements Initializable {
 				
 				if(!flag) {
 					JOptionPane.showMessageDialog(null, "Account Created");
-					///////////////////both the tables are created here i.e, user balance table and user txn table
+					//************** both the tables are created here i.e, user balance table and user txn table
 					try {
 					prst = conn.prepareStatement("select * from user where username = ?");
 					prst.setString(1, username);
@@ -296,6 +305,7 @@ public class BankingSystemController implements Initializable {
 					try {
 						Statement stmt = conn.createStatement();
 						stmt.execute(tablebalance);
+						stmt.execute("insert into " + username+accno + "  values(0.0)");
 						
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
@@ -303,7 +313,7 @@ public class BankingSystemController implements Initializable {
 					}
 					
 					// create table trx
-					String tabletrx ="create table IF NOT EXISTS " + "trx"+username+accno + " (date text, remarks text, type text, balance real)";
+					String tabletrx ="create table IF NOT EXISTS " + "trx"+username+accno + " (date text, remarks text, type text, amount real, balance real)";
 					try {
 						Statement stmt = conn.createStatement();
 						stmt.execute(tabletrx);
@@ -328,6 +338,7 @@ public class BankingSystemController implements Initializable {
 	    			emailverification.setVisible(false);
 	    			sendWELCOME();
 				}
+				conn.close();
 			}catch(Exception e) {
 				JOptionPane.showMessageDialog(null, e);
 			}
@@ -345,6 +356,8 @@ public class BankingSystemController implements Initializable {
     		JOptionPane.showMessageDialog(null, "Enter all the details.");
     		
     	}else {
+    		//**************if user enter all the details then verify the email id and then create account *******
+    		
     		txt_emailverify.setText(txt_emailid.getText());
     		emailverification.setVisible(true);
     		
@@ -384,7 +397,7 @@ public class BankingSystemController implements Initializable {
 				///////// user id not found
 				JOptionPane.showMessageDialog(null, "Please Enter the Correct Details");
 			}
-			
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -419,6 +432,7 @@ public class BankingSystemController implements Initializable {
 				///////// user id not found
 				JOptionPane.showMessageDialog(null, "Please Enter the Correct Details");
 			}
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -426,6 +440,7 @@ public class BankingSystemController implements Initializable {
 	}
 	public void resetpassword() {
 		try {
+			conn = sqlconnect.dbconnect();
 			if(txt_resetPasswordNewPassword.getText().equals(txt_ResetRasswordConformPassword.getText())) {
 				prst = conn.prepareStatement("update user set password = ? where accno = "+ rs.getInt("accno"));
 				prst.setString(1, txt_resetPasswordNewPassword.getText());
@@ -443,6 +458,7 @@ public class BankingSystemController implements Initializable {
 			}else {
 				lab_resetPasswordStatus.setText("Password do not match !!!");
 			}
+			conn.close();
 		}catch(Exception e) {
 			
 		}
