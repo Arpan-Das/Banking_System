@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -84,6 +85,7 @@ public class UsersController implements Initializable  {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
+    Statement stmt;
     
     public void Add_user() {
     	conn = sqlconnect.dbconnect();
@@ -142,10 +144,11 @@ public class UsersController implements Initializable  {
     		String anumber = txt_anumber.getText();
     		String mnumber = txt_mnumber.getText();
     		
-    		String sql = "update user set accountnumber = "+ anumber +", username = '"+ username +"', gender = '"+ gender 
-    				+"', email = '"+ email +"', name = '"+ name +", mnumber = '"+ mnumber +", id = '"+ id +"' where  anumber = "+ anumber+" ";
-    		ps = conn.prepareStatement(sql);
-    		ps.execute();
+    		String sql = "update user set username = '"+ username +"', gender = '"+ gender 
+    				+"', emailid = '"+ email +"', firstname = '"+ name +",lastname = '', mobileno = '"+ mnumber +", id = '"+ id +"' where  accno = "+ anumber+" ";
+    		stmt = conn.createStatement();
+    		stmt.execute(sql);
+    		
     		
     		JOptionPane.showMessageDialog(null, "Successfully Updated");
     		
@@ -160,7 +163,7 @@ public class UsersController implements Initializable  {
 			txt_anumber.setText("");
     		
 			
-    	}catch(Exception e) {
+    	}catch(SQLException e) {
     		JOptionPane.showMessageDialog(null, e);
     	}
     }
@@ -171,7 +174,7 @@ public class UsersController implements Initializable  {
     	
     	try {
     		
-			ps = conn.prepareStatement("delete from user where acountnumber = ?");
+			ps = conn.prepareStatement("delete from user where accno = ?");
 			ps.setInt(1, col_anumber.getCellData(index));			
 			ps.executeUpdate();
 			
