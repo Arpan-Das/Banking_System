@@ -295,33 +295,33 @@ public class BankingSystemController implements Initializable {
 					JOptionPane.showMessageDialog(null, "Account Created");
 					//************** both the tables are created here i.e, user balance table and user txn table
 					try {
-					prst = conn.prepareStatement("select * from user where username = ?");
-					prst.setString(1, username);
-					rs = prst.executeQuery();
-					accno = rs.getInt("accno");
+						prst = conn.prepareStatement("select * from user where username = ?");
+						prst.setString(1, username);
+						rs = prst.executeQuery();
+						accno = rs.getInt("accno");
 					
-					// create table balance
-					String tablebalance ="CREATE TABLE IF NOT EXISTS " + username+accno + " (balance real default 0.0);";
-					try {
-						Statement stmt = conn.createStatement();
-						stmt.execute(tablebalance);
-						stmt.execute("insert into " + username+accno + "  values(0.0)");
+						// create table balance
+						String tablebalance ="CREATE TABLE IF NOT EXISTS " + username+accno + " (balance real default 0.0);";
+						try {
+							Statement stmt = conn.createStatement();
+							stmt.execute(tablebalance);
+							stmt.execute("insert into " + username+accno + "  values(0.0)");
 						
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null, e);
-					}
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(null, e);
+						}
 					
-					// create table trx
-					String tabletrx ="create table IF NOT EXISTS " + "trx"+username+accno + " (date text, remarks text, type text, amount real, balance real)";
-					try {
-						Statement stmt = conn.createStatement();
-						stmt.execute(tabletrx);
+						// create table trx
+						String tabletrx ="create table IF NOT EXISTS " + "trx"+username+accno + " (date text, remarks text, type text, amount real, balance real)";
+						try {
+							Statement stmt = conn.createStatement();
+							stmt.execute(tabletrx);
 						
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null, e);
-					}
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(null, e);
+						}
 					
 					}catch(Exception e) {
 						JOptionPane.showMessageDialog(null, "inside create table"+e);

@@ -90,17 +90,56 @@ public class UsersController implements Initializable  {
     public void Add_user() {
     	conn = sqlconnect.dbconnect();
     	try {
-			ps = conn.prepareStatement("insert into user (accountnumber, name, gender, id, username, email, mobilenumber) values(?,?,?,?,?,?,?)");
-			ps.setString(1,txt_anumber.getText());
-			ps.setString(2, txt_name.getText());
+			ps = conn.prepareStatement("insert into user(firstname, lastname,gender, dob, id, address, emailid, mobileno,username,password, datetime) values(?,?,?,?,?,?,?,?,?,?, datetime('now','localtime'))");
+			
+			ps.setString(1, txt_name.getText());
+			ps.setString(2, " ");
 			ps.setString(3, txt_gender.getText());
-			ps.setString(4, txt_id.getText());
-			ps.setString(5, txt_username.getText());
-			ps.setString(6, txt_email.getText());
-			ps.setString(7, txt_mnumber.getText());
+			ps.setString(4, "Nil");
+			ps.setString(5, txt_id.getText());
+			ps.setString(6, "Nil");
+			ps.setString(7, txt_email.getText());
+			ps.setString(8, txt_mnumber.getText());
+			ps.setString(9, txt_username.getText());
+			ps.setString(10, "0000");
+			
 			ps.executeUpdate();
 			
-			JOptionPane.showMessageDialog(null, "Successfully inserted");
+			//************** both the tables are created here i.e, user balance table and user txn table
+			try {
+				ps = conn.prepareStatement("select * from user where username = ?");
+				ps.setString(1, txt_username.getText());
+				rs = ps.executeQuery();
+				int accno = rs.getInt("accno");
+			
+				// create table balance
+				String tablebalance ="CREATE TABLE IF NOT EXISTS " + txt_username.getText()+accno + " (balance real default 0.0);";
+				try {
+					Statement stmt = conn.createStatement();
+					stmt.execute(tablebalance);
+					stmt.execute("insert into " + txt_username.getText()+accno + "  values(0.0)");
+				
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, e);
+				}
+			
+				// create table trx
+				String tabletrx ="create table IF NOT EXISTS " + "trx"+txt_username.getText()+accno + " (date text, remarks text, type text, amount real, balance real)";
+				try {
+					Statement stmt = conn.createStatement();
+					stmt.execute(tabletrx);
+				
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, e);
+				}
+			
+			}catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "inside create table"+e);
+			}
+			
+			JOptionPane.showMessageDialog(null, "User Account created. Note user Default password is '0000'");
 			
 			Update();
 			
@@ -111,7 +150,7 @@ public class UsersController implements Initializable  {
 			txt_name.setText("");
 			txt_mnumber.setText("");
 			txt_anumber.setText("");
-			
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e);
@@ -144,11 +183,15 @@ public class UsersController implements Initializable  {
     		String anumber = txt_anumber.getText();
     		String mnumber = txt_mnumber.getText();
     		
-    		String sql = "update user set username = '"+ username +"', gender = '"+ gender 
-    				+"', emailid = '"+ email +"', firstname = '"+ name +",lastname = '', mobileno = '"+ mnumber +", id = '"+ id +"' where  accno = "+ anumber+" ";
-    		stmt = conn.createStatement();
-    		stmt.execute(sql);
-    		
+    		ps = conn.prepareStatement("update user set firstname = ? , lastname = ' ', gender = ? , id = ?, emailid = ? , mobileno = ? , username = ? where accno = ?  ");
+    		ps.setString(1, name);
+    		ps.setString(2, gender);
+    		ps.setString(3, id);
+    		ps.setString(4, email);
+    		ps.setString(5, mnumber);
+    		ps.setString(6, username);
+    		ps.setString(7, anumber);
+    		ps.execute();
     		
     		JOptionPane.showMessageDialog(null, "Successfully Updated");
     		
@@ -162,7 +205,7 @@ public class UsersController implements Initializable  {
 			txt_mnumber.setText("");
 			txt_anumber.setText("");
     		
-			
+			conn.close();
     	}catch(SQLException e) {
     		JOptionPane.showMessageDialog(null, e);
     	}
@@ -178,6 +221,9 @@ public class UsersController implements Initializable  {
 			ps.setInt(1, col_anumber.getCellData(index));			
 			ps.executeUpdate();
 			
+			stmt = conn.createStatement();
+			stmt.execute("drop table " + col_username.getCellData(index)+col_anumber.getCellData(index));
+			stmt.execute("drop table trx"+ col_username.getCellData(index)+col_anumber.getCellData(index) );
 			JOptionPane.showMessageDialog(null, "DeletedSuccessfully");
 			
 			Update();
@@ -190,6 +236,7 @@ public class UsersController implements Initializable  {
 			txt_mnumber.setText("");
 			txt_anumber.setText("");
 			
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e);

@@ -41,6 +41,9 @@ public class AdminComplaintsController implements Initializable {
 
     @FXML
     private TableColumn<complaints, String> col_remark;
+    
+    @FXML
+    private TableColumn<complaints, String> col_status;
 	
     @FXML
     private TextField txt_anumber;
@@ -73,25 +76,55 @@ public class AdminComplaintsController implements Initializable {
 
     }
     
-    
-    @FXML
-    public void Delete_complaint(ActionEvent event) {
-    	conn = sqlconnect.dbconnect();
+    public void Solved(ActionEvent event) {
     	
     	try {
     		
-			ps = conn.prepareStatement("delete from user where accno = ?");
-			ps.setInt(1, col_anumber.getCellData(index));			
+    		if(!col_status.getCellData(index).toString().equals("Solved")) {
+    			conn = sqlconnect.dbconnect();
+    			stmt = conn.createStatement();
+    			stmt.execute("update feed_Comp set status = 'Solved' where accno = " + col_anumber.getCellData(index) +" and remark = '"+ col_remark.getCellData(index)+"'");
+    			JOptionPane.showMessageDialog(null, "Solved");
+    			
+    			Update();
+    			
+    			txt_type.setText("");
+    			txt_remark.setText("");
+    			txt_anumber.setText("");
+    		}else {
+    			JOptionPane.showMessageDialog(null, "Already Solved");
+    		}
+    		conn.close();
+    	}catch(Exception e) {
+    		JOptionPane.showMessageDialog(null, e);
+    	}
+    }
+    
+    @FXML
+    public void Delete_complaint(ActionEvent event) {
+    	
+    	
+    	try {
+    		
+    		if(col_status.getCellData(index).toString().equals("Solved")) {
+    			conn = sqlconnect.dbconnect();
+			ps = conn.prepareStatement("delete from feed_Comp where accno = ? and remark = ? ");
+			ps.setInt(1, col_anumber.getCellData(index));
+			ps.setString(2, col_remark.getCellData(index));
 			ps.executeUpdate();
 			
-			JOptionPane.showMessageDialog(null, "Succesfully updated");
+			JOptionPane.showMessageDialog(null, "Deleted");
 			
 			Update();
 			
 			txt_type.setText("");
 			txt_remark.setText("");
 			txt_anumber.setText("");
-			
+    		
+    		}else {
+    			JOptionPane.showMessageDialog(null, "Please View before Deleting");
+    		}
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e);
@@ -101,7 +134,9 @@ public class AdminComplaintsController implements Initializable {
     public void Update() {
     	col_anumber.setCellValueFactory(new PropertyValueFactory<complaints, Integer>("accno"));
 		col_type.setCellValueFactory(new PropertyValueFactory<complaints, String>("type"));
-		col_remark.setCellValueFactory(new PropertyValueFactory<complaints, String>("remark"));
+		col_remark.setCellValueFactory(new PropertyValueFactory<complaints, String>("remark")); // this is not visible
+		col_status.setCellValueFactory(new PropertyValueFactory<complaints, String>("status"));
+		
 		listM = sqlconnect.getDatacomplaints();
 		table_complaints.setItems(listM);
     }

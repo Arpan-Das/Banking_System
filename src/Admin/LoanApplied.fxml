@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.LoansAppliedController">
+<AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.LoansAppliedController">
    <children>
       <Pane layoutX="50.0" layoutY="50.0" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #8fb7e7; -fx-border-color: #b38600; -fx-border-width: 5px;">
          <children>
@@ -26,18 +26,19 @@
             </Label>
             <TableView fx:id="table_loans" layoutX="228.0" layoutY="119.0" onMouseClicked="#getSelected" prefHeight="259.0" prefWidth="509.0">
               <columns>
-                <TableColumn fx:id="col_anumber" prefWidth="128.0" text="Account no." />
-                <TableColumn fx:id="col_username" prefWidth="111.0" text="Username" />
-                  <TableColumn fx:id="col_amount" prefWidth="89.0" text="Amount" />
-                  <TableColumn fx:id="col_remark" prefWidth="179.0" text="Applied for" />
+                <TableColumn fx:id="col_anumber" prefWidth="58.0" text="Acc No." />
+                <TableColumn fx:id="col_username" prefWidth="106.0" text="Username" />
+                  <TableColumn fx:id="col_amount" prefWidth="99.0" text="Amount" />
+                  <TableColumn fx:id="col_why" minWidth="0.0" prefWidth="161.0" text="Applied for" />
+                  <TableColumn fx:id="col_status" prefWidth="84.0" text="Status" />
               </columns>
             </TableView>
             <TextField fx:id="txt_anumber" editable="false" layoutX="14.0" layoutY="118.0" promptText="Selected account number" />
             <TextField fx:id="txt_username" editable="false" layoutX="14.0" layoutY="160.0" promptText="selected username" />
             <TextField fx:id="txt_amount" editable="false" layoutX="14.0" layoutY="205.0" promptText="amount applied for" />
-            <TextArea fx:id="txt_remark" editable="false" layoutX="14.0" layoutY="248.0" prefHeight="130.0" prefWidth="186.0" promptText="Remark" />
-            <Button layoutX="125.0" layoutY="424.0" mnemonicParsing="false" onAction="#Delete_entry" prefHeight="39.0" prefWidth="146.0" style="-fx-background-color: green; -fx-text-fill: WHITE;" text="APPROVE" />
-            <Button layoutX="475.0" layoutY="424.0" mnemonicParsing="false" onAction="#Delete_entry" prefHeight="39.0" prefWidth="146.0" style="-fx-background-color: red; -fx-text-fill: WHITE;" text="REJECT" />
+            <TextArea fx:id="txt_remark" editable="false" layoutX="14.0" layoutY="248.0" prefHeight="130.0" prefWidth="186.0" promptText="Remark" wrapText="true" />
+            <Button layoutX="125.0" layoutY="424.0" mnemonicParsing="false" onAction="#Approve" prefHeight="39.0" prefWidth="146.0" style="-fx-background-color: green; -fx-text-fill: WHITE;" text="APPROVE" />
+            <Button layoutX="475.0" layoutY="424.0" mnemonicParsing="false" onAction="#Reject" prefHeight="39.0" prefWidth="146.0" style="-fx-background-color: red; -fx-text-fill: WHITE;" text="REJECT" />
             <Separator layoutX="211.0" layoutY="118.0" orientation="VERTICAL" prefHeight="259.0" prefWidth="0.0" />
          </children></Pane>
       <Button layoutX="785.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT" />

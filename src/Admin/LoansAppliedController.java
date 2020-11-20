@@ -40,10 +40,13 @@ public class LoansAppliedController implements Initializable {
     private TableColumn<loansapplied, String> col_username;
     
     @FXML
-    private TableColumn<loansapplied, Integer> col_amount;
+    private TableColumn<loansapplied, Float> col_amount;
 
     @FXML
-    private TableColumn<loansapplied, String> col_remark;
+    private TableColumn<loansapplied, String> col_why;
+    
+    @FXML
+    private TableColumn<loansapplied, String> col_status;
 	
     @FXML
     private TextField txt_anumber;
@@ -76,30 +79,97 @@ public class LoansAppliedController implements Initializable {
     	txt_anumber.setText(col_anumber.getCellData(index).toString());
     	txt_username.setText(col_username.getCellData(index).toString());
     	txt_amount.setText(col_amount.getCellData(index).toString());
-    	txt_remark.setText(col_remark.getCellData(index).toString());
+    	txt_remark.setText(col_status.getCellData(index).toString());
 
     }
     
     
     @FXML
-    public void Delete_entry(ActionEvent event) {
-    	conn = sqlconnect.dbconnect();
+    public void Reject(ActionEvent event) {
+    	
     	
     	try {
-    		
-			ps = conn.prepareStatement("delete from user where accno = ?");
-			ps.setInt(1, col_anumber.getCellData(index));			
-			ps.executeUpdate();
+    		if(!col_status.getCellData(index).toString().equals("Approve")) {
+    			conn = sqlconnect.dbconnect();
+    			ps = conn.prepareStatement("update loan set status = 'Reject' where accno = ? and amount = ? ");
+    			ps.setInt(1, col_anumber.getCellData(index));
+				ps.setFloat(2, col_amount.getCellData(index));
+				ps.executeUpdate();
 			
-			JOptionPane.showMessageDialog(null, "Succesfully updated");
+				JOptionPane.showMessageDialog(null, "Rejected");
 			
-			Update();
+				Update();
 			
-			txt_username.setText("");
-			txt_remark.setText("");
-			txt_anumber.setText("");
-			txt_amount.setText("");
+				txt_username.setText("");
+				txt_remark.setText("");
+				txt_anumber.setText("");
+				txt_amount.setText("");
 			
+    		}else {
+    			JOptionPane.showMessageDialog(null, "Already Approved and Amount is already credited. Now you can't Reject.");
+    		}
+			conn.close();
+		} catch (SQLException e) {
+			
+			JOptionPane.showMessageDialog(null, e);
+		}
+    }
+    
+    public void Approve(ActionEvent event) {
+    	
+    	
+    	try {
+    		if(!col_status.getCellData(index).toString().equals("Approve")) {
+    			conn = sqlconnect.dbconnect();
+    			ps = conn.prepareStatement("update loan set status = 'Approve' where accno = ? and amount = ? ");
+    			ps.setInt(1, col_anumber.getCellData(index));
+    			ps.setFloat(2, Float.valueOf(col_amount.getCellData(index)));
+    			ps.executeUpdate();
+			
+    			JOptionPane.showMessageDialog(null, "Approve");
+			
+    			//***************************** credit the loan
+			
+    			// to get the previous balance
+    			String query = "select * from "+ col_username.getCellData(index).toString()+col_anumber.getCellData(index);
+    			stmt = conn.createStatement();
+    			rs = stmt.executeQuery(query);
+    			float balance = rs.getFloat("balance") ;
+					
+    			// update the balance with added loan amount
+    			stmt.execute("update "+col_username.getCellData(index).toString()+col_anumber.getCellData(index)+" set balance = " + (balance + Float.valueOf(col_amount.getCellData(index))));
+		
+    			//********************** insert data into trx. table *******************************
+			
+    			stmt.execute("create table IF NOT EXISTS temp (date text, remarks text, type text, amount real, balance real)");
+		
+    			ps = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
+    			ps.setString(1, "Loan Amount");		// remark
+    			ps.setString(2, "Credit");		// type credit/debit
+    			ps.setFloat(3, Float.valueOf(col_amount.getCellData(index)));	// credit/debit amount
+    			ps.setFloat(4, (balance + Float.valueOf(col_amount.getCellData(index))));	// final balance after the trx
+    			ps.execute();
+		
+    			stmt.execute("insert into temp select * from trx" +col_username.getCellData(index).toString()+col_anumber.getCellData(index) );
+		
+    			stmt.execute("drop table trx" + col_username.getCellData(index).toString()+col_anumber.getCellData(index));
+		
+    			stmt.execute("alter table temp rename to trx"+col_username.getCellData(index).toString()+col_anumber.getCellData(index));
+		
+    			JOptionPane.showMessageDialog(null, "Amount Credited.");
+			
+    			Update();
+			
+    			txt_username.setText("");
+    			txt_remark.setText("");
+    			txt_anumber.setText("");
+    			txt_amount.setText("");
+			
+			
+    		}else {
+    			JOptionPane.showMessageDialog(null, "Already Approved and All Trx. Complete.");
+    		}
+			conn.close();
 		} catch (SQLException e) {
 			
 			JOptionPane.showMessageDialog(null, e);
@@ -109,8 +179,10 @@ public class LoansAppliedController implements Initializable {
     public void Update() {
     	col_anumber.setCellValueFactory(new PropertyValueFactory<loansapplied, Integer>("accno"));
 		col_username.setCellValueFactory(new PropertyValueFactory<loansapplied, String>("username"));
-		col_amount.setCellValueFactory(new PropertyValueFactory<loansapplied, Integer>("amount"));
-		col_remark.setCellValueFactory(new PropertyValueFactory<loansapplied, String>("remark"));
+		col_amount.setCellValueFactory(new PropertyValueFactory<loansapplied, Float>("amount"));
+		col_why.setCellValueFactory(new PropertyValueFactory<loansapplied, String>("why"));
+		col_status.setCellValueFactory(new PropertyValueFactory<loansapplied, String>("status"));
+		
 		listM = sqlconnect.getDataloansapplied();
 		table_loans.setItems(listM);
     }

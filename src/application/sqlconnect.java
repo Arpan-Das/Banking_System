@@ -41,7 +41,7 @@ public class sqlconnect {
 		
 		try {
 			
-			//PreparedStatement ps = conn.prepareStatement("select * from user");
+			
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("select *from user");
 			String name;
@@ -55,7 +55,7 @@ public class sqlconnect {
 					
 				}
 			}
-						
+			conn.close();			
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "sqlldsjf "+e);
 		}
@@ -63,13 +63,37 @@ public class sqlconnect {
 	}
 
     public static ObservableList<complaints>getDatacomplaints(){
-		return null;
+		conn = sqlconnect.dbconnect();
+		ObservableList<complaints> list = FXCollections.observableArrayList();
+    	try {
+    		Statement stmt = conn.createStatement();
+    		ResultSet rs = stmt.executeQuery("select * from feed_Comp");
+    		while(rs.next()) {
+    			list.add(new complaints(rs.getInt("accno"), rs.getString("type"), rs.getString("remark"), rs.getString("status")));
+    		}
+    		conn.close();
+    	}catch(Exception e) {
+    		JOptionPane.showMessageDialog(null, e);
+    	}
+    	return list;
     	
     }
      
 
     public static ObservableList<loansapplied>getDataloansapplied(){
-		return null;
-    	
+    	conn = sqlconnect.dbconnect();
+    	ObservableList<loansapplied> list = FXCollections.observableArrayList();
+    	try {
+    		Statement stmt = conn.createStatement();
+    		ResultSet rs = stmt.executeQuery("select *from loan");
+    		while(rs.next()) {
+    			list.add(new loansapplied(rs.getInt("accno"), rs.getFloat("amount"), rs.getString("username"),
+    					rs.getString("status"), rs.getString("why")));
+    		}
+    		conn.close();
+    	}catch(Exception e) {
+    		JOptionPane.showMessageDialog(null, "inside getDataLoansappied()----"+e);
+    	}
+		return list;
     }
 }
