@@ -27,8 +27,6 @@ public class AdminPanelController implements Initializable{
 
 		}
 		
-		
-		
 		public void exxit(ActionEvent event) {
 				System.exit(0);	
 				}
@@ -90,10 +88,10 @@ public class AdminPanelController implements Initializable{
 				((Node)event.getSource()).getScene().getWindow().hide();
 				Stage primaryStage = new Stage();
 				FXMLLoader loader = new FXMLLoader();
-				Pane root = loader.load(getClass().getResource("/Frontend/loans.fxml").openStream());
+				Pane root = loader.load(getClass().getResource("/Admin/loanapplied.fxml").openStream());
 				Scene scene = new Scene(root);
 				primaryStage.setScene(scene);
-				primaryStage.setTitle(" New Bills ");
+				primaryStage.initStyle(StageStyle.TRANSPARENT);
 				primaryStage.show();
 				
 			} catch (Exception e) {
@@ -107,10 +105,10 @@ public class AdminPanelController implements Initializable{
 				((Node)event.getSource()).getScene().getWindow().hide();
 				Stage primaryStage = new Stage();
 				FXMLLoader loader = new FXMLLoader();
-				Pane root = loader.load(getClass().getResource("/Frontend/AdminComplaints.fxml").openStream());
+				Pane root = loader.load(getClass().getResource("/Admin/AdminComplaints.fxml").openStream());
 				Scene scene = new Scene(root);
 				primaryStage.setScene(scene);
-				primaryStage.setTitle(" Admin Complaints ");
+				primaryStage.initStyle(StageStyle.TRANSPARENT);
 				primaryStage.show();
 				
 			} catch (Exception e) {
