@@ -38,6 +38,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class BankingSystemController implements Initializable {
     @FXML
@@ -227,11 +228,11 @@ public class BankingSystemController implements Initializable {
 					Stage primaryStage = new Stage();
 					FXMLLoader loader = new FXMLLoader();
 					Pane root = loader.load(getClass().getResource("/Admin/AdminPanel.fxml").openStream());
-					AdminPanelController userController = (AdminPanelController)loader.getController();
-					userController.SetAdminName(rs.getString("firstname") + " " +rs.getString("lastname"));
+					AdminPanelController adminController = (AdminPanelController)loader.getController();
+					adminController.SetAdminName(rs.getString("firstname") + " " +rs.getString("lastname"));
 					
 					Scene scene = new Scene(root);
-					
+					primaryStage.initStyle(StageStyle.TRANSPARENT);
 					primaryStage.setScene(scene);
 					
 					primaryStage.show();
@@ -250,7 +251,7 @@ public class BankingSystemController implements Initializable {
 					userpanelController.SetName(rs.getString("firstname") + " " +rs.getString("lastname"));
 					userpanelController.SetAccno(String.valueOf(rs.getInt("accno")));
 					Scene scene = new Scene(root);
-					
+					primaryStage.initStyle(StageStyle.TRANSPARENT);
 					primaryStage.setScene(scene);
 					
 					primaryStage.show();

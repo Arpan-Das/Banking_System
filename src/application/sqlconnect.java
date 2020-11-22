@@ -19,7 +19,7 @@ public class sqlconnect {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			conn = DriverManager.getConnection("jdbc:sqlite:BankingSystem.db");
-			JOptionPane.showMessageDialog(null, "database connected");
+		//	JOptionPane.showMessageDialog(null, "database connected");
 			return conn;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
