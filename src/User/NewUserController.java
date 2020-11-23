@@ -31,13 +31,16 @@ import javafx.stage.StageStyle;
 	    private TextField newpass;
 
 	    @FXML
-	    private TextField confirmpass;
+	    private TextField email;
 
 	    @FXML
 	    private TextArea address;
 
 	    @FXML
 	    private DatePicker dob;
+	    
+	    @FXML
+	    private TextField otp;
 
 	    @FXML
 	    void exxit(ActionEvent event) {
@@ -45,6 +48,11 @@ import javafx.stage.StageStyle;
 	    	System.exit(0);	
 	    }
 
+		public void SetName(String user) {
+			
+			userlbl.setText(user);
+
+	   }
 	    @FXML
 	    void logout(ActionEvent event) {
 	    	try {
@@ -67,7 +75,7 @@ import javafx.stage.StageStyle;
 	    @FXML
 	    void submit(ActionEvent event) {
 	    	
-	    	if(confirmpass.getText().trim().isEmpty() || newpass.getText().trim().isEmpty() || address.getText().trim().isEmpty()|| dob.getValue()== null )
+	    	if(email.getText().trim().isEmpty() || newpass.getText().trim().isEmpty() || address.getText().trim().isEmpty()|| dob.getValue()== null )
 	    	{
 	    		JOptionPane.showMessageDialog(null, "Enter all details");
 	    	}
@@ -80,6 +88,8 @@ import javafx.stage.StageStyle;
 	    		Pane root = loader.load(getClass().getResource("/User/UserPanel.fxml").openStream());
 	    		Scene scene = new Scene(root);
 	    		primaryStage.setScene(scene);
+	    		UserPanelController userpanelController = (UserPanelController)loader.getController();
+				userpanelController.SetName(userlbl.getText()); 
 	    		primaryStage.initStyle(StageStyle.TRANSPARENT);
 	    		primaryStage.show();
 	    		

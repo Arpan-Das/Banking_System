@@ -18,12 +18,11 @@ public class AdminPanelController implements Initializable{
 
 	@FXML private Label Adminlbl;
 	
-	 
-
 		
 		public void SetAdminName(String admin) {
 			
 			Adminlbl.setText(admin);
+			
 
 		}
 		
@@ -119,7 +118,7 @@ public class AdminPanelController implements Initializable{
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			// TODO Auto-generated method stub
-			
+		
 		}
 		
 	}
