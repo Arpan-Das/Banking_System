@@ -26,10 +26,10 @@
             </Label>
             <TableView fx:id="table_complaints" layoutX="228.0" layoutY="119.0" onMouseClicked="#getSelected" prefHeight="259.0" prefWidth="509.0">
               <columns>
-                <TableColumn fx:id="col_anumber" prefWidth="128.0" text="Account no." />
-                  <TableColumn fx:id="col_type" prefWidth="89.0" text="Type" />
-                  <TableColumn fx:id="col_remark" minWidth="0.0" prefWidth="193.0" text="Remark" visible="false" />
-                  <TableColumn fx:id="col_status" prefWidth="291.0" text="Status" />
+                <TableColumn fx:id="col_anumber" prefWidth="170.0" text="Account no." />
+                  <TableColumn fx:id="col_type" prefWidth="140.0" text="Type" />
+                  <TableColumn fx:id="col_remark" minWidth="0.0" prefWidth="3.0" text="Remark" visible="false" />
+                  <TableColumn fx:id="col_status" prefWidth="199.0" text="Status" />
               </columns>
             </TableView>
             <TextField fx:id="txt_anumber" editable="false" layoutX="14.0" layoutY="118.0" promptText="Selected account number" />
