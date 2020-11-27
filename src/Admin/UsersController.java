@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -28,7 +29,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class UsersController implements Initializable  {
-
+	
+	@FXML 
+	private Label lab_name;
+	public void setName(String name) {
+		lab_name.setText(name);
+	}
+	
     @FXML
     private TableView<user> table_user;
 
@@ -261,7 +268,7 @@ public class UsersController implements Initializable  {
 		System.exit(0);	
 		}
 
-    public void out(ActionEvent event) {
+    public void out(ActionEvent event) {		/////************ logout
 	try {
 		
 		((Node)event.getSource()).getScene().getWindow().hide();
@@ -278,13 +285,17 @@ public class UsersController implements Initializable  {
 	}
 }
 
-    public void out1(ActionEvent event) {
+    public void out1(ActionEvent event) {		////******* go back to admin panel
 	try {
 		
 		((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/Admin/AdminPanel.fxml").openStream());
+		
+		AdminPanelController adminpanel = (AdminPanelController)loader.getController();
+		adminpanel.SetAdminName(lab_name.getText());
+		
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
@@ -299,6 +310,6 @@ public class UsersController implements Initializable  {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		Update();
-		
+		lab_name.setVisible(false);
 	}
 }

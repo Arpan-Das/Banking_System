@@ -44,5 +44,6 @@
       <Button layoutX="785.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT" />
       <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onAction="#out1" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="DASHBOAD" />
       <Button layoutX="762.0" layoutY="567.0" mnemonicParsing="false" onAction="#out" prefHeight="31.0" prefWidth="87.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
+      <Label fx:id="lab_name" layoutX="678.0" layoutY="18.0" text="Label" />
    </children>
 </AnchorPane>

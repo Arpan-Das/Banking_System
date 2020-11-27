@@ -34,6 +34,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class WithrawController implements Initializable {
+	
+	@FXML 
+	private Label lab_name;
+	public void setName(String name) {
+		lab_name.setText(name);
+	}
+	
 	@FXML
 	private ComboBox<String> combobox;
 	@FXML
@@ -93,7 +100,7 @@ public class WithrawController implements Initializable {
 		System.exit(0);	
 		}
 
-    public void out(ActionEvent event) {
+    public void out(ActionEvent event) {	//******* logout
 	try {
 		
 		((Node)event.getSource()).getScene().getWindow().hide();
@@ -110,13 +117,17 @@ public class WithrawController implements Initializable {
 	}
 }
 
-    public void out1(ActionEvent event) {
+    public void out1(ActionEvent event) {		///*********** go back to admin panel
 	try {
 		
 		((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/Admin/AdminPanel.fxml").openStream());
+		
+		AdminPanelController admincomplaints = (AdminPanelController)loader.getController();
+		admincomplaints.SetAdminName(lab_name.getText());
+		
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
@@ -331,7 +342,7 @@ public class WithrawController implements Initializable {
     	combobox.setItems(list);
     	myrandcatcha = random();
 		randomlbl.setText(myrandcatcha);
-    	
+		lab_name.setVisible(false);
     }
 
 }

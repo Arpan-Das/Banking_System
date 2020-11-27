@@ -66,5 +66,6 @@
             <Glow />
          </effect>
       </Label>
+      <Label fx:id="lab_name" layoutX="111.0" layoutY="54.0" text="Label" />
    </children>
 </AnchorPane>

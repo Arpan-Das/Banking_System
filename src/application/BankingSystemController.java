@@ -18,6 +18,7 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 
 import Admin.AdminPanelController;
+import User.FirstTimeLogin;
 import User.UserPanelController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -228,8 +229,10 @@ public class BankingSystemController implements Initializable {
 					Stage primaryStage = new Stage();
 					FXMLLoader loader = new FXMLLoader();
 					Pane root = loader.load(getClass().getResource("/Admin/AdminPanel.fxml").openStream());
+					
 					AdminPanelController adminpanelController = (AdminPanelController)loader.getController();
 					adminpanelController.SetAdminName(rs.getString("firstname") + " " +rs.getString("lastname"));
+					
 					Scene scene = new Scene(root);
 					primaryStage.initStyle(StageStyle.TRANSPARENT);
 					primaryStage.setScene(scene);
@@ -239,21 +242,51 @@ public class BankingSystemController implements Initializable {
 					
 				}else {
 					// ************************ if user is a client **********************************
+					if(txt_loginpassword.getText().equals("0000")) {
+						//*************************** if the user account is created by admin only **********************
+						JOptionPane.showMessageDialog(null, "Welcome, "+ rs.getString("firstname"));
+						
+						((Node)event.getSource()).getScene().getWindow().hide();
+						Stage primaryStage = new Stage();
+						FXMLLoader loader = new FXMLLoader();
+						
+						
+						Pane root = loader.load(getClass().getResource("/User/FirstTimeLogin.fxml").openStream());
+						
+						FirstTimeLogin firsttimelogin = (FirstTimeLogin)loader.getController();
+						firsttimelogin.SetName(rs.getString("firstname")+rs.getString("lastname"));
+						firsttimelogin.setAccno(rs.getInt("accno"));
+						firsttimelogin.setUsername(rs.getString("username"));
+						firsttimelogin.setEmailid(rs.getString("emailid"));
+						
+						Scene scene = new Scene(root);
+						primaryStage.initStyle(StageStyle.TRANSPARENT);
+						primaryStage.setScene(scene);
+						
+						primaryStage.show();
+					}else {
 					
+					//************** normal user *****************************
 					JOptionPane.showMessageDialog(null, "Welcome, "+ rs.getString("firstname"));
 					
 					((Node)event.getSource()).getScene().getWindow().hide();
 					Stage primaryStage = new Stage();
 					FXMLLoader loader = new FXMLLoader();
+					
+					
 					Pane root = loader.load(getClass().getResource("/User/UserPanel.fxml").openStream());
+					
 					UserPanelController userpanelController = (UserPanelController)loader.getController();
-					userpanelController.SetName(rs.getString("firstname") + " " +rs.getString("lastname"));
-					userpanelController.SetAccno(String.valueOf(rs.getInt("accno")));
+					userpanelController.setAccno(rs.getInt("accno"));
+					userpanelController.setName(rs.getString("firstname")+rs.getString("lastname"));
+					userpanelController.setUsername(rs.getString("username"));
+					
 					Scene scene = new Scene(root);
 					primaryStage.initStyle(StageStyle.TRANSPARENT);
 					primaryStage.setScene(scene);
 					
 					primaryStage.show();
+					}	
 				}
 			}else {
 				//************************ user not found ****************************************

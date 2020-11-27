@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -29,6 +30,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class AdminComplaintsController implements Initializable {
+	
+	@FXML
+	private Label lab_name;
 	
 	@FXML
     private TableView<complaints> table_complaints;
@@ -64,6 +68,9 @@ public class AdminComplaintsController implements Initializable {
     PreparedStatement ps = null;
     Statement stmt;
     
+    public void setName(String name) {
+    	lab_name.setText(name);
+    }
     
     public void getSelected(MouseEvent event) {
     	index = table_complaints.getSelectionModel().getSelectedIndex();
@@ -145,13 +152,14 @@ public class AdminComplaintsController implements Initializable {
 		System.exit(0);	
 		}
 
-    public void out(ActionEvent event) {
+    public void out(ActionEvent event) {	// logout
 	try {
 		
 		((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/BankingSystem.fxml").openStream());
+		
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
@@ -162,13 +170,17 @@ public class AdminComplaintsController implements Initializable {
 	}
 }
 
-    public void out1(ActionEvent event) {
+    public void out1(ActionEvent event) {		//****** go back to adminpanel
 	try {
 		
 		((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/Admin/AdminPanel.fxml").openStream());
+		
+		AdminPanelController adminpanelController = (AdminPanelController)loader.getController();
+		adminpanelController.SetAdminName(lab_name.getText());
+		
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
@@ -183,7 +195,7 @@ public class AdminComplaintsController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Update();
-		
+		lab_name.setVisible(false);
 	}
 
 }
