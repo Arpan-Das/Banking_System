@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.LoansAppliedController">
+<AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.RecenTransactionController">
    <children>
       <Pane layoutX="50.0" layoutY="50.0" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #8fb7e7; -fx-border-color: #b38600; -fx-border-width: 5px;">
          <children>
@@ -24,25 +24,26 @@
                   <Glow level="0.54" />
                </effect>
             </Label>
-            <TableView fx:id="table_loans" layoutX="228.0" layoutY="119.0" onMouseClicked="#getSelected" prefHeight="333.0" prefWidth="509.0">
+            <TableView fx:id="tabel_log" layoutX="228.0" layoutY="119.0" onMouseClicked="#getSelected" prefHeight="333.0" prefWidth="509.0">
               <columns>
-                <TableColumn fx:id="col_anumber" prefWidth="82.0" text="AMOUNT" />
-                <TableColumn fx:id="col_username" prefWidth="82.0" text="DATE" />
-                  <TableColumn fx:id="col_amount" prefWidth="99.0" text="TYPE" />
-                  <TableColumn fx:id="col_why" minWidth="0.0" prefWidth="161.0" text="REMARK" />
-                  <TableColumn fx:id="col_status" prefWidth="84.0" text="BALANCE" />
+                <TableColumn fx:id="col_amount" prefWidth="82.0" text="AMOUNT" />
+                <TableColumn fx:id="col_date" prefWidth="82.0" text="DATE" />
+                  <TableColumn fx:id="col_type" prefWidth="99.0" text="TYPE" />
+                  <TableColumn fx:id="col_remark" minWidth="0.0" prefWidth="161.0" text="REMARK" />
+                  <TableColumn fx:id="col_balance" prefWidth="84.0" text="BALANCE" />
               </columns>
             </TableView>
-            <TextField fx:id="txt_anumber" editable="false" layoutX="14.0" layoutY="138.0" promptText="AMOUNT" />
-            <TextField fx:id="txt_username" editable="false" layoutX="14.0" layoutY="191.0" promptText="DATE" />
-            <TextField fx:id="txt_amount" editable="false" layoutX="14.0" layoutY="243.0" promptText="TYPE" />
-            <TextArea fx:id="txt_remark" editable="false" layoutX="14.0" layoutY="301.0" prefHeight="130.0" prefWidth="186.0" promptText="REMARK" wrapText="true" />
+            <TextField fx:id="amount" editable="false" layoutX="14.0" layoutY="138.0" promptText="AMOUNT" />
+            <TextField fx:id="date" editable="false" layoutX="14.0" layoutY="191.0" promptText="DATE" />
+            <TextField fx:id="type" editable="false" layoutX="14.0" layoutY="243.0" promptText="TYPE" />
+            <TextArea fx:id="remark" editable="false" layoutX="14.0" layoutY="301.0" prefHeight="130.0" prefWidth="186.0" promptText="REMARK" wrapText="true" />
             <Separator layoutX="211.0" layoutY="118.0" orientation="VERTICAL" prefHeight="333.0" prefWidth="0.0" />
             <Label layoutX="620.0" layoutY="37.0" prefHeight="21.0" prefWidth="116.0" text="Current Balance" />
-            <Label layoutX="620.0" layoutY="14.0" prefHeight="21.0" prefWidth="116.0" text="Account Number" />
+            <Label fx:id="accountnumber" layoutX="620.0" layoutY="14.0" prefHeight="21.0" prefWidth="116.0" text="Account Number" />
+            <Label fx:id="username" layoutX="346.0" layoutY="79.0" visible="false" />
          </children></Pane>
-      <Button layoutX="785.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT" />
-      <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onAction="#out1" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="DASHBOAD" />
-      <Button layoutX="762.0" layoutY="567.0" mnemonicParsing="false" onAction="#out" prefHeight="31.0" prefWidth="87.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
+      <Button fx:id="exit" layoutX="785.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT" />
+      <Button fx:id="dashboad" layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onAction="#out1" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="DASHBOAD" />
+      <Button fx:id="logout" layoutX="762.0" layoutY="567.0" mnemonicParsing="false" onAction="#out" prefHeight="31.0" prefWidth="87.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
    </children>
 </AnchorPane>
