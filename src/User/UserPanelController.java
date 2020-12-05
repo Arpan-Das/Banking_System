@@ -21,10 +21,14 @@ import javafx.stage.Stage;
 
 public class UserPanelController implements Initializable {
 	
-	@FXML private Label lbl_name, lab_username;
-	@FXML private Label lab_accno;
-	@FXML private Label userbalance;
-	@FXML private Label lab_viewbalance;
+	@FXML 
+	private Label lbl_name, lab_username;
+	@FXML 
+	private Label lab_accno;
+	@FXML 
+	private Label userbalance;
+	@FXML 
+	private Label lab_viewbalance;
 	private String username;
 	private int accno;
 	private float balance;
