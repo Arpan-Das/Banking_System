@@ -112,8 +112,11 @@ public class UserPanelController implements Initializable {
 			((Node)event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(getClass().getResource("/Frontend/Depositwithraw.fxml").openStream());
+			Pane root = loader.load(getClass().getResource("/User/RecentTransaction.fxml").openStream());
 			Scene scene = new Scene(root);
+			RecenTransactionController rtcontroller = (RecenTransactionController)loader.getController();
+			rtcontroller.setName(lbl_name.getText(),lab_accno.getText());
+			
 			primaryStage.setScene(scene);
 			primaryStage.setTitle(" New Payments ");
 			primaryStage.show();
