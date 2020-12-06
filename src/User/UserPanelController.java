@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
+
 import application.sqlconnect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,7 +55,6 @@ public class UserPanelController implements Initializable {
 		data.setAccno(String.valueOf(accno));
 	}
 
-	
 			
 	public void exxit(ActionEvent event) {
 		System.exit(0);	
@@ -78,8 +80,6 @@ public class UserPanelController implements Initializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
 			
 		}else if(event.getSource() == userbalance) {
 			//****************** when user click on balance then balance will hide **************
@@ -113,11 +113,9 @@ public class UserPanelController implements Initializable {
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
 			Pane root = loader.load(getClass().getResource("/User/RecentTransaction.fxml").openStream());
-			
 			Scene scene = new Scene(root);
-			
 			primaryStage.setScene(scene);
-			primaryStage.setTitle(" New Payments ");
+			primaryStage.setTitle(" Mini Statement ");
 			primaryStage.show();
 			
 		} catch (Exception e) {
@@ -125,20 +123,20 @@ public class UserPanelController implements Initializable {
 		}
 	}
 			
-	public void out2(ActionEvent event) {
+	public void out2(ActionEvent event) {	//********************* go to online trx *************************
 		try {
 			
 			((Node)event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(getClass().getResource("/Frontend/Users.fxml").openStream());
+			Pane root = loader.load(getClass().getResource("/User/MoneyTransfer.fxml").openStream());
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle(" Pending Bills ");
+			primaryStage.setTitle(" Online Transection ");
 			primaryStage.show();
 			
 		} catch (Exception e) {
-			
+			JOptionPane.showMessageDialog(null, "open" + e);
 		}
 	}
 			
