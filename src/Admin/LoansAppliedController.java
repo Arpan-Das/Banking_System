@@ -111,7 +111,7 @@ public class LoansAppliedController implements Initializable {
 				txt_remark.setText("");
 				txt_anumber.setText("");
 				txt_amount.setText("");
-			
+				index = -1;
     		}else {
     			JOptionPane.showMessageDialog(null, "Already Approved and Amount is already credited. Now you can't Reject.");
     		}
@@ -172,7 +172,7 @@ public class LoansAppliedController implements Initializable {
     			txt_anumber.setText("");
     			txt_amount.setText("");
 			
-			
+    			index = -1;
     		}else {
     			JOptionPane.showMessageDialog(null, "Already Approved and All Trx. Complete.");
     		}

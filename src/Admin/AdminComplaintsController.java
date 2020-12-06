@@ -127,7 +127,8 @@ public class AdminComplaintsController implements Initializable {
 			txt_type.setText("");
 			txt_remark.setText("");
 			txt_anumber.setText("");
-    		
+			
+    		index = -1;
     		}else {
     			JOptionPane.showMessageDialog(null, "Please View before Deleting");
     		}
