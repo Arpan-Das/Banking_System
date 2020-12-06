@@ -21,13 +21,16 @@ import javafx.stage.Stage;
 
 public class UserPanelController implements Initializable {
 	
-	@FXML private Label lbl_name, lab_username;
-	@FXML private Label lab_accno;
-	@FXML private Label userbalance;
-	@FXML private Label lab_viewbalance;
-	private String username;
-	private int accno;
-	private float balance;
+	@FXML 
+	private Label lbl_name, lab_username;
+	@FXML 
+	private Label lab_accno;
+	@FXML 
+	private Label userbalance;
+	@FXML 
+	private Label lab_viewbalance;
+
+	private double balance;
 	
 	Connection conn;
 	ResultSet rs;
@@ -36,16 +39,17 @@ public class UserPanelController implements Initializable {
 				
 	public void setName(String name) {
 		lbl_name.setText(name);
+		data.setName(name);
 	}
 
 	public void setUsername(String username) {
 		lab_username.setText(username);
-		this.username = username;
+		data.setUsername(username);
 	}
 
 	public void setAccno(int accno) {
 		lab_accno.setText(String.valueOf(accno));
-		this.accno = accno;
+		data.setAccno(String.valueOf(accno));
 	}
 
 	
@@ -63,7 +67,7 @@ public class UserPanelController implements Initializable {
 			userbalance.setVisible(true);
 			
 			conn = sqlconnect.dbconnect();
-			String sql = "select balance from "+username+accno;
+			String sql = "select balance from "+data.getUsername()+data.getAccno();
 			try {
 				stmt = conn.createStatement();
 				rs = stmt.executeQuery(sql);
@@ -78,14 +82,14 @@ public class UserPanelController implements Initializable {
 			
 			
 		}else if(event.getSource() == userbalance) {
-			//******************when user click on balance then balance will hide **************
+			//****************** when user click on balance then balance will hide **************
 			
 			userbalance.setVisible(false);
 			lab_viewbalance.setVisible(true);
 		}
 	}
 			
-	public void out(ActionEvent event) {
+	public void out(ActionEvent event) {	//***************** logout ***************************
 		try {
 			
 			((Node)event.getSource()).getScene().getWindow().hide();
@@ -102,14 +106,16 @@ public class UserPanelController implements Initializable {
 		}
 	}
 			
-	public void out1(ActionEvent event) {
+	public void out1(ActionEvent event) {	//********************* go to recent trx. ************************
 		try {
 				
 			((Node)event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(getClass().getResource("/Frontend/Depositwithraw.fxml").openStream());
+			Pane root = loader.load(getClass().getResource("/User/RecentTransaction.fxml").openStream());
+			
 			Scene scene = new Scene(root);
+			
 			primaryStage.setScene(scene);
 			primaryStage.setTitle(" New Payments ");
 			primaryStage.show();

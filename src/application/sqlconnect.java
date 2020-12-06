@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import Admin.complaints;
 import Admin.loansapplied;
 import Admin.user;
+import User.activitylog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -96,4 +97,24 @@ public class sqlconnect {
     	}
 		return list;
     }
+
+
+	public static ObservableList<activitylog> getDatalog(String user, String anumber) {
+		conn = sqlconnect.dbconnect();
+		ObservableList<activitylog> list = FXCollections.observableArrayList();
+		try {
+			Statement stmt = conn.createStatement();
+			String sql = "SELECT * FROM trx" + user + anumber;
+			ResultSet rs= stmt.executeQuery(sql);
+			while(rs.next()) {
+				list.add(new activitylog(rs.getDouble("amount"), rs.getString("type"), rs.getString("remarks"),
+						rs.getString("date"), rs.getDouble("balance")));
+			}
+			conn.close();
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "inside getDatalog()---"+e);
+		}
+		return list;
+		
+	}
 }
