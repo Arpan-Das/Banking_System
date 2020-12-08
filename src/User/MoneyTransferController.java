@@ -65,6 +65,14 @@ public class MoneyTransferController implements Initializable {
 		return String.valueOf(rand.nextInt(1000+1));
 	}
 	
+	public void setloan(String acconumber, String amountt){
+    	anumber.setText(acconumber);
+    	amount.setText(amountt);
+    	amount.setEditable(false);
+    	anumber.setEditable(false);
+    	
+    }
+	
 	@FXML
 	public void submit(ActionEvent event) {
 		//**************************** main code *********************************

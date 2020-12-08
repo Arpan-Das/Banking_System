@@ -46,6 +46,10 @@ public class LoanController implements Initializable{
 				Stage primaryStage = new Stage();
 				FXMLLoader loader = new FXMLLoader();
 				Pane root = loader.load(getClass().getResource("/User/UserPanel.fxml").openStream());
+				UserPanelController panelController = (UserPanelController)loader.getController();
+	    		panelController.setName(data.getName());
+	    		panelController.setUsername(data.getUsername());
+	    		panelController.setAccno(Integer.parseInt(data.getAccno()));
 				Scene scene = new Scene(root);
 				primaryStage.setScene(scene);
 				primaryStage.initStyle(StageStyle.TRANSPARENT);

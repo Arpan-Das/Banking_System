@@ -64,7 +64,6 @@ public class RecenTransactionController implements Initializable {
 	    private Label name;
 	    
 	    
-	    
 //	    public void setName(String username,String accountnumber, String name) {
 //	    	this.username.setText(username);
 //	    	this.accountnumber.setText(accountnumber);

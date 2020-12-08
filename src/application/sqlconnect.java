@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import Admin.complaints;
 import Admin.loansapplied;
 import Admin.user;
+import User.activeloans;
 import User.activitylog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -116,5 +117,11 @@ public class sqlconnect {
 		}
 		return list;
 		
+	}
+
+
+	public static ObservableList<activeloans> getDataloans(String accountnumber) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
