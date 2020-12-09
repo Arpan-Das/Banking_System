@@ -130,7 +130,27 @@ public class AdminPanelController implements Initializable{
 				
 			}
 		}
-
+       
+		public void out5(ActionEvent event) {		//fixed deposits
+			try {
+				
+				((Node)event.getSource()).getScene().getWindow().hide();
+				Stage primaryStage = new Stage();
+				FXMLLoader loader = new FXMLLoader();
+				Pane root = loader.load(getClass().getResource("/Admin/FixedDeposits.fxml").openStream());
+				
+				FixedDepositController fixedcomplaints = (FixedDepositController)loader.getController();
+				fixedcomplaints.setName(Adminlbl.getText());
+				
+				Scene scene = new Scene(root);
+				primaryStage.setScene(scene);
+				primaryStage.initStyle(StageStyle.TRANSPARENT);
+				primaryStage.show();
+				
+			} catch (Exception e) {
+				
+			}
+		}
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			// TODO Auto-generated method stub

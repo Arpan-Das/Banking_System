@@ -193,7 +193,7 @@ public class ActiveLoanController implements Initializable{
 		col_pay.setCellValueFactory(new PropertyValueFactory<activeloans, Double>("pay"));
 		col_paid.setCellValueFactory(new PropertyValueFactory<activeloans, Double>("paid"));
 		
-		listloans = sqlconnect.getDataloans(data.getAccno());
+		listloans = sqlconnect.getDataloans(Integer.parseInt(data.getAccno()));
 		tabel_loan.setItems(listloans);
     }
 		

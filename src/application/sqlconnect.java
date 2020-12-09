@@ -118,10 +118,24 @@ public class sqlconnect {
 		return list;
 		
 	}
+   
 
-
-	public static ObservableList<activeloans> getDataloans(String accountnumber) {
-		// TODO Auto-generated method stub
-		return null;
+	public static ObservableList<activeloans> getDataloans(int accountnumber) {
+		
+		conn = sqlconnect.dbconnect();
+		ObservableList<activeloans> list = FXCollections.observableArrayList();
+		try {
+			Statement stmt = conn.createStatement();
+			String sql = "SELECT * FROM loan where accono =\"" + accountnumber + "\"";
+			ResultSet rs= stmt.executeQuery(sql);
+			while(rs.next()) {
+				list.add(new activeloans(rs.getDouble("amount"), rs.getString("type"), rs.getString("duedate"), rs.getDouble("dueamount"),
+						rs.getDouble("topay"), rs.getDouble("paid"), rs.getString("remark"), rs.getString("applieddate")));
+			}
+			conn.close();
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "inside getDatalog()---"+e);
+		}
+		return list;
 	}
 }

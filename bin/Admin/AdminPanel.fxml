@@ -27,30 +27,36 @@
                </font>
             </Label>
             <Button layoutX="341.0" layoutY="125.0" mnemonicParsing="false" onAction="#out" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
-                <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="67.0" layoutY="125.0" pickOnBounds="true">
+                <ImageView fitHeight="141.0" fitWidth="155.0" layoutX="53.0" layoutY="110.0" pickOnBounds="true">
                <image>
                   <Image url="Images/img4.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="518.0" layoutY="321.0" pickOnBounds="true">
+            <ImageView fitHeight="141.0" fitWidth="155.0" layoutX="536.0" layoutY="312.0" pickOnBounds="true">
                <image>
                   <Image url="Images/img6.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="518.0" layoutY="125.0" pickOnBounds="true">
+            <ImageView fitHeight="141.0" fitWidth="155.0" layoutX="536.0" layoutY="111.0" pickOnBounds="true">
                <image>
                   <Image url="Images/img1.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="132.0" fitWidth="155.0" layoutX="68.0" layoutY="322.0" pickOnBounds="true">
+            <ImageView fitHeight="141.0" fitWidth="155.0" layoutX="54.0" layoutY="313.0" pickOnBounds="true">
                <image>
                   <Image url="Images/img2.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="518.0" layoutY="453.0" mnemonicParsing="false" onAction="#out4" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FEEDBACKS" />
-            <Button layoutX="68.0" layoutY="454.0" mnemonicParsing="false" onAction="#out3" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOANS" />
-            <Button layoutX="518.0" layoutY="257.0" mnemonicParsing="false" onAction="#out2" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="USERS DETAILS" />
-            <Button layoutX="68.0" layoutY="257.0" mnemonicParsing="false" onAction="#out1" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="WITHRAW/DEPOSIT" />
+            <Button layoutX="536.0" layoutY="453.0" mnemonicParsing="false" onAction="#out4" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FEEDBACKS" />
+            <Button layoutX="54.0" layoutY="454.0" mnemonicParsing="false" onAction="#out3" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOANS" />
+            <Button layoutX="536.0" layoutY="252.0" mnemonicParsing="false" onAction="#out2" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="USERS DETAILS" />
+            <Button layoutX="54.0" layoutY="251.0" mnemonicParsing="false" onAction="#out1" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="WITHRAW/DEPOSIT" />
+            <ImageView fitHeight="141.0" fitWidth="155.0" layoutX="302.0" layoutY="198.0" pickOnBounds="true">
+               <image>
+                  <Image url="Images/img10.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="303.0" layoutY="339.0" mnemonicParsing="false" onAction="#out5" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FIXED DEPOSITS" />
          </children></Pane>
       <Button layoutX="785.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT" />
    </children>
