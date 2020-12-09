@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.FixedDepositController">
    <children>
       <Button layoutX="923.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="76.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT" />
       <Button layoutX="900.0" layoutY="667.0" mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="99.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
@@ -40,6 +40,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </TextArea>
+            <Label fx:id="adminaccountnumber" layoutX="45.0" layoutY="155.0" text="1000145" visible="false" />
          </children>
       </Pane>
       <Label layoutX="647.0" layoutY="130.0" text="APPLY NOW">
@@ -73,24 +74,24 @@
             <Glow level="0.5" />
          </effect>
       </Label>
-      <Button layoutX="689.0" layoutY="253.0" mnemonicParsing="false" onAction="#submit" prefHeight="31.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="PROCEED">
+      <Button layoutX="689.0" layoutY="253.0" mnemonicParsing="false" onAction="#proceed" prefHeight="31.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="PROCEED">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="amount1" layoutX="786.0" layoutY="500.0" prefHeight="31.0" prefWidth="188.0" promptText="DATE" />
+      <TextField fx:id="mdate" editable="false" layoutX="786.0" layoutY="500.0" prefHeight="31.0" prefWidth="188.0" promptText="DATE" />
       <Label layoutX="532.0" layoutY="496.0" prefHeight="39.0" prefWidth="224.0" text="MATURITY DATE">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <TextField fx:id="amount2" layoutX="785.0" layoutY="547.0" prefHeight="31.0" prefWidth="188.0" promptText="PROFIT" />
+      <TextField fx:id="profit" editable="false" layoutX="785.0" layoutY="547.0" prefHeight="31.0" prefWidth="188.0" promptText="PROFIT" />
       <Label layoutX="532.0" layoutY="543.0" prefHeight="39.0" prefWidth="235.0" text="EXPECTED PROFIT">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <TextField fx:id="amount3" layoutX="785.0" layoutY="452.0" prefHeight="31.0" prefWidth="188.0" promptText="INTERESTED RATE" />
+      <TextField fx:id="rate" editable="false" layoutX="785.0" layoutY="452.0" prefHeight="31.0" prefWidth="188.0" promptText="INTERESTED RATE" />
       <Label layoutX="532.0" layoutY="448.0" prefHeight="32.0" prefWidth="213.0" text="INTEREST RATE">
          <font>
             <Font name="System Bold" size="27.0" />

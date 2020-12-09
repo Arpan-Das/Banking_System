@@ -1,8 +1,14 @@
 package Admin;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
+import application.sqlconnect;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -39,7 +46,7 @@ public class FixedDepositController implements Initializable{
     private TableColumn<fixeddeposit, String> col_mdate;
 
     @FXML
-    private TableColumn<fixeddeposit, String> col_profit;
+    private TableColumn<fixeddeposit, Double> col_profit;
 
     @FXML
     private Label adminlbl;
@@ -94,11 +101,33 @@ public class FixedDepositController implements Initializable{
     	}
 
     }
+   ObservableList<fixeddeposit> listM;
+    
+
+    int index = -1;
+    
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
+    Statement stmt;
+    
+    public void Update() {
+    	col_anumber.setCellValueFactory(new PropertyValueFactory<fixeddeposit, Integer>("accnonumber"));
+		col_username.setCellValueFactory(new PropertyValueFactory<fixeddeposit, String>("username"));
+		col_amount.setCellValueFactory(new PropertyValueFactory<fixeddeposit, Double>("amount"));
+		col_rate.setCellValueFactory(new PropertyValueFactory<fixeddeposit, Double>("rate"));
+		col_mdate.setCellValueFactory(new PropertyValueFactory<fixeddeposit, String>("mdate"));
+		col_adate.setCellValueFactory(new PropertyValueFactory<fixeddeposit, String>("applieddate"));
+		col_profit.setCellValueFactory(new PropertyValueFactory<fixeddeposit, Double>("profit"));
+		
+		listM = sqlconnect.getDatafixeddeposits();
+		table_fixes.setItems(listM);
+    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		
+		Update();
 	}
 
 }

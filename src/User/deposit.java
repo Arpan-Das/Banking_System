@@ -1,22 +1,14 @@
-package Admin;
+package User;
 
-public class fixeddeposit {
+public class deposit {
 	
-	int acconumber;
 	double amount,profit, rate;
-	String username, mdate, applieddate;
+	String mdate, applieddate;
 	
 	
-	public void setAccountnumber(int acco)
-	{
-		this.acconumber = acco;
-	}
+
 	public void setAmount(double amount) {
 		this.amount = amount;
-	}
-
-	public void setUsername(String uname) {
-		this.username = uname;
 	}
 
 	public void setmDate(String mdate) {
@@ -33,16 +25,8 @@ public class fixeddeposit {
 		this.applieddate = applieddate;
 	}
 	
-	public int getAccount() {
-		return acconumber;
-	}
-	
 	public double getAmount() {
 		return amount;
-	}
-
-	public String getUsername() {
-		return username;
 	}
 
 	public String getMdate() {
@@ -62,15 +46,13 @@ public class fixeddeposit {
 		return applieddate;
 	}
 
-	public fixeddeposit(double amount, String username, String mdate, double rate, double profit, int acconumber, String applieddate) {
+	public deposit(double amount, String mdate, double rate, double profit, String applieddate) {
 		super();
 		this.amount = amount;
-		this.username = username;
 		this.mdate = mdate;
 		this.rate = rate;
 		this.profit = profit;
 		this.applieddate = applieddate;
-		this.acconumber = acconumber;
 		
 	}
 }
