@@ -5,9 +5,12 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 import Admin.complaints;
+import Admin.fixeddeposit;
 import Admin.loansapplied;
 import Admin.user;
+import User.activeloans;
 import User.activitylog;
+import User.deposit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -117,4 +120,60 @@ public class sqlconnect {
 		return list;
 		
 	}
-}
+   
+
+	public static ObservableList<activeloans> getDataloans(int accountnumber) {
+		
+		conn = sqlconnect.dbconnect();
+		ObservableList<activeloans> list = FXCollections.observableArrayList();
+		try {
+			Statement stmt = conn.createStatement();
+			String sql = "SELECT * FROM loan where accono =\"" + accountnumber + "\"";
+			ResultSet rs= stmt.executeQuery(sql);
+			while(rs.next()) {
+				list.add(new activeloans(rs.getDouble("amount"), rs.getString("type"), rs.getString("duedate"), rs.getDouble("dueamount"),
+						rs.getDouble("topay"), rs.getDouble("paid"), rs.getString("remark"), rs.getString("applieddate")));
+			}
+			conn.close();
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "inside getDatalog()---"+e);
+		}
+		return list;
+	}
+
+
+	public static ObservableList<fixeddeposit> getDatafixeddeposits() {
+		conn = sqlconnect.dbconnect();
+    	ObservableList<fixeddeposit> list = FXCollections.observableArrayList();
+    	try {
+    		Statement stmt = conn.createStatement();
+    		ResultSet rs = stmt.executeQuery("select *from fixeddeposits");
+    		while(rs.next()) {
+    			list.add(new fixeddeposit(rs.getDouble("amount"), rs.getString("username"), rs.getString("mdate"), rs.getDouble("rate"),
+    					rs.getDouble("profit"), rs.getInt("accountnumber"), rs.getString("applieddate")));
+    		}
+    		conn.close();
+    	}catch(Exception e) {
+    		JOptionPane.showMessageDialog(null, "inside getDataLoansappied()----"+e);
+    	}
+		return list;
+      }
+
+
+	public static ObservableList<deposit> getDatadeposits(int parseInt) {
+		conn = sqlconnect.dbconnect();
+    	ObservableList<deposit> list = FXCollections.observableArrayList();
+    	try {
+    		Statement stmt = conn.createStatement();
+    		ResultSet rs = stmt.executeQuery("select *from fixeddeposits where accountnumber = \"" + parseInt + "\"");
+    		while(rs.next()) {
+    			list.add(new deposit(rs.getDouble("amount"), rs.getString("mdate"), rs.getDouble("rate"),
+    					rs.getDouble("profit"), rs.getString("applieddate")));
+    		}
+    		conn.close();
+    	}catch(Exception e) {
+    		JOptionPane.showMessageDialog(null, "inside getDataLoansappied()----"+e);
+    	}
+		return list;
+      }
+	}

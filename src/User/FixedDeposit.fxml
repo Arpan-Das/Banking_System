@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.FixedDepositController">
+   <children>
+      <Button layoutX="923.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="76.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT" />
+      <Button layoutX="900.0" layoutY="667.0" mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="99.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
+      <TextField fx:id="accountnumber" editable="false" layoutX="784.0" layoutY="306.0" prefHeight="31.0" prefWidth="188.0" promptText="ACCOUNTNUMBER" />
+      <TextField fx:id="username" editable="false" layoutX="785.0" layoutY="359.0" prefHeight="31.0" prefWidth="188.0" promptText="USERNAME" />
+      <TextField fx:id="amount" layoutX="786.0" layoutY="409.0" prefHeight="31.0" prefWidth="188.0" promptText="AMOUNT" />
+      <ComboBox fx:id="combobox" layoutX="649.0" layoutY="205.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="235.0" promptText="          SELECT TIME PERIOD" />
+      <Button layoutX="684.0" layoutY="610.0" mnemonicParsing="false" onAction="#submit" prefHeight="39.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="SUBMIT">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Pane layoutX="-6.0" layoutY="-1.0" minHeight="700.0" minWidth="0.0" prefHeight="700.0" prefWidth="500.0" style="-fx-background-color: #8fb7e7;">
+         <children>
+            <Button layoutX="7.0" layoutY="2.0" mnemonicParsing="false" onAction="#dashboad" prefHeight="31.0" prefWidth="111.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="DASHBOARD" />
+            <Label layoutX="170.0" layoutY="138.0" text="POLICIES">
+               <font>
+                  <Font name="System Bold" size="38.0" />
+               </font>
+               <effect>
+                  <Glow level="0.5" />
+               </effect>
+            </Label>
+            <Label layoutX="39.0" layoutY="212.0" prefHeight="21.0" prefWidth="446.0" />
+            <TextArea editable="false" layoutX="39.0" layoutY="212.0" minWidth="446.0" prefHeight="454.0" prefWidth="446.0" style="-fx-background-color: #8fb7e7;" text="* A-V BANK is providing loans for its trusted users.&#10;* Users can apply for loans at low interest rates.&#10;Home Loans - 6.12%&#10;Car Loans - 10.74%&#10;Study Loans - 2.5%&#10;Medical Loans- 5.89%&#10;Business Loans - 11.96%&#10;Personal Loan 12.5%&#10;* Above mentioned are some of the common&#10; loans which can be passed on user's demand.&#10;* Rates are non-negotiable.&#10;* Interested users can apply now and be ready for&#10;documents verification process by our admin.&#10;* We will tune you on your registered E-Mail&#10; address once documents get verified and &#10;loan amount get passed by our admin.&#10;* KEEP BANKING!!!&#10;">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </TextArea>
+            <Label fx:id="adminaccountnumber" layoutX="45.0" layoutY="155.0" text="1000145" visible="false" />
+         </children>
+      </Pane>
+      <Label layoutX="647.0" layoutY="130.0" text="APPLY NOW">
+         <font>
+            <Font name="System Bold" size="38.0" />
+         </font>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
+      </Label>
+      <Label layoutX="532.0" layoutY="302.0" prefHeight="39.0" prefWidth="254.0" text="ACCOUNT No.">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="532.0" layoutY="405.0" prefHeight="32.0" prefWidth="213.0" text="AMOUNT">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="532.0" layoutY="355.0" prefHeight="32.0" prefWidth="213.0" text="USERNAME">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="118.0" layoutY="41.0" text="A-V BANK FIXED DEPOSITS">
+         <font>
+            <Font name="System Bold" size="61.0" />
+         </font>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
+      </Label>
+      <Button layoutX="689.0" layoutY="253.0" mnemonicParsing="false" onAction="#proceed" prefHeight="31.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="PROCEED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <TextField fx:id="mdate" editable="false" layoutX="786.0" layoutY="500.0" prefHeight="31.0" prefWidth="188.0" promptText="DATE" />
+      <Label layoutX="532.0" layoutY="496.0" prefHeight="39.0" prefWidth="224.0" text="MATURITY DATE">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+      <TextField fx:id="profit" editable="false" layoutX="785.0" layoutY="547.0" prefHeight="31.0" prefWidth="188.0" promptText="PROFIT" />
+      <Label layoutX="532.0" layoutY="543.0" prefHeight="39.0" prefWidth="235.0" text="EXPECTED PROFIT">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+      <TextField fx:id="rate" editable="false" layoutX="785.0" layoutY="452.0" prefHeight="31.0" prefWidth="188.0" promptText="INTERESTED RATE" />
+      <Label layoutX="532.0" layoutY="448.0" prefHeight="32.0" prefWidth="213.0" text="INTEREST RATE">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

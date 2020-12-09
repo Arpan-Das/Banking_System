@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class UserPanelController implements Initializable {
 	
@@ -98,7 +99,7 @@ public class UserPanelController implements Initializable {
 			Pane root = loader.load(getClass().getResource("/application/BankingSystem.fxml").openStream());
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-//			primaryStage.setTitle(" Login ");
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.show();
 			
 		} catch (Exception e) {
@@ -115,7 +116,7 @@ public class UserPanelController implements Initializable {
 			Pane root = loader.load(getClass().getResource("/User/RecentTransaction.fxml").openStream());
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle(" Mini Statement ");
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.show();
 			
 		} catch (Exception e) {
@@ -132,7 +133,7 @@ public class UserPanelController implements Initializable {
 			Pane root = loader.load(getClass().getResource("/User/MoneyTransfer.fxml").openStream());
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle(" Online Transection ");
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.show();
 			
 		} catch (Exception e) {
@@ -141,15 +142,15 @@ public class UserPanelController implements Initializable {
 	}
 			
 	public void out3(ActionEvent event) {
-		try {
+       try {
 			
 			((Node)event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(getClass().getResource("/Frontend/loans.fxml").openStream());
+			Pane root = loader.load(getClass().getResource("/User/ActiveLoans.fxml").openStream());
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle(" New Bills ");
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.show();
 			
 		} catch (Exception e) {
@@ -163,29 +164,28 @@ public class UserPanelController implements Initializable {
 			((Node)event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(getClass().getResource("/Frontend/AdminComplaints.fxml").openStream());
+			Pane root = loader.load(getClass().getResource("/User/userComplaints.fxml").openStream());
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle(" Admin Complaints ");
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.show();
 			
 		} catch (Exception e) {
 			
 		}
 	}
-			
 	public void out5(ActionEvent event) {
 		try {
 			
 			((Node)event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(getClass().getResource("/Frontend/Login.fxml").openStream());
+			Pane root = loader.load(getClass().getResource("/User/ActiveDeposit.fxml").openStream());
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle(" Login ");
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.show();
-					
+			
 		} catch (Exception e) {
 			
 		}
