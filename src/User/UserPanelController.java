@@ -141,7 +141,7 @@ public class UserPanelController implements Initializable {
 		}
 	}
 			
-	public void out3(ActionEvent event) {
+	public void out3(ActionEvent event) {	//***************** go to loan segment ****************
        try {
 			
 			((Node)event.getSource()).getScene().getWindow().hide();

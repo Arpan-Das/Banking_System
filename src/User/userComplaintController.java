@@ -16,10 +16,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import application.sqlconnect;
 import javafx.fxml.Initializable;
 
 public class userComplaintController implements Initializable{
@@ -38,7 +41,8 @@ public class userComplaintController implements Initializable{
 
 	    ObservableList<String> list = FXCollections.observableArrayList("Query", "Feedback","Complaint","Suggestion","Change some registered details");
 	    @FXML
-	    void dashboad(ActionEvent event) {
+	    
+	    void dashboad(ActionEvent event) {		//***************** go back to userpanel ********************
 	    	try {
 				
 				((Node)event.getSource()).getScene().getWindow().hide();
@@ -67,7 +71,7 @@ public class userComplaintController implements Initializable{
 	    }
 
 	    @FXML
-	    void logout(ActionEvent event) {
+	    void logout(ActionEvent event) {	//***************** logout ****************************
 	    	try {
 				
 				((Node)event.getSource()).getScene().getWindow().hide();
@@ -87,12 +91,33 @@ public class userComplaintController implements Initializable{
 
 	    @FXML
 	    void submit(ActionEvent event) {
-	    	if(accountnumber.getText()!=null  &&  combobox.getValue()!=null  && textarea.getText()!=null)
-	    	{
-	    		JOptionPane.showMessageDialog(null, "Submitted");
-	    	}
 	    	
-
+	    	//***************** to insert the data into feed_Comp table in the database *******************
+	    	
+	    	if(accountnumber.getText()!=null  &&  combobox.getValue()!=null  && textarea.getText()!=null)
+	    	{	
+	    		try {
+	    			Connection conn = sqlconnect.dbconnect();
+	    		
+	    			PreparedStatement ps = conn.prepareStatement("insert into feed_Comp (accno, type, remark, status) values (?,?,?,?)");
+	    			ps.setString(1, data.getAccno());	    		
+	    			ps.setString(2, combobox.getSelectionModel().getSelectedItem());
+	    			ps.setString(3, textarea.getText());
+	    			ps.setString(4, "Pending");
+	    			ps.execute();
+	    		
+	    			conn.close();
+	    			}catch(Exception e) {
+	    				JOptionPane.showMessageDialog(null, e);
+	    			}
+	    		
+	    			JOptionPane.showMessageDialog(null, "Submitted");
+	    			
+	    			textarea.setText("");
+	    			combobox.setValue(null);
+	    	}else{
+	    		JOptionPane.showMessageDialog(null, "Please fill all the fields.");
+	    	}
 	    }
 
 	@Override

@@ -83,63 +83,76 @@ public class AdminComplaintsController implements Initializable {
 
     }
     
-    public void Solved(ActionEvent event) {
+    public void Solved(ActionEvent event) {		
+    	
+    	//************************** to solve a query **************************************
     	
     	try {
-    		
-    		if(!col_status.getCellData(index).toString().equals("Solved")) {
-    			conn = sqlconnect.dbconnect();
-    			stmt = conn.createStatement();
-    			stmt.execute("update feed_Comp set status = 'Solved' where accno = " + col_anumber.getCellData(index) +" and remark = '"+ col_remark.getCellData(index)+"'");
-    			JOptionPane.showMessageDialog(null, "Solved");
+    		if(index != -1) {
+    			if(!col_status.getCellData(index).toString().equals("Solved")) {
+    				conn = sqlconnect.dbconnect();
+    				stmt = conn.createStatement();
+    				stmt.execute("update feed_Comp set status = 'Solved' where accno = " + col_anumber.getCellData(index) +" and remark = '"+ col_remark.getCellData(index)+"'");
+    				JOptionPane.showMessageDialog(null, "Solved");
     			
-    			Update();
+    				Update();
     			
-    			txt_type.setText("");
-    			txt_remark.setText("");
-    			txt_anumber.setText("");
+    				txt_type.setText("");
+    				txt_remark.setText("");
+    				txt_anumber.setText("");
+    				index = -1;
+    			}else {
+    				JOptionPane.showMessageDialog(null, "Already Solved");
+    			}
+    			conn.close();
     		}else {
-    			JOptionPane.showMessageDialog(null, "Already Solved");
+    			JOptionPane.showMessageDialog(null, "Please select any query before clicking.");
     		}
-    		conn.close();
     	}catch(Exception e) {
     		JOptionPane.showMessageDialog(null, e);
     	}
     }
     
     @FXML
-    public void Delete_complaint(ActionEvent event) {
+    public void Delete_complaint(ActionEvent event) {	
     	
+    	//********************** to delete the query **********************************
     	
     	try {
-    		
-    		if(col_status.getCellData(index).toString().equals("Solved")) {
-    			conn = sqlconnect.dbconnect();
-			ps = conn.prepareStatement("delete from feed_Comp where accno = ? and remark = ? ");
-			ps.setInt(1, col_anumber.getCellData(index));
-			ps.setString(2, col_remark.getCellData(index));
-			ps.executeUpdate();
+    		if(index != -1){
+    			if(col_status.getCellData(index).toString().equals("Solved")) {
+    				conn = sqlconnect.dbconnect();
+    				ps = conn.prepareStatement("delete from feed_Comp where accno = ? and remark = ? ");
+    				ps.setInt(1, col_anumber.getCellData(index));
+    				ps.setString(2, col_remark.getCellData(index));
+    				ps.executeUpdate();
 			
-			JOptionPane.showMessageDialog(null, "Deleted");
+    				JOptionPane.showMessageDialog(null, "Deleted");
 			
-			Update();
+    				Update();
 			
-			txt_type.setText("");
-			txt_remark.setText("");
-			txt_anumber.setText("");
+    				txt_type.setText("");
+    				txt_remark.setText("");
+    				txt_anumber.setText("");
 			
-    		index = -1;
+    				index = -1;
+    			}else {
+    				JOptionPane.showMessageDialog(null, "Please View before Deleting");
+    			}
+    			conn.close();
     		}else {
-    			JOptionPane.showMessageDialog(null, "Please View before Deleting");
+    			JOptionPane.showMessageDialog(null, "Please select any query before clicking.");
     		}
-			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			JOptionPane.showMessageDialog(null, e);
 		}
     }
     
-    public void Update() {
+    public void Update() {		
+    	
+    	//*********************** to update the table *****************************
+    	
     	col_anumber.setCellValueFactory(new PropertyValueFactory<complaints, Integer>("accno"));
 		col_type.setCellValueFactory(new PropertyValueFactory<complaints, String>("type"));
 		col_remark.setCellValueFactory(new PropertyValueFactory<complaints, String>("remark")); // this is not visible
@@ -171,7 +184,7 @@ public class AdminComplaintsController implements Initializable {
 	}
 }
 
-    public void out1(ActionEvent event) {		//****** go back to adminpanel
+    public void out1(ActionEvent event) {		//********** go back to adminpanel *******************
 	try {
 		
 		((Node)event.getSource()).getScene().getWindow().hide();
