@@ -2,8 +2,8 @@ package User;
 
 public class activitylog {
 
-	double amount,balance;
-	String type, remark, date;
+	double amount;
+	String type, remark, date,balance;
 	
 	public void setAmount(double amount) {
 		this.amount = amount;
@@ -20,7 +20,7 @@ public class activitylog {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public void setBalance(double balance) {
+	public void setBalance(String balance) {
 		this.balance = balance;
 	}
 
@@ -39,11 +39,11 @@ public class activitylog {
 	public String getDate() {
 		return date;
 	}
-	public double getBalance() {
+	public String getBalance() {
 		return balance;
 	}
 
-	public activitylog(double amount, String type, String remark, String date, double balance) {
+	public activitylog(double amount, String type, String remark, String date, String balance) {
 		super();
 		this.amount = amount;
 		this.type = type;

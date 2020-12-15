@@ -5,8 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
-
+import javax.swing.JOptionPane;
 import application.sqlconnect;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +22,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import userDom.dateCalculator;
+import userDom.interestCalculator;
 import javafx.fxml.Initializable;
 
 public class FixedDepositController implements Initializable{
@@ -29,9 +32,6 @@ public class FixedDepositController implements Initializable{
 
     @FXML
     private TableColumn<fixeddeposit, Integer> col_anumber;
-
-    @FXML
-    private TableColumn<fixeddeposit, String> col_username;
 
     @FXML
     private TableColumn<fixeddeposit, Double> col_amount;
@@ -112,8 +112,7 @@ public class FixedDepositController implements Initializable{
     Statement stmt;
     
     public void Update() {
-    	col_anumber.setCellValueFactory(new PropertyValueFactory<fixeddeposit, Integer>("accnonumber"));
-		col_username.setCellValueFactory(new PropertyValueFactory<fixeddeposit, String>("username"));
+    	col_anumber.setCellValueFactory(new PropertyValueFactory<fixeddeposit, Integer>("acconumber"));
 		col_amount.setCellValueFactory(new PropertyValueFactory<fixeddeposit, Double>("amount"));
 		col_rate.setCellValueFactory(new PropertyValueFactory<fixeddeposit, Double>("rate"));
 		col_mdate.setCellValueFactory(new PropertyValueFactory<fixeddeposit, String>("mdate"));
@@ -126,6 +125,33 @@ public class FixedDepositController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		try {
+			
+			conn = sqlconnect.dbconnect();
+			stmt = conn.createStatement();
+			Statement stmt2=conn.createStatement();
+			rs = stmt.executeQuery("select * from FixedDeposit");
+			while(rs.next()){
+				double amount = rs.getDouble("amount");
+				double rate = rs.getDouble("rate");
+				String fromD= rs.getString("fromD");
+				
+				LocalDate date = java.time.LocalDate.now();
+    			String ttoday  = date.getYear()+"-"+date.getMonthValue()+"-"+date.getDayOfMonth();
+				
+    			double interest = interestCalculator.interest(amount, rate, dateCalculator.days(fromD, ttoday)) - amount ;
+    			
+    			try {
+    				stmt2.executeUpdate("update FixedDeposit set interestaccum = "+ interest +" where amount = "+ amount+" and rate = "+rate);
+    	    		
+    			}catch (Exception e) {
+    				e.printStackTrace();
+    			}
+    		}
+			conn.close();
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
 		
 		Update();
 	}

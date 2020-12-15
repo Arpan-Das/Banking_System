@@ -44,7 +44,7 @@ public class RecenTransactionController implements Initializable {
 	    private TableColumn<activitylog, String> col_remark;
 
 	    @FXML
-	    private TableColumn<activitylog, Double> col_balance;
+	    private TableColumn<activitylog, String> col_balance;
 
 	    @FXML
 	    private TextField amount;
@@ -126,7 +126,7 @@ public class RecenTransactionController implements Initializable {
 			col_type.setCellValueFactory(new PropertyValueFactory<activitylog, String>("type"));
 			col_remark.setCellValueFactory(new PropertyValueFactory<activitylog, String>("remark")); 
 			col_date.setCellValueFactory(new PropertyValueFactory<activitylog, String>("date"));
-			col_balance.setCellValueFactory(new PropertyValueFactory<activitylog, Double>("balance"));
+			col_balance.setCellValueFactory(new PropertyValueFactory<activitylog, String>("balance"));
 			
 //			JOptionPane.showMessageDialog(null, username.getText() +"----"+ accountnumber.getText());
 //			JOptionPane.showMessageDialog(null, data.getUsername()+"----"+data.getAccno());

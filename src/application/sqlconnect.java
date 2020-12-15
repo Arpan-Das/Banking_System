@@ -1,6 +1,7 @@
 package application;
 
 import java.sql.*;
+import java.text.DecimalFormat;
 
 import javax.swing.JOptionPane;
 
@@ -39,7 +40,7 @@ public class sqlconnect {
 	}
 	
 
-	public static ObservableList<user> getDatauser(){
+	public static ObservableList<user> getDatauser(){//************* to get the user data ---- in the admin panel -user detail
 		Connection conn = dbconnect();
 		ObservableList<user> list = FXCollections.observableArrayList();
 		
@@ -66,7 +67,7 @@ public class sqlconnect {
 		return list;
 	}
 
-    public static ObservableList<complaints>getDatacomplaints(){
+    public static ObservableList<complaints>getDatacomplaints(){//********** to get the feedback+querys --- in the admin panel -feedback
 		conn = sqlconnect.dbconnect();
 		ObservableList<complaints> list = FXCollections.observableArrayList();
     	try {
@@ -102,7 +103,8 @@ public class sqlconnect {
     }
 
 
-	public static ObservableList<activitylog> getDatalog(String user, String anumber) {
+	public static ObservableList<activitylog> getDatalog(String user, String anumber) {	//****** for RecentTransection page(Passbook) ************************************
+		
 		conn = sqlconnect.dbconnect();
 		ObservableList<activitylog> list = FXCollections.observableArrayList();
 		try {
@@ -111,7 +113,7 @@ public class sqlconnect {
 			ResultSet rs= stmt.executeQuery(sql);
 			while(rs.next()) {
 				list.add(new activitylog(rs.getDouble("amount"), rs.getString("type"), rs.getString("remarks"),
-						rs.getString("date"), rs.getDouble("balance")));
+						rs.getString("date"), DecimalFormat.getNumberInstance().format(rs.getDouble("balance"))));
 			}
 			conn.close();
 		}catch(Exception e) {
@@ -142,15 +144,16 @@ public class sqlconnect {
 	}
 
 
-	public static ObservableList<fixeddeposit> getDatafixeddeposits() {
+	public static ObservableList<fixeddeposit> getDatafixeddeposits() {// to get the total fixed deposits --in admin panel -- fixed deposits
 		conn = sqlconnect.dbconnect();
     	ObservableList<fixeddeposit> list = FXCollections.observableArrayList();
     	try {
     		Statement stmt = conn.createStatement();
-    		ResultSet rs = stmt.executeQuery("select *from fixeddeposits");
+    		ResultSet rs = stmt.executeQuery("select *from FixedDeposit");
     		while(rs.next()) {
-    			list.add(new fixeddeposit(rs.getDouble("amount"), rs.getString("username"), rs.getString("mdate"), rs.getDouble("rate"),
-    					rs.getDouble("profit"), rs.getInt("accountnumber"), rs.getString("applieddate")));
+     			list.add(new fixeddeposit(rs.getInt("accno"), rs.getDouble("amount"), rs.getDouble("interestaccum"), 
+    					rs.getDouble("rate"), rs.getString("toD"), rs.getString("fromD")));
+ 
     		}
     		conn.close();
     	}catch(Exception e) {
@@ -160,19 +163,19 @@ public class sqlconnect {
       }
 
 
-	public static ObservableList<deposit> getDatadeposits(int parseInt) {
+	public static ObservableList<deposit> getDatadeposits(int accno) {// to get the active deposit ---in user panel -- active deposit
 		conn = sqlconnect.dbconnect();
     	ObservableList<deposit> list = FXCollections.observableArrayList();
     	try {
     		Statement stmt = conn.createStatement();
-    		ResultSet rs = stmt.executeQuery("select *from fixeddeposits where accountnumber = \"" + parseInt + "\"");
+    		ResultSet rs = stmt.executeQuery("select *from FixedDeposit where accno = " + accno );
     		while(rs.next()) {
-    			list.add(new deposit(rs.getDouble("amount"), rs.getString("mdate"), rs.getDouble("rate"),
-    					rs.getDouble("profit"), rs.getString("applieddate")));
+    			list.add(new deposit(rs.getDouble("amount"), rs.getString("toD"), rs.getDouble("rate"),
+    					rs.getDouble("interestaccum"), rs.getString("fromD")));
     		}
     		conn.close();
     	}catch(Exception e) {
-    		JOptionPane.showMessageDialog(null, "inside getDataLoansappied()----"+e);
+    		JOptionPane.showMessageDialog(null, "inside getDatadeposits()----"+e);
     	}
 		return list;
       }

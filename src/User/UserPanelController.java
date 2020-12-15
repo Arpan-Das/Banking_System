@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -75,7 +76,7 @@ public class UserPanelController implements Initializable {
 				stmt = conn.createStatement();
 				rs = stmt.executeQuery(sql);
 				balance = rs.getFloat("balance");
-				userbalance.setText("Rs. "+String.valueOf(balance)+"    (HIDE)");
+				userbalance.setText("Rs. "+DecimalFormat.getNumberInstance().format(balance)+"    (HIDE)");
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -141,7 +142,7 @@ public class UserPanelController implements Initializable {
 		}
 	}
 			
-	public void out3(ActionEvent event) {	//***************** go to loan segment ****************
+	public void out3(ActionEvent event) {	//***************** go to loan section ****************
        try {
 			
 			((Node)event.getSource()).getScene().getWindow().hide();
@@ -158,7 +159,7 @@ public class UserPanelController implements Initializable {
 		}
 	}
 			
-	public void out4(ActionEvent event) {
+	public void out4(ActionEvent event) {	//**************** go to feedback section *********************
 		try {
 			
 			((Node)event.getSource()).getScene().getWindow().hide();
@@ -174,7 +175,7 @@ public class UserPanelController implements Initializable {
 			
 		}
 	}
-	public void out5(ActionEvent event) {
+	public void out5(ActionEvent event) {		//********************* go to fixed deposit section **********
 		try {
 			
 			((Node)event.getSource()).getScene().getWindow().hide();
@@ -193,7 +194,6 @@ public class UserPanelController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		
 		userbalance.setVisible(false);
 		lab_viewbalance.setVisible(true);

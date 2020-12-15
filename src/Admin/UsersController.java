@@ -95,73 +95,80 @@ public class UsersController implements Initializable  {
     Statement stmt;
     
     public void Add_user() {
-    	conn = sqlconnect.dbconnect();
-    	try {
-			ps = conn.prepareStatement("insert into user(firstname, lastname,gender, dob, id, address, emailid, mobileno,username,password, datetime) values(?,?,?,?,?,?,?,?,?,?, datetime('now','localtime'))");
+    	
+    	//*************************** new account created by admin ****************************************
+    	
+    	if(!(txt_name.getText().trim().isEmpty() && txt_gender.getText().trim().isEmpty()&& txt_id.getText().trim().isEmpty() && txt_email.getText().trim().isEmpty() && txt_username.getText().trim().isEmpty())){
+    		conn = sqlconnect.dbconnect();
+    		try {
+    			ps = conn.prepareStatement("insert into user(firstname, lastname,gender, dob, id, address, emailid, mobileno,username,password, datetime) values(?,?,?,?,?,?,?,?,?,?, datetime('now','localtime'))");
 			
-			ps.setString(1, txt_name.getText());
-			ps.setString(2, " ");
-			ps.setString(3, txt_gender.getText());
-			ps.setString(4, "Nil");
-			ps.setString(5, txt_id.getText());
-			ps.setString(6, "Nil");
-			ps.setString(7, txt_email.getText());
-			ps.setString(8, txt_mnumber.getText());
-			ps.setString(9, txt_username.getText());
-			ps.setString(10, "0000");
+    			ps.setString(1, txt_name.getText());
+    			ps.setString(2, " ");
+    			ps.setString(3, txt_gender.getText());
+    			ps.setString(4, "Nil");
+    			ps.setString(5, txt_id.getText());
+    			ps.setString(6, "Nil");
+    			ps.setString(7, txt_email.getText());
+    			ps.setString(8, txt_mnumber.getText());
+    			ps.setString(9, txt_username.getText());
+    			ps.setString(10, "0000");
 			
-			ps.executeUpdate();
+    			ps.executeUpdate();
 			
-			//************** both the tables are created here i.e, user balance table and user txn table
-			try {
-				ps = conn.prepareStatement("select * from user where username = ?");
-				ps.setString(1, txt_username.getText());
-				rs = ps.executeQuery();
-				int accno = rs.getInt("accno");
+    			//************** both the tables are created here i.e, user balance table and user txn table
+    			try {
+    				ps = conn.prepareStatement("select * from user where username = ?");
+    				ps.setString(1, txt_username.getText());
+    				rs = ps.executeQuery();
+    				int accno = rs.getInt("accno");
 			
-				// create table balance
-				String tablebalance ="CREATE TABLE IF NOT EXISTS " + txt_username.getText()+accno + " (balance real default 0.0);";
-				try {
-					Statement stmt = conn.createStatement();
-					stmt.execute(tablebalance);
-					stmt.execute("insert into " + txt_username.getText()+accno + "  values(0.0)");
+    				// create table balance
+    				String tablebalance ="CREATE TABLE IF NOT EXISTS " + txt_username.getText()+accno + " (balance real default 0.0);";
+    				try {
+    					Statement stmt = conn.createStatement();
+    					stmt.execute(tablebalance);
+    					stmt.execute("insert into " + txt_username.getText()+accno + "  values(0.0)");
 				
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, e);
-				}
+    				} catch (SQLException e) {
+    					
+    					JOptionPane.showMessageDialog(null, e);
+    				}
 			
-				// create table trx
-				String tabletrx ="create table IF NOT EXISTS " + "trx"+txt_username.getText()+accno + " (date text, remarks text, type text, amount real, balance real)";
-				try {
-					Statement stmt = conn.createStatement();
-					stmt.execute(tabletrx);
+    				// create table trx
+    				String tabletrx ="create table IF NOT EXISTS " + "trx"+txt_username.getText()+accno + " (date text, remarks text, type text, amount real, balance real)";
+    				try {
+    					Statement stmt = conn.createStatement();
+    					stmt.execute(tabletrx);
 				
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, e);
-				}
+    				} catch (SQLException e) {
+    					
+    					JOptionPane.showMessageDialog(null, e);
+    				}
 			
-			}catch(Exception e) {
-				JOptionPane.showMessageDialog(null, "inside create table"+e);
-			}
+    			}catch(Exception e) {
+    				JOptionPane.showMessageDialog(null, "inside create table"+e);
+    			}
 			
-			JOptionPane.showMessageDialog(null, "User Account created. Note user Default password is '0000'");
+    			JOptionPane.showMessageDialog(null, "User Account created. Note user Default password is '0000'");
 			
-			Update();
+    			Update();
 			
-			txt_id.setText("");
-			txt_username.setText("");
-			txt_gender.setText("");
-			txt_email.setText("");
-			txt_name.setText("");
-			txt_mnumber.setText("");
-			txt_anumber.setText("");
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, e);
-		}
+    			txt_id.setText("");
+    			txt_username.setText("");
+    			txt_gender.setText("");
+    			txt_email.setText("");
+    			txt_name.setText("");
+    			txt_mnumber.setText("");
+    			txt_anumber.setText("");
+    			conn.close();
+    		} catch (SQLException e) {
+    			
+    			JOptionPane.showMessageDialog(null, e);
+    		}
+    	}else {
+    		JOptionPane.showMessageDialog(null,"Please enter all the details");
+    	}
     }
     
     public void getSelected(MouseEvent event) {
@@ -179,78 +186,90 @@ public class UsersController implements Initializable  {
     	
     }
     
-    public void Edit(ActionEvent event) {
-    	try {
-    		conn = sqlconnect.dbconnect();
-    		String id = txt_id.getText();
-    		String username = txt_username.getText();
-    		String gender = txt_gender.getText();
-    		String email = txt_email.getText();
-    		String name = txt_name.getText();
-    		String anumber = txt_anumber.getText();
-    		String mnumber = txt_mnumber.getText();
+    public void Edit(ActionEvent event){
+    	if(!txt_anumber.getText().isEmpty()){
+    		try{
+    			conn = sqlconnect.dbconnect();
+    			String id = txt_id.getText();
+    			String username = txt_username.getText();
+    			String gender = txt_gender.getText();
+    			String email = txt_email.getText();
+    			String name = txt_name.getText();
+    			String anumber = txt_anumber.getText();
+    			String mnumber = txt_mnumber.getText();
     		
-    		ps = conn.prepareStatement("update user set firstname = ? , lastname = ' ', gender = ? , id = ?, emailid = ? , mobileno = ? , username = ? where accno = ?  ");
-    		ps.setString(1, name);
-    		ps.setString(2, gender);
-    		ps.setString(3, id);
-    		ps.setString(4, email);
-    		ps.setString(5, mnumber);
-    		ps.setString(6, username);
-    		ps.setString(7, anumber);
-    		ps.execute();
+    			ps = conn.prepareStatement("update user set firstname = ? , lastname = ' ', gender = ? , id = ?, emailid = ? , mobileno = ? , username = ? where accno = ?  ");
+    			ps.setString(1, name);
+    			ps.setString(2, gender);
+    			ps.setString(3, id);
+    			ps.setString(4, email);
+    			ps.setString(5, mnumber);
+    			ps.setString(6, username);
+    			ps.setString(7, anumber);
+    			ps.execute();
+    			
+    			JOptionPane.showMessageDialog(null, "Successfully Updated");
     		
-    		JOptionPane.showMessageDialog(null, "Successfully Updated");
+    			Update();
     		
-    		Update();
+    			txt_id.setText("");
+    			txt_username.setText("");
+    			txt_gender.setText("");
+    			txt_email.setText("");
+    			txt_name.setText("");
+    			txt_mnumber.setText("");
+    			txt_anumber.setText("");
     		
-    		txt_id.setText("");
-			txt_username.setText("");
-			txt_gender.setText("");
-			txt_email.setText("");
-			txt_name.setText("");
-			txt_mnumber.setText("");
-			txt_anumber.setText("");
-    		
-			conn.close();
-    	}catch(SQLException e) {
-    		JOptionPane.showMessageDialog(null, e);
+    			conn.close();
+    		}catch(SQLException e) {
+    			JOptionPane.showMessageDialog(null, e);
+    		}
+    	}else {
+    		JOptionPane.showMessageDialog(null, "Please select a account befour prociding.");
     	}
+    	txt_anumber.setText("");
     }
     
     @FXML
-    public void Delete_user(ActionEvent event) {
-    	conn = sqlconnect.dbconnect();
+    public void Delete_user(ActionEvent event){
+    	if(!txt_anumber.getText().isEmpty() && index != -1) {
+    		conn = sqlconnect.dbconnect();
     	
-    	try {
+    		try {
     		
-			ps = conn.prepareStatement("delete from user where accno = ?");
-			ps.setInt(1, col_anumber.getCellData(index));			
-			ps.executeUpdate();
+    			ps = conn.prepareStatement("delete from user where accno = ?");
+    			ps.setInt(1, col_anumber.getCellData(index));			
+    			ps.executeUpdate();
 			
-			stmt = conn.createStatement();
-			stmt.execute("drop table " + col_username.getCellData(index)+col_anumber.getCellData(index));
-			stmt.execute("drop table trx"+ col_username.getCellData(index)+col_anumber.getCellData(index) );
-			JOptionPane.showMessageDialog(null, "DeletedSuccessfully");
+    			stmt = conn.createStatement();
+    			stmt.execute("drop table " + col_username.getCellData(index)+col_anumber.getCellData(index));
+				stmt.execute("drop table trx"+ col_username.getCellData(index)+col_anumber.getCellData(index) );
+				JOptionPane.showMessageDialog(null, "Deleted Successfully");
 			
-			Update();
+				Update();
 			
-			txt_id.setText("");
-			txt_username.setText("");
-			txt_gender.setText("");
-			txt_email.setText("");
-			txt_name.setText("");
-			txt_mnumber.setText("");
-			txt_anumber.setText("");
+				txt_id.setText("");
+				txt_username.setText("");
+				txt_gender.setText("");
+				txt_email.setText("");
+				txt_name.setText("");
+				txt_mnumber.setText("");
+				txt_anumber.setText("");
 			
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, e);
-		}
+				conn.close();
+    		} catch (SQLException e) {
+    			
+    			JOptionPane.showMessageDialog(null, e);
+    		}
+    	}else {
+    		JOptionPane.showMessageDialog(null, "Please select a account befour prociding.");
+    	}
+    	txt_anumber.setText("");
+    	index = -1;
     }
     
     public void Update() {
+    	
     	col_anumber.setCellValueFactory(new PropertyValueFactory<user, Integer>("accno"));
 		col_name.setCellValueFactory(new PropertyValueFactory<user, String>("name"));
 		col_gender.setCellValueFactory(new PropertyValueFactory<user, String>("gender"));
