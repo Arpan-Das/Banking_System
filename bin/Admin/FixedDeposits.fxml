@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.FixedDepositController">
+   <children>
+      <Pane layoutX="50.0" layoutY="50.0" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #8fb7e7; -fx-border-color: #b38600; -fx-border-width: 5px;">
+         <children>
+            <Label layoutX="78.0" layoutY="16.0" prefHeight="63.0" prefWidth="634.0" text="ACTIVE FIXED DEPOSITS">
+               <font>
+                  <Font name="Berlin Sans FB" size="57.0" />
+               </font>
+               <effect>
+                  <Glow level="0.54" />
+               </effect>
+            </Label>
+            <TableView fx:id="table_fixes" layoutX="16.0" layoutY="120.0" prefHeight="345.0" prefWidth="718.0">
+              <columns>
+                <TableColumn fx:id="col_anumber" prefWidth="82.0" text="Acc No." />
+                  <TableColumn fx:id="col_amount" prefWidth="104.0" text="Amount" />
+                  <TableColumn fx:id="col_adate" minWidth="0.0" prefWidth="138.0" text="Applied on" />
+                  <TableColumn fx:id="col_rate" prefWidth="109.0" text="Interest rate" />
+                  <TableColumn fx:id="col_mdate" prefWidth="140.0" text="Maturity date" />
+                  <TableColumn fx:id="col_profit" prefWidth="144.0" text="Profit" />
+              </columns>
+            </TableView>
+         </children></Pane>
+      <Button layoutX="785.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT" />
+      <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onAction="#dashboard" prefHeight="31.0" prefWidth="114.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="DASHBOARD" />
+      <Button layoutX="762.0" layoutY="567.0" mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="87.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
+      <Label fx:id="adminlbl" layoutX="678.0" layoutY="18.0" visible="false" />
+   </children>
+</AnchorPane>
