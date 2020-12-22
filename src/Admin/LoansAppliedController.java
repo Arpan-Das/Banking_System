@@ -6,10 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import application.sendMail;
 import application.sqlconnect;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +30,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import userDom.DueDate;
+import userDom.RemoveComma;
 
 public class LoansAppliedController implements Initializable {
 	
@@ -47,7 +51,7 @@ public class LoansAppliedController implements Initializable {
     private TableColumn<loansapplied, String> col_username;
     
     @FXML
-    private TableColumn<loansapplied, Float> col_amount;
+    private TableColumn<loansapplied, String> col_amount;
 
     @FXML
     private TableColumn<loansapplied, String> col_why;
@@ -93,100 +97,196 @@ public class LoansAppliedController implements Initializable {
     
     @FXML
     public void Reject(ActionEvent event) {
+    	if(index != -1) {
+        		if(col_status.getCellData(index).toString().equals("Pending")) {
+        			        			
+        			//-************ first email is send and then all the other stufs are done like - update the loan table 
+        			String email = null,type = null;
+        			
+        			try {
+        				conn = sqlconnect.dbconnect();
+        				Statement stmt = conn.createStatement();
+        				ResultSet rs = stmt.executeQuery("select * from user where accno = "+col_anumber.getCellData(index));
+        				if(rs.next()) {
+        					email = rs.getString("emailid");
+        					
+        				}
+        				
+        				
+        				Statement st= conn.createStatement();
+        				ResultSet rs2 = st.executeQuery("select * from loan where accno = "+col_anumber.getCellData(index)+" and amount = "+RemoveComma.remove(col_amount.getCellData(index)));
+        				
+        				if(rs2.next()) {
+        					
+        					type = rs2.getString("type");
+        					System.out.println("***"+type+"**************-*******************");
+        				}
+        				
+        				conn.close();
+        			}catch(Exception e) {
+        				JOptionPane.showMessageDialog(null, "error in email "+e);
+        			}
+        			
+        			if(sendMail.sendmail("Dear Customer,\n\tYour Loan request for "+ type+" of amount Rs."+txt_amount.getText()+" has been REJECTED. Please contact Admin for further details.\nThank You\n\n\n****This is an system generated email please don't replay.", email, "Loan Update")) {
+        				//*********** loan table is being update
+        				try {
+        					
+        					conn = sqlconnect.dbconnect();
+        					
+            				ps = conn.prepareStatement("update loan set status = 'Reject' where accno = ? and amount = ? ");
+                		    ps.setInt(1, col_anumber.getCellData(index));
+                			ps.setDouble(2, RemoveComma.remove(col_amount.getCellData(index)));
+                			ps.executeUpdate();
+                			
+        					conn.close();
+        				}catch(Exception e) {
+        					JOptionPane.showMessageDialog(null, e);
+        				}
+        				JOptionPane.showMessageDialog(null, "Rejected");
+        				Update();
+        					
+        			}else {
+        				JOptionPane.showMessageDialog(null,"No Internet Connection");
+        			}
+        			
+    				txt_username.setText("");
+    				txt_remark.setText("");
+    				txt_anumber.setText("");
+    				txt_amount.setText("");
+    				
+    				index = -1;
+        		}else {
+        			if(col_status.getCellData(index).equals("Approve")) {
+        				JOptionPane.showMessageDialog(null, "Already Approved and Amount is already credited. Now you can't Reject.");
+        			}else {
+        				JOptionPane.showMessageDialog(null, "Already Rejected");
+        			}
+        		}
+    			
+    	}else {
+    		JOptionPane.showMessageDialog(null, "Please select a Query.");
+    	}
     	
-    	
-    	try {
-    		if(!col_status.getCellData(index).toString().equals("Approve")) {
-    			conn = sqlconnect.dbconnect();
-    			ps = conn.prepareStatement("update loan set status = 'Reject' where accno = ? and amount = ? ");
-    			ps.setInt(1, col_anumber.getCellData(index));
-				ps.setFloat(2, col_amount.getCellData(index));
-				ps.executeUpdate();
-			
-				JOptionPane.showMessageDialog(null, "Rejected");
-			
-				Update();
-			
-				txt_username.setText("");
-				txt_remark.setText("");
-				txt_anumber.setText("");
-				txt_amount.setText("");
-				index = -1;
-    		}else {
-    			JOptionPane.showMessageDialog(null, "Already Approved and Amount is already credited. Now you can't Reject.");
-    		}
-			conn.close();
-		} catch (SQLException e) {
-			
-			JOptionPane.showMessageDialog(null, e);
-		}
     }
     
     public void Approve(ActionEvent event) {
     	
-    	
-    	try {
-    		if(!col_status.getCellData(index).toString().equals("Approve")) {
-    			conn = sqlconnect.dbconnect();
-    			ps = conn.prepareStatement("update loan set status = 'Approve' where accno = ? and amount = ? ");
-    			ps.setInt(1, col_anumber.getCellData(index));
-    			ps.setFloat(2, Float.valueOf(col_amount.getCellData(index)));
-    			ps.executeUpdate();
-			
-    			JOptionPane.showMessageDialog(null, "Approve");
-			
-    			//***************************** credit the loan
-			
-    			// to get the previous balance
-    			String query = "select * from "+ col_username.getCellData(index).toString()+col_anumber.getCellData(index);
-    			stmt = conn.createStatement();
-    			rs = stmt.executeQuery(query);
-    			float balance = rs.getFloat("balance") ;
-					
-    			// update the balance with added loan amount
-    			stmt.execute("update "+col_username.getCellData(index).toString()+col_anumber.getCellData(index)+" set balance = " + (balance + Float.valueOf(col_amount.getCellData(index))));
-		
-    			//********************** insert data into trx. table *******************************
-			
-    			stmt.execute("create table IF NOT EXISTS temp (date text, remarks text, type text, amount real, balance real)");
-		
-    			ps = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
-    			ps.setString(1, "Loan Amount");		// remark
-    			ps.setString(2, "Credit");		// type credit/debit
-    			ps.setFloat(3, Float.valueOf(col_amount.getCellData(index)));	// credit/debit amount
-    			ps.setFloat(4, (balance + Float.valueOf(col_amount.getCellData(index))));	// final balance after the trx
-    			ps.execute();
-		
-    			stmt.execute("insert into temp select * from trx" +col_username.getCellData(index).toString()+col_anumber.getCellData(index) );
-		
-    			stmt.execute("drop table trx" + col_username.getCellData(index).toString()+col_anumber.getCellData(index));
-		
-    			stmt.execute("alter table temp rename to trx"+col_username.getCellData(index).toString()+col_anumber.getCellData(index));
-		
-    			JOptionPane.showMessageDialog(null, "Amount Credited.");
-			
-    			Update();
-			
-    			txt_username.setText("");
-    			txt_remark.setText("");
-    			txt_anumber.setText("");
-    			txt_amount.setText("");
-			
-    			index = -1;
-    		}else {
-    			JOptionPane.showMessageDialog(null, "Already Approved and All Trx. Complete.");
+    	if(index != -1) { ///************* it will only execute if admin has selected any query
+    		try {
+        		if(!col_status.getCellData(index).toString().equals("Approve")) {
+        			
+        			/*
+        			 * first mail is send and then rest of the stuf
+        			 * like update the loan table 
+        			 * then do the trx. in which you update the balance table and the trx. table and also credit the amount
+        			 * */
+        			
+        			// current date 
+        			LocalDate date = java.time.LocalDate.now();
+        			String today  = date.getYear()+"-"+date.getMonthValue()+"-"+date.getDayOfMonth();
+        			
+        			DueDate duedate = new DueDate();
+        			duedate.duedate(date.getYear(), date.getMonthValue(), date.getDayOfMonth());	// calculate the due date
+        			
+        			String email = null,type =null;
+        			double emi =0, rate =0, timeperiod =0 ;
+        			
+        			try {
+        				conn = sqlconnect.dbconnect();
+        				Statement stmt = conn.createStatement();
+        				ResultSet rs = stmt.executeQuery("select * from user where accno = "+col_anumber.getCellData(index));
+        				if(rs.next()) {
+        					email = rs.getString("emailid");
+        				}
+        				ResultSet rs2 = stmt.executeQuery("select * from loan where accno = "+col_anumber.getCellData(index)+" and amount = "+RemoveComma.remove(col_amount.getCellData(index)));
+        				if(rs2.next()) {
+        					emi = rs2.getDouble("emi");
+        					rate = rs2.getDouble("rate");
+        					timeperiod = rs2.getDouble("timeperiod");
+        					type = rs2.getString("type");
+        				}
+        				conn.close();
+        			}catch(Exception e) {
+        				JOptionPane.showMessageDialog(null, "error in email "+e);
+        			}
+        			
+        			if(sendMail.sendmail("Dear Customer,\n\t Your Loan requested for "+type+" of Rs."+col_amount.getCellData(index)+" has been accepted on "+ today +".\n\t\tLoan Detail:\n\tLoan Type:"+col_why.getCellData(index)+"\n\tLoan Amount:Rs. "+col_amount.getCellData(index)+"\n\tInterest Rate:"+rate+"%\n\tTime Period:"+timeperiod+" year\n\tMonthly EMI: Rs."+emi+"\nYour amount will credit shortly.\nYour due date for emi is "+duedate.getDate()+"/"+duedate.getMonth()+"/"+duedate.getYear()+". And Please pay your monthly EMI in time for your convinient.\n\n\n**This is system generated e-mail please do not replay.", email, "Loan Update")) {
+        				
+        				//*************************** update approve in loan table -status to approve and due date 
+        				conn = sqlconnect.dbconnect();
+        				ps = conn.prepareStatement("update loan set status = 'Approve' , y = ? , m = ? , d = ?, dueamount = ? where accno = ? and amount = ? ");
+            			ps.setInt(1, duedate.getYear());
+            			ps.setInt(2, duedate.getMonth());
+            			ps.setInt(3, duedate.getDate());
+            			ps.setDouble(4, RemoveComma.remove(col_amount.getCellData(index)));
+        				ps.setInt(5, col_anumber.getCellData(index));
+            			ps.setDouble(6, RemoveComma.remove(col_amount.getCellData(index)));
+            			ps.executeUpdate();
+            			
+            			JOptionPane.showMessageDialog(null, "Approve");
+        			
+            			//***************************** credit the loan ****************************
+        			
+            			// to get the previous balance
+            			String query = "select * from "+ col_username.getCellData(index).toString()+col_anumber.getCellData(index);
+            			stmt = conn.createStatement();
+            			rs = stmt.executeQuery(query);
+            			float balance = rs.getFloat("balance") ;
+        					
+            			// update the balance with added loan amount
+            			stmt.execute("update "+col_username.getCellData(index).toString()+col_anumber.getCellData(index)+" set balance = " + (balance + RemoveComma.remove(col_amount.getCellData(index))));
+        		
+            			//********************** insert data into trx. table *******************************
+        			
+            			stmt.execute("create table IF NOT EXISTS temp (date text, remarks text, type text, amount real, balance real)");
+        		
+            			ps = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
+            			ps.setString(1, "Loan Amount");		// remark
+            			ps.setString(2, "Credit");		// type credit/debit
+            			ps.setDouble(3, RemoveComma.remove(col_amount.getCellData(index)));	// credit/debit amount
+            			ps.setDouble(4, (balance + RemoveComma.remove(col_amount.getCellData(index))));	// final balance after the trx
+            			ps.execute();
+        		
+            			stmt.execute("insert into temp select * from trx" +col_username.getCellData(index).toString()+col_anumber.getCellData(index) );
+        		
+            			stmt.execute("drop table trx" + col_username.getCellData(index).toString()+col_anumber.getCellData(index));
+        		
+            			stmt.execute("alter table temp rename to trx"+col_username.getCellData(index).toString()+col_anumber.getCellData(index));
+        		
+            			JOptionPane.showMessageDialog(null, "Amount Credited.");
+        			
+            			Update();
+            			conn.close();
+        			}else {
+        				JOptionPane.showMessageDialog(null,"Please Check Your Internet Connection.");
+        			}
+        			
+    			
+        			txt_username.setText("");
+        			txt_remark.setText("");
+        			txt_anumber.setText("");
+        			txt_amount.setText("");
+    			
+        			index = -1;
+        			
+        		}else {
+        			JOptionPane.showMessageDialog(null, "Already Approved and All Trx. Complete.");
+        		}
+    			
+    		} catch (SQLException e) {
+    			
+    			JOptionPane.showMessageDialog(null, e);
     		}
-			conn.close();
-		} catch (SQLException e) {
-			
-			JOptionPane.showMessageDialog(null, e);
-		}
+    	}else {
+    		JOptionPane.showMessageDialog(null, "Please select a Query.");
+    	}
+    	
     }
     
     public void Update() {
     	col_anumber.setCellValueFactory(new PropertyValueFactory<loansapplied, Integer>("accno"));
 		col_username.setCellValueFactory(new PropertyValueFactory<loansapplied, String>("username"));
-		col_amount.setCellValueFactory(new PropertyValueFactory<loansapplied, Float>("amount"));
+		col_amount.setCellValueFactory(new PropertyValueFactory<loansapplied, String>("amount"));
 		col_why.setCellValueFactory(new PropertyValueFactory<loansapplied, String>("why"));
 		col_status.setCellValueFactory(new PropertyValueFactory<loansapplied, String>("status"));
 		

@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
@@ -126,7 +128,7 @@ public class FixedDepositController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-			
+			//************* update the accuulated interest in the FixedDeposit table ***********************
 			conn = sqlconnect.dbconnect();
 			stmt = conn.createStatement();
 			Statement stmt2=conn.createStatement();
@@ -139,10 +141,11 @@ public class FixedDepositController implements Initializable{
 				LocalDate date = java.time.LocalDate.now();
     			String ttoday  = date.getYear()+"-"+date.getMonthValue()+"-"+date.getDayOfMonth();
 				
+    			NumberFormat formatter = new DecimalFormat("#0.00");
     			double interest = interestCalculator.interest(amount, rate, dateCalculator.days(fromD, ttoday)) - amount ;
     			
     			try {
-    				stmt2.executeUpdate("update FixedDeposit set interestaccum = "+ interest +" where amount = "+ amount+" and rate = "+rate);
+    				stmt2.executeUpdate("update FixedDeposit set interestaccum = "+ formatter.format(interest) +" where amount = "+ amount+" and rate = "+rate);
     	    		
     			}catch (Exception e) {
     				e.printStackTrace();

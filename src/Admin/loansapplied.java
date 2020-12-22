@@ -3,12 +3,12 @@ package Admin;
 public class loansapplied {
 
 	int accno;
-	float amount;
+	String amount;
 	String username, status, why;
 	public int getAccno() {
 		return accno;
 	}
-	public float getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 	public String getUsername() {
@@ -23,7 +23,7 @@ public class loansapplied {
 	public void setAccno(int accno) {
 		this.accno = accno;
 	}
-	public void setAmount(float amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 	public void setUsername(String username) {
@@ -35,7 +35,7 @@ public class loansapplied {
 	public void setWhy(String why) {
 		this.why = why;
 	}
-	public loansapplied(int accno, float amount, String username, String status, String why) {
+	public loansapplied(int accno, String amount, String username, String status, String why) {
 		super();
 		this.accno = accno;
 		this.amount = amount;

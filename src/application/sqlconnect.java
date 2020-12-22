@@ -92,8 +92,8 @@ public class sqlconnect {
     		Statement stmt = conn.createStatement();
     		ResultSet rs = stmt.executeQuery("select *from loan");
     		while(rs.next()) {
-    			list.add(new loansapplied(rs.getInt("accno"), rs.getFloat("amount"), rs.getString("username"),
-    					rs.getString("status"), rs.getString("why")));
+    			list.add(new loansapplied(rs.getInt("accno"), DecimalFormat.getNumberInstance().format(rs.getFloat("amount")), rs.getString("username"),
+    					rs.getString("status"), rs.getString("remark")));
     		}
     		conn.close();
     	}catch(Exception e) {
@@ -124,21 +124,22 @@ public class sqlconnect {
 	}
    
 
-	public static ObservableList<activeloans> getDataloans(int accountnumber) {
+	public static ObservableList<activeloans> getDataloans(int accountnumber) {//********** for user panel--activeloan
 		
 		conn = sqlconnect.dbconnect();
 		ObservableList<activeloans> list = FXCollections.observableArrayList();
 		try {
 			Statement stmt = conn.createStatement();
-			String sql = "SELECT * FROM loan where accono =\"" + accountnumber + "\"";
+			String sql = "SELECT * FROM loan where accno =\"" + accountnumber + "\"";
 			ResultSet rs= stmt.executeQuery(sql);
 			while(rs.next()) {
-				list.add(new activeloans(rs.getDouble("amount"), rs.getString("type"), rs.getString("duedate"), rs.getDouble("dueamount"),
-						rs.getDouble("topay"), rs.getDouble("paid"), rs.getString("remark"), rs.getString("applieddate")));
+				
+				list.add(new activeloans(DecimalFormat.getNumberInstance().format(rs.getDouble("amount")), rs.getDouble("dueamount"), DecimalFormat.getNumberInstance().format(rs.getDouble("emi")), rs.getString("type"), rs.getString("remark"), rs.getInt("y")+"-"+ rs.getInt("m")+"-"+rs.getInt("d"), rs.getString("fromD"), rs.getString("status")));
+				
 			}
 			conn.close();
 		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "inside getDatalog()---"+e);
+			JOptionPane.showMessageDialog(null, "inside getDataloans()---"+e);
 		}
 		return list;
 	}

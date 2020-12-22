@@ -2,81 +2,70 @@ package User;
 
 public class activeloans {
 	
-	double amount,dueamount, paid, topay;
-	String type, remark, duedate, applieddate;
+	double dueloan;
+	String amount,type, remark, duedate, applieddate, emi,status;
 	
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public void setDate(String duedate) {
-		this.duedate = duedate;
-	}
-	public void setDueamount(double dueamount) {
-		this.dueamount = dueamount;
-	}
-	public void setPaid(double paid) {
-		this.paid = paid;
-	}
-	public void setPay(double pay) {
-		this.topay = pay;
-	}
-
-	public void setAppliedDate(String applieddate) {
-		this.applieddate = applieddate;
-	}
-	
-	public double getAmount() {
+	public String getAmount() {
 		return amount;
 	}
-
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
+	public double getDueloan() {
+		return dueloan;
+	}
+	public void setDueloan(double dueloan) {
+		this.dueloan = dueloan;
+	}
+	public String getEmi() {
+		return emi;
+	}
+	public void setEmi(String emi) {
+		this.emi = emi;
+	}
 	public String getType() {
 		return type;
 	}
-
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getRemark() {
 		return remark;
 	}
-
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	public String getDuedate() {
 		return duedate;
 	}
-	
-	public double getDueamount() {
-		return dueamount;
+	public void setDuedate(String duedate) {
+		this.duedate = duedate;
 	}
-	
-	public double getPaid() {
-		return paid;
-	}
-	
-	public double getTopay() {
-		return topay;
-	}
-	
 	public String getApplieddate() {
 		return applieddate;
 	}
-
-	public activeloans(double amount, String type, String duedate,double dueamount, double topay, double paid,String remark, String applieddate) {
+	public void setApplieddate(String applieddate) {
+		this.applieddate = applieddate;
+	}
+	public activeloans(String amount, double dueloan, String emi, String type, String remark, String duedate,
+			String applieddate,String status) {
 		super();
 		this.amount = amount;
+		this.dueloan = dueloan;
+		this.emi = emi;
 		this.type = type;
 		this.remark = remark;
 		this.duedate = duedate;
-		this.dueamount = dueamount;
 		this.applieddate = applieddate;
-		this.paid = paid;
-		this.topay= topay;
-		
+		this.status = status;
 	}
+	
+	
 }
 

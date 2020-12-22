@@ -155,7 +155,7 @@ public class UserPanelController implements Initializable {
 			primaryStage.show();
 			
 		} catch (Exception e) {
-			
+			JOptionPane.showMessageDialog(null, e);
 		}
 	}
 			

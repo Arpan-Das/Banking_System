@@ -9,7 +9,11 @@ import java.util.concurrent.TimeUnit;
 public class dateCalculator {
 
 	public static long days(String from, String to) {
-			
+		
+//		current date
+//		LocalDate date = java.time.LocalDate.now();
+//		today  = date.getYear()+"-"+date.getMonthValue()+"-"+date.getDayOfMonth();
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 		Date firstDate, secondDate;
 		long diff = 0;

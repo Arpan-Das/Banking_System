@@ -299,7 +299,7 @@ public class WithrawController implements Initializable {
 		Properties props=new Properties();
         props.put("mail.smtp.host","smtp.gmail.com");
         props.put("mail.smtp.port",465);
-        props.put("mail.smtp.user","ad0084763@gmail.com"); // your email id
+        props.put("mail.smtp.user","avbank2@gmail.com"); // your email id
         props.put("mail.smtp.auth",true);
         props.put("mail.smtp.starttls.enable",true);
         props.put("mail.smtp.debug",true);
@@ -313,20 +313,20 @@ public class WithrawController implements Initializable {
                 MimeMessage message = new MimeMessage(session);
                 message.setText("Your OTP is " + otp);	// msg send to the email id
                 message.setSubject("AV Bank ... Bank of Benifits - Email Verfication");
-                message.setFrom(new InternetAddress("ad0084763@gmail.com"));
+                message.setFrom(new InternetAddress("avbank2@gmail.com"));
                 message.addRecipient(RecipientType.TO, new InternetAddress(emailid));		// email of the reciever
                 message.saveChanges();
                 try
                 {
                 Transport transport = session.getTransport("smtp");
-                transport.connect("smtp.gmail.com","ad0084763@gmail.com","Light@2020");
+                transport.connect("smtp.gmail.com","avbank2@gmail.com","Logitech@2");
                 transport.sendMessage(message, message.getAllRecipients());
                 transport.close();
                               
                 JOptionPane.showMessageDialog(null,"OTP send to your Email id"); 
                 }catch(Exception e)
                 {
-                    JOptionPane.showMessageDialog(null,e);
+                    JOptionPane.showMessageDialog(null,"No Internet Connection.");
                 }              
             
         } catch (Exception e) {

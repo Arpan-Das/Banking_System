@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
@@ -211,7 +213,7 @@ public class ActiveDepositController implements Initializable {
 		// TODO Auto-generated method stub
 		
 		/*
-		 * *********to update the interestaccumulated
+		 * *********to update the interestAccumulated in the Fixed Deposit table **************
 		 * */
 		
 		try {
@@ -228,10 +230,11 @@ public class ActiveDepositController implements Initializable {
 				LocalDate date = java.time.LocalDate.now();
     			String ttoday  = date.getYear()+"-"+date.getMonthValue()+"-"+date.getDayOfMonth();
 				
+    			NumberFormat formatter = new DecimalFormat("#0.00");
     			double interest = interestCalculator.interest(amount, rate, dateCalculator.days(fromD, ttoday)) - amount ;
     			
     			try {
-    				stmt2.executeUpdate("update FixedDeposit set interestaccum = "+ interest +" where amount = "+ amount+" and rate = "+rate);
+    				stmt2.executeUpdate("update FixedDeposit set interestaccum = "+ formatter.format(interest) +" where amount = "+ amount+" and rate = "+rate);
     	    		
     			}catch (Exception e) {
     				e.printStackTrace();

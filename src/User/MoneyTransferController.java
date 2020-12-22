@@ -8,7 +8,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import userDom.RemoveComma;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -65,11 +67,13 @@ public class MoneyTransferController implements Initializable {
 		return String.valueOf(rand.nextInt(1000+1));
 	}
 	
-	public void setloan(String acconumber, String amountt){
+	public void setloan(String acconumber, String amountt,String remark){
     	anumber.setText(acconumber);
     	amount.setText(amountt);
+    	this.remark.setText(remark);
     	amount.setEditable(false);
     	anumber.setEditable(false);
+    	this.remark.setEditable(false);
     	
     }
 	
@@ -96,6 +100,7 @@ public class MoneyTransferController implements Initializable {
 				
 						if(rs.next()) {	//********** verify the account number
 							b_username = rs.getString("username");
+							
 							b_name = rs.getString("firstname")+" "+rs.getString("lastname"); 
 						
 							try {
@@ -160,22 +165,22 @@ public class MoneyTransferController implements Initializable {
 					// to get the previous balance
 					String query = "select * from "+ data.getUsername()+data.getAccno();
 					stmt = conn.createStatement();
-					rs = stmt.executeQuery(query);
+					 rs = stmt.executeQuery(query);
 					float balance = rs.getFloat("balance") ;
 							
-					if(balance > Float.valueOf(amount.getText()) ) {
+					if(balance > RemoveComma.remove(amount.getText()) ) {
 				
 						//********************** insert data into trx. table *******************************
 				
-						stmt.execute("update "+data.getUsername()+data.getAccno()+"  set balance = " + (balance - Float.valueOf(amount.getText())));
+						stmt.execute("update "+data.getUsername()+data.getAccno()+"  set balance = " + (balance - RemoveComma.remove(amount.getText())));
 				
 						stmt.execute("create table IF NOT EXISTS temp (date text, remarks text, type text, amount real, balance real)");
 				
 						ps = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
 						ps.setString(1, "online trx. to "+anumber.getText()+"/"+b_name +" - "+remark.getText());
 						ps.setString(2, "Debit");
-						ps.setFloat(3, Float.valueOf(amount.getText()));
-						ps.setFloat(4, (balance - Float.valueOf(amount.getText())));
+						ps.setDouble(3, RemoveComma.remove(amount.getText()));
+						ps.setDouble(4, (balance - RemoveComma.remove(amount.getText())));
 						ps.execute();
 				
 						stmt.execute("insert into temp select * from trx" +data.getUsername()+data.getAccno() );
@@ -194,7 +199,7 @@ public class MoneyTransferController implements Initializable {
 							rs = stmt.executeQuery(query2);
 							float balance2 = rs.getFloat("balance") ;
 									
-							stmt.execute("update "+b_username+anumber.getText()+" set balance = " + (balance2 + Float.valueOf(amount.getText())));
+							stmt.execute("update "+b_username+anumber.getText()+" set balance = " + (balance2 + RemoveComma.remove(amount.getText())));
 						
 							//********************** insert data into trx. table *******************************
 							
@@ -203,8 +208,8 @@ public class MoneyTransferController implements Initializable {
 							ps = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
 							ps.setString(1, "online trx. from "+data.getAccno()+"/"+data.getName() +" - "+remark.getText());
 							ps.setString(2, "Credit");
-							ps.setFloat(3, Float.valueOf(amount.getText()));
-							ps.setFloat(4, (balance2 + Float.valueOf(amount.getText())));
+							ps.setDouble(3, RemoveComma.remove(amount.getText()));
+							ps.setDouble(4, (balance2 + RemoveComma.remove(amount.getText())));
 							ps.execute();
 						
 							stmt.execute("insert into temp select * from trx" +b_username+anumber.getText() );
@@ -233,6 +238,26 @@ public class MoneyTransferController implements Initializable {
 				}
 				
 				//******* 
+				if(data.getLoanflag()) {
+					//************** it will only work when user pay the emi -loan section - it will go back to active loan section
+					try {
+						data.setTrxflag(true);
+						((Node)event.getSource()).getScene().getWindow().hide();
+			    		Stage primaryStage = new Stage();
+			    		FXMLLoader loader = new FXMLLoader();
+			    		Pane root;
+						root = loader.load(getClass().getResource("/User/ActiveLoans.fxml").openStream());
+						Scene scene = new Scene(root);
+			    		primaryStage.setScene(scene);
+			    		primaryStage.initStyle(StageStyle.TRANSPARENT);
+			    		primaryStage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		    		
+		    		
+				}
 				verification.setVisible(false);
 				onlinetransfer.setVisible(true);
 				anumber.setText("");

@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import application.sqlconnect;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +26,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import userDom.DueDate;
+import userDom.RemoveComma;
 
 public class ActiveLoanController implements Initializable{
 
@@ -31,58 +35,58 @@ public class ActiveLoanController implements Initializable{
     private TableView<activeloans> tabel_loan;
 
     @FXML
-    private TableColumn<activeloans, Double> col_amount;
+    private TableColumn<activeloans, String> col_amount;
 
     @FXML
-    private TableColumn<activeloans, String> col_applieddate;
+    private TableColumn<activeloans, String> col_applieddate; // fromD
 
     @FXML
     private TableColumn<activeloans, String> col_type;
 
     @FXML
-    private TableColumn<activeloans, Double> col_pay;
+    private TableColumn<activeloans, String> col_emi;//emi
 
     @FXML
-    private TableColumn<activeloans, Double> col_paid;
-
-    @FXML
-    private TableColumn<activeloans, String> col_duedate;
-
-    @FXML
-    private TableColumn<activeloans, Double> col_dueamount;
-
+    private TableColumn<activeloans, Double> col_dueloan;
+    
     @FXML
     private TableColumn<activeloans, String> col_remark;
 
     @FXML
+    private TableColumn<activeloans, String> col_duedate;// hide-directly print on textfield
+
+    @FXML
+    private TableColumn<activeloans, String> col_status;// hide
+    
+    @FXML
     private TextField duedate;
 
     @FXML
-    private Label accountnumber;
+    private TextField dueamount;// print emi
+//
+//    @FXML
+//    private Label accountnumber;
+//
+//    @FXML
+//    private Label username;
+//
+//    @FXML
+//    private Label name;
 
-    @FXML
-    private Label username;
-
-    @FXML
-    private Label name;
-
-    @FXML
-    private TextField dueamount;
-    
     @FXML
     private Label adminaccountnumber;                           // 1000145
 
-    
     ObservableList<activeloans> listloans;
     
-
     int index = -1;
     
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
     Statement stmt;
-
+    boolean select = false;
+    String loantype ;// to set the remark  while user go for emi payment
+    String loanamount;// to set the remark  while user go for emi payment
     @FXML
     void exxit(ActionEvent event) {
 
@@ -91,13 +95,36 @@ public class ActiveLoanController implements Initializable{
 
     @FXML
     void getSelected(MouseEvent event) {
+    	try {
     	index = tabel_loan.getSelectionModel().getSelectedIndex();
     	if(index <= -1) {
     		return;
     	}
-    	dueamount.setText(col_dueamount.getCellData(index).toString());
-    	duedate.setText(col_duedate.getCellData(index).toString());
-
+    	
+    	loantype = col_type.getCellData(index).toString();
+    	loanamount = col_amount.getCellData(index).toString();
+    	
+    	String status = col_status.getCellData(index).toString();
+    	
+    	if(!(status.equals("Pending")||status.equals("Reject"))) {
+    		dueamount.setText(col_emi.getCellData(index).toString());
+        	duedate.setText(col_duedate.getCellData(index).toString());
+        	
+        	select = true;
+    	}else {
+    		if(status.equals("Pending")) {
+    			JOptionPane.showMessageDialog(null, "Loan is not approved yet. You will get a email alert when loan gets approved.");
+    		}else {
+    			JOptionPane.showMessageDialog(null, "Your "+loantype+" request of Rs."+loanamount+" has been rejected.");
+    		}
+    		
+    	}
+    	
+    	
+    	index = -1;
+    	}catch(Exception e) {
+    		JOptionPane.showMessageDialog(null, e);
+    	}
     }
 
     @FXML
@@ -121,7 +148,7 @@ public class ActiveLoanController implements Initializable{
     }
 
     @FXML
-    void neww(ActionEvent event) {
+    void neww(ActionEvent event) {	//************* go to apply for new loan section -- loan.fxml + loanController.java
     	try {
     		
     		((Node)event.getSource()).getScene().getWindow().hide();
@@ -163,44 +190,85 @@ public class ActiveLoanController implements Initializable{
     }
 
     @FXML
-    void pay(ActionEvent event) {
-    	try {
+    void pay(ActionEvent event) {//************ pay the monthly emi *****************
+    	if(select) {
     		
-    		((Node)event.getSource()).getScene().getWindow().hide();
-    		Stage primaryStage = new Stage();
-    		FXMLLoader loader = new FXMLLoader();
-    		Pane root = loader.load(getClass().getResource("/User/MoneyTransfer.fxml").openStream());
-    		MoneyTransferController moneyController = (MoneyTransferController)loader.getController();
-			moneyController.setloan(adminaccountnumber.getText(), dueamount.getText());
-    		Scene scene = new Scene(root);
-    		primaryStage.setScene(scene);
-    		primaryStage.initStyle(StageStyle.TRANSPARENT);
-    		primaryStage.show();
-    		
-    	} catch (Exception e) {
-    		
+    		try {
+    			data.setLoanflag(true);
+    			data.setLoanamount(RemoveComma.remove(loanamount));
+        		((Node)event.getSource()).getScene().getWindow().hide();
+        		Stage primaryStage = new Stage();
+        		FXMLLoader loader = new FXMLLoader();
+        		Pane root = loader.load(getClass().getResource("/User/MoneyTransfer.fxml").openStream());
+        		MoneyTransferController moneyController = (MoneyTransferController)loader.getController();
+    			moneyController.setloan(adminaccountnumber.getText(), dueamount.getText(), "EMI for "+ loantype+" of Rs."+loanamount);
+        		Scene scene = new Scene(root);
+        		primaryStage.setScene(scene);
+        		primaryStage.initStyle(StageStyle.TRANSPARENT);
+        		primaryStage.show();
+        		
+        	} catch (Exception e) {
+        		e.printStackTrace();
+        	}
+    	}else {
+    		JOptionPane.showMessageDialog(null,"Please select a Query.");
     	}
+    	
     	
     }
     
     public void Update() {
-    	col_amount.setCellValueFactory(new PropertyValueFactory<activeloans, Double>("amount"));
+    	try {
+    	col_amount.setCellValueFactory(new PropertyValueFactory<activeloans, String>("amount"));
 		col_type.setCellValueFactory(new PropertyValueFactory<activeloans, String>("type"));
 		col_remark.setCellValueFactory(new PropertyValueFactory<activeloans, String>("remark")); 
 		col_duedate.setCellValueFactory(new PropertyValueFactory<activeloans, String>("duedate"));
-		col_dueamount.setCellValueFactory(new PropertyValueFactory<activeloans, Double>("duebalance"));
 		col_applieddate.setCellValueFactory(new PropertyValueFactory<activeloans, String>("applieddate"));
-		col_pay.setCellValueFactory(new PropertyValueFactory<activeloans, Double>("pay"));
-		col_paid.setCellValueFactory(new PropertyValueFactory<activeloans, Double>("paid"));
+		col_emi.setCellValueFactory(new PropertyValueFactory<activeloans, String>("emi"));
+		col_dueloan.setCellValueFactory(new PropertyValueFactory<activeloans, Double>("dueloan"));
+		col_status.setCellValueFactory(new PropertyValueFactory<activeloans, String>("status"));
 		
 		listloans = sqlconnect.getDataloans(Integer.parseInt(data.getAccno()));
 		tabel_loan.setItems(listloans);
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    		JOptionPane.showMessageDialog(null, e);
+    	}
     }
 		
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		
+		if(data.getTrxflag()) {
+			try {
+    			//******************* update the duedate and due amount
+    			Connection conn = sqlconnect.dbconnect();
+    			int y=0 , m=0 , d=0;// due date
+    			double emi = 0 , dueamount = 0;
+    			Statement stmt = conn.createStatement();
+    			ResultSet rs = stmt.executeQuery("select * from loan where accno = "+data.getAccno()+" and amount = "+data.getLoanamount());
+    			if(rs.next()) {
+    				y=rs.getInt("y");
+    				m = rs.getInt("m");
+    				d = rs.getInt("d");
+    				emi = rs.getDouble("emi");
+    				dueamount= rs.getDouble("dueamount");
+    			}
+    			DueDate duedate = new DueDate();
+    			duedate.duedate(y, m, d);
+    			Statement stmt2 = conn.createStatement();
+    			stmt2.execute("update loan set dueamount = "+(dueamount-emi)+", y = "+duedate.getYear()+" , m = "+duedate.getMonth()+" , d = "+duedate.getDate()+" where accno = "+data.getAccno()+" and amount = "+data.getLoanamount());
+    			conn.close();
+    		}catch(Exception e) {
+    			e.printStackTrace();
+    		}
+			data.setLoanflag(false);
+			data.setTrxflag(false);
+		}
 		Update();
+		adminaccountnumber.setText("1014");
 	}
 
 }
