@@ -10,24 +10,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.LoanController">
+<AnchorPane minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.LoanController">
    <children>
       <Button layoutX="923.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="76.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT" />
       <Button layoutX="900.0" layoutY="667.0" mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="99.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
-      <ComboBox fx:id="combobox" layoutX="649.0" layoutY="205.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="235.0" promptText="                   LOAN TYPE" />
+      <ComboBox fx:id="combobox" layoutX="649.0" layoutY="205.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="235.0" promptText="                 LOAN TYPE" />
       <TextField fx:id="amount" layoutX="790.0" layoutY="263.0" prefHeight="31.0" prefWidth="188.0" promptText="AMOUNT" />
-      <ComboBox fx:id="timeperiod" layoutX="790.0" layoutY="315.0" prefHeight="31.0" prefWidth="188.0" promptText="Time Period*" />
-      <TextArea fx:id="textarea" layoutX="524.0" layoutY="357.0" prefHeight="96.0" prefWidth="453.0" promptText="REASON FOR LOAN IN BRIEF" />
-      <Button fx:id="but_calculateemi" layoutX="679.0" layoutY="464.0" mnemonicParsing="false" onAction="#CalculateEMI" prefHeight="31.0" prefWidth="161.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: white;" text="Calculate Monthly EMI">
+      <ComboBox fx:id="timeperiod" layoutX="790.0" layoutY="315.0" prefHeight="31.0" prefWidth="188.0" promptText="IN YEARS" />
+      <TextArea fx:id="textarea" layoutX="539.0" layoutY="507.0" prefHeight="114.0" prefWidth="440.0" promptText="REASON FOR LOAN IN BRIEF" />
+      <Button fx:id="but_calculateemi" layoutX="655.0" layoutY="364.0" mnemonicParsing="false" onAction="#CalculateEMI" prefHeight="31.0" prefWidth="224.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: white;" text="PROCEED">
          <font>
-            <Font size="13.0" />
+            <Font name="Berlin Sans FB" size="17.0" />
          </font>
       </Button>
-      <TextField fx:id="text_rate" editable="false" layoutX="788.0" layoutY="503.0" prefHeight="31.0" prefWidth="188.0" promptText="Interest Rate" />
-      <TextField fx:id="text_emi" editable="false" layoutX="788.0" layoutY="551.0" prefHeight="31.0" prefWidth="188.0" promptText="Monthly EMI" />
-      <Button layoutX="684.0" layoutY="610.0" mnemonicParsing="false" onAction="#submit" prefHeight="39.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="SUBMIT">
+      <TextField fx:id="text_rate" editable="false" layoutX="797.0" layoutY="414.0" prefHeight="31.0" prefWidth="188.0" promptText="INTEREST RATE" />
+      <TextField fx:id="text_emi" editable="false" layoutX="797.0" layoutY="461.0" prefHeight="31.0" prefWidth="188.0" promptText="MONTHLY EMI" />
+      <Button layoutX="655.0" layoutY="628.0" mnemonicParsing="false" onAction="#submit" prefHeight="32.0" prefWidth="224.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="SUBMIT">
          <font>
-            <Font size="14.0" />
+            <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Button>
       <Label layoutX="494.0" layoutY="25.0" text="K LOANS">
@@ -73,22 +73,22 @@
             <Glow level="0.5" />
          </effect>
       </Label>
-      <Label layoutX="543.0" layoutY="551.0" prefHeight="39.0" prefWidth="254.0" text="EMI(per Month)">
+      <Label layoutX="537.0" layoutY="457.0" prefHeight="39.0" prefWidth="254.0" text="MONTHLY EMI">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <Label layoutX="592.0" layoutY="259.0" prefHeight="32.0" prefWidth="213.0" text="AMOUNT">
+      <Label layoutX="537.0" layoutY="259.0" prefHeight="39.0" prefWidth="224.0" text="AMOUNT">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <Label layoutX="500.0" layoutY="311.0" prefHeight="39.0" prefWidth="305.0" text="Time Period(In Years)*">
+      <Label layoutX="538.0" layoutY="311.0" prefHeight="39.0" prefWidth="321.0" text="TIME PERIOD">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <Label layoutX="543.0" layoutY="503.0" prefHeight="39.0" prefWidth="254.0" text="Interest Rate">
+      <Label layoutX="537.0" layoutY="410.0" prefHeight="39.0" prefWidth="254.0" text="INTEREST RATE">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>

@@ -22,7 +22,7 @@
                   <Font name="Berlin Sans FB" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="264.0" layoutY="10.0" prefHeight="52.0" prefWidth="215.0" text="User Panel">
+            <Label layoutX="269.0" layoutY="11.0" prefHeight="52.0" prefWidth="215.0" text="User Panel">
                <font>
                   <Font name="Berlin Sans FB" size="46.0" />
                </font>
@@ -32,12 +32,12 @@
             </Label>
 
             
-            <Label fx:id="lbl_name" alignment="CENTER" contentDisplay="CENTER" layoutX="286.0" layoutY="70.0" prefHeight="33.0" prefWidth="167.0" text="viveksingh9780" textAlignment="CENTER">
+            <Label fx:id="lbl_name" alignment="CENTER" contentDisplay="CENTER" layoutX="293.0" layoutY="71.0" prefHeight="33.0" prefWidth="167.0" text="viveksingh9780" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
             </Label>
-            <Button layoutX="327.0" layoutY="116.0" mnemonicParsing="false" onAction="#out" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
+            <Button layoutX="337.0" layoutY="118.0" mnemonicParsing="false" onAction="#out" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
            
             <Button layoutX="535.0" layoutY="457.0" mnemonicParsing="false" onAction="#out4" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FEEDBACKS" />
             <Button layoutX="58.0" layoutY="458.0" mnemonicParsing="false" onAction="#out3" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOANS" />

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="650.0" maxWidth="950.0" prefHeight="650.0" prefWidth="950.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.ActiveLoanController">
+<AnchorPane maxHeight="650.0" maxWidth="950.0" prefHeight="650.0" prefWidth="950.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.ActiveLoanController">
    <children>
       <Pane layoutX="50.0" layoutY="50.0" prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #8fb7e7; -fx-border-color: #b38600; -fx-border-width: 5px;">
          <children>
@@ -35,7 +35,7 @@
                   <TableColumn fx:id="col_status" prefWidth="75.0" text="status" visible="false" />
               </columns>
             </TableView>
-            <TextField fx:id="duedate" editable="false" layoutX="98.0" layoutY="441.0" prefHeight="31.0" prefWidth="249.0" promptText="DUE DATE" />
+            <TextField fx:id="duedate" editable="false" layoutX="269.0" layoutY="450.0" prefHeight="31.0" prefWidth="168.0" promptText="DUE DATE" />
             <Label fx:id="accountnumber" alignment="CENTER" layoutX="620.0" layoutY="14.0" prefHeight="21.0" prefWidth="116.0" text="Account Number" visible="false">
                <font>
                   <Font size="14.0" />
@@ -45,7 +45,7 @@
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
-            <TextField fx:id="dueamount" editable="false" layoutX="98.0" layoutY="494.0" prefHeight="31.0" prefWidth="249.0" promptText="DUE AMOUNT" />
+            <TextField fx:id="dueamount" editable="false" layoutX="270.0" layoutY="495.0" prefHeight="31.0" prefWidth="168.0" promptText="DUE AMOUNT" />
             <Button layoutX="338.0" layoutY="112.0" mnemonicParsing="false" onAction="#neww" prefHeight="36.0" prefWidth="221.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="APPLY FOR NEW">
                <font>
                   <Font name="Berlin Sans FB" size="20.0" />
@@ -57,6 +57,22 @@
                </font>
             </Button>
             <Label fx:id="adminaccountnumber" layoutX="63.0" layoutY="120.0" text="1000145" visible="false" />
+            <Label layoutX="69.0" layoutY="450.0" text="DUE DATE">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="27.0" />
+               </font>
+               <effect>
+                  <Glow level="0.59" />
+               </effect>
+            </Label>
+            <Label layoutX="69.0" layoutY="495.0" text="DUE AMOUNT">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="27.0" />
+               </font>
+               <effect>
+                  <Glow level="0.59" />
+               </effect>
+            </Label>
          </children></Pane>
       <Button layoutX="885.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT" />
       <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onAction="#dashboard" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="DASHBOARD" />
