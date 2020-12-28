@@ -69,19 +69,19 @@ public class WithrawController implements Initializable {
     Statement stmt2;
     ResultSet rs;
     
-//    public void normal() {
-//    	combobox.setValue(null);
-//    	anumber.setText(" ");
-//    	amount.setText("");
-//    	uname.setText("");
-//    	remark.setText("");
-//    	otp.setText("");
-//    	captcha.setText("");
-//    	
-//    	//*******reset the captcha
-//    	myrandcatcha = random();
-//		randomlbl.setText(myrandcatcha);
-//    }
+    public void normal() {
+    	combobox.setValue(null);
+    	anumber.setText(" ");
+    	amount.setText("");
+    	uname.setText("");
+    	remark.setText("");
+    	otp.setText("");
+    	captcha.setText("");
+    	
+    	//*******reset the captcha
+    	myrandcatcha = random();
+		randomlbl.setText(myrandcatcha);
+    }
     
     public String random() {
     	Random rand = new Random();
@@ -139,130 +139,134 @@ public class WithrawController implements Initializable {
 }
    
     public void submit(ActionEvent event) {
-    	if(uname.getText().trim().isEmpty() || anumber.getText().trim().isEmpty() || amount.getText().trim().isEmpty()
-    		|| remark.getText().trim().isEmpty() || captcha.getText().trim().isEmpty()|| otp.getText().trim().isEmpty()
-    		|| combobox.getValue().trim().isEmpty())
-    	{
-    		JOptionPane.showMessageDialog(null, "Enter all details properly");
-			
-		}else {
-			
-			if(otp.getText().equals(randomotp)) {
-				otp.setStyle(
-						"-fx-border-color: white;"
-				);
-								
-				if(captcha.getText().equals(myrandcatcha)) {
-					captcha.setStyle(
-							"-fx-border-color: white;"
-					);
-							
-					if(combobox.getSelectionModel().getSelectedItem().toString() == "WITHDRAW") {
-				
-						//************************************* code for withdraw (debit)**************************
-				
-						conn = sqlconnect.dbconnect();
-						try {
-							// to get the previous balance
-							String query = "select * from "+ uname.getText()+anumber.getText();
-							stmt2 = conn.createStatement();
-							rs = stmt2.executeQuery(query);
-							float balance = rs.getFloat("balance") ;
-									
-							if(balance > Float.valueOf(amount.getText()) ) {
-						
-								//********************** insert data into trx. table *******************************
-						
-								stmt2.execute("update "+uname.getText()+anumber.getText()+"  set balance = " + (balance - Float.valueOf(amount.getText())));
-						
-								stmt2.execute("create table IF NOT EXISTS temp (date text, remarks text, type text, amount real, balance real)");
-						
-								prst = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
-								prst.setString(1, remark.getText());
-								prst.setString(2, "Debit");
-								prst.setFloat(3, Float.valueOf(amount.getText()));
-								prst.setFloat(4, (balance - Float.valueOf(amount.getText())));
-								prst.execute();
-						
-								stmt2.execute("insert into temp select * from trx" +uname.getText()+anumber.getText() );
-						
-								stmt2.execute("drop table trx" + uname.getText()+anumber.getText());
-						
-								stmt2.execute("alter table temp rename to trx" + uname.getText()+anumber.getText());
-				
-						
-								JOptionPane.showMessageDialog(null, "Transection Successfully.");	
-								
-								
-							}else {
-								JOptionPane.showMessageDialog(null, "Insufficient Balance");
-								
-							}
-//						normal();
-						conn.close();	
-						} catch (SQLException e) {
-							
-							JOptionPane.showMessageDialog(null, "debit"+e);
-						}
-				
-					}else if(combobox.getSelectionModel().getSelectedItem().toString() == "DEPOSIT") {
-				
-						//********************************** code for deposit(credit) ***********************
-				
-						conn = sqlconnect.dbconnect();
-						try {
-							// to get the previous balance
-							String query = "select * from "+ uname.getText()+anumber.getText();
-							stmt2 = conn.createStatement();
-							rs = stmt2.executeQuery(query);
-							float balance = rs.getFloat("balance") ;
-									
-							stmt2.execute("update "+uname.getText()+anumber.getText()+" set balance = " + (balance + Float.valueOf(amount.getText())));
-						
-							//********************** insert data into trx. table *******************************
-							
-							stmt2.execute("create table IF NOT EXISTS temp (date text, remarks text, type text, amount real, balance real)");
-						
-							prst = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
-							prst.setString(1, remark.getText());
-							prst.setString(2, "Credit");
-							prst.setFloat(3, Float.valueOf(amount.getText()));
-							prst.setFloat(4, (balance + Float.valueOf(amount.getText())));
-							prst.execute();
-						
-							stmt2.execute("insert into temp select * from trx" +uname.getText()+anumber.getText() );
-						
-							stmt2.execute("drop table trx" + uname.getText()+anumber.getText());
-						
-							stmt2.execute("alter table temp rename to trx"+uname.getText() +anumber.getText());
-						
-							JOptionPane.showMessageDialog(null, "Transection Successfully.");
-//							normal();
-							conn.close();
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							JOptionPane.showMessageDialog(null, "credit"+e);
-						}
-				
-					}
-									
-				}else {			//else part of Catcha
-			
-					//*************** if catcha is incorrect ******************************
-			
-					captcha.setStyle(
-					"-fx-border-color: red;"
-							);
-				}
-			}else {			// else part of OTP
-		  
-				//************ if otp is incorrect ****************************
-			
-				otp.setStyle(
-					"-fx-border-color: red;"
-						);
-			}
-		}// outer else 
+    	if(combobox.getValue() != "WITHDRAW" || combobox.getValue() != "DEPOSIT"){
+    		JOptionPane.showMessageDialog(null,"Please select Tranction Type");
+    	}else {
+    		if(uname.getText().trim().isEmpty() || anumber.getText().trim().isEmpty() || amount.getText().trim().isEmpty()
+    	    	|| remark.getText().trim().isEmpty() || captcha.getText().trim().isEmpty()|| otp.getText().trim().isEmpty())
+    	    	{
+    	    		JOptionPane.showMessageDialog(null, "Enter all details properly");
+    				
+    			}else {
+    				
+    				if(otp.getText().equals(randomotp)) {
+    					otp.setStyle(
+    							"-fx-border-color: white;"
+    					);
+    									
+    					if(captcha.getText().equals(myrandcatcha)) {
+    						captcha.setStyle(
+    								"-fx-border-color: white;"
+    						);
+    								
+    						if(combobox.getSelectionModel().getSelectedItem().toString() == "WITHDRAW") {
+    					
+    							//************************************* code for withdraw (debit)**************************
+    					
+    							conn = sqlconnect.dbconnect();
+    							try {
+    								// to get the previous balance
+    								String query = "select * from "+ uname.getText()+anumber.getText();
+    								stmt2 = conn.createStatement();
+    								rs = stmt2.executeQuery(query);
+    								float balance = rs.getFloat("balance") ;
+    										
+    								if(balance > Float.valueOf(amount.getText()) ) {
+    							
+    									//********************** insert data into trx. table *******************************
+    							
+    									stmt2.execute("update "+uname.getText()+anumber.getText()+"  set balance = " + (balance - Float.valueOf(amount.getText())));
+    							
+    									stmt2.execute("create table IF NOT EXISTS temp (date text, remarks text, type text, amount real, balance real)");
+    							
+    									prst = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
+    									prst.setString(1, remark.getText());
+    									prst.setString(2, "Debit");
+    									prst.setFloat(3, Float.valueOf(amount.getText()));
+    									prst.setFloat(4, (balance - Float.valueOf(amount.getText())));
+    									prst.execute();
+    							
+    									stmt2.execute("insert into temp select * from trx" +uname.getText()+anumber.getText() );
+    							
+    									stmt2.execute("drop table trx" + uname.getText()+anumber.getText());
+    							
+    									stmt2.execute("alter table temp rename to trx" + uname.getText()+anumber.getText());
+    					
+    							
+    									JOptionPane.showMessageDialog(null, "Transection Successfully.");	
+    	    							normal();
+    									
+    								}else {
+    									JOptionPane.showMessageDialog(null, "Insufficient Balance");
+    									
+    								}
+
+    							conn.close();	
+    							} catch (SQLException e) {
+    								
+    								JOptionPane.showMessageDialog(null, "debit"+e);
+    							}
+    					
+    						}else if(combobox.getSelectionModel().getSelectedItem().toString() == "DEPOSIT") {
+    					
+    							//********************************** code for deposit(credit) ***********************
+    					
+    							conn = sqlconnect.dbconnect();
+    							try {
+    								// to get the previous balance
+    								String query = "select * from "+ uname.getText()+anumber.getText();
+    								stmt2 = conn.createStatement();
+    								rs = stmt2.executeQuery(query);
+    								float balance = rs.getFloat("balance") ;
+    										
+    								stmt2.execute("update "+uname.getText()+anumber.getText()+" set balance = " + (balance + Float.valueOf(amount.getText())));
+    							
+    								//********************** insert data into trx. table *******************************
+    								
+    								stmt2.execute("create table IF NOT EXISTS temp (date text, remarks text, type text, amount real, balance real)");
+    							
+    								prst = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
+    								prst.setString(1, remark.getText());
+    								prst.setString(2, "Credit");
+    								prst.setFloat(3, Float.valueOf(amount.getText()));
+    								prst.setFloat(4, (balance + Float.valueOf(amount.getText())));
+    								prst.execute();
+    							
+    								stmt2.execute("insert into temp select * from trx" +uname.getText()+anumber.getText() );
+    							
+    								stmt2.execute("drop table trx" + uname.getText()+anumber.getText());
+    							
+    								stmt2.execute("alter table temp rename to trx"+uname.getText() +anumber.getText());
+    							
+    								JOptionPane.showMessageDialog(null, "Transection Successfully.");
+    								normal();
+    								conn.close();
+    							} catch (SQLException e) {
+    								// TODO Auto-generated catch block
+    								JOptionPane.showMessageDialog(null, "credit"+e);
+    							}
+    					
+    						}
+    										
+    					}else {			//else part of Catcha
+    				
+    						//*************** if catcha is incorrect ******************************
+    				
+    						captcha.setStyle(
+    						"-fx-border-color: red;"
+    								);
+    					}
+    				}else {			// else part of OTP
+    			  
+    					//************ if otp is incorrect ****************************
+    				
+    					otp.setStyle(
+    						"-fx-border-color: red;"
+    							);
+    				}
+    			}// outer else 
+    	}
+    	
 	
 	}
     

@@ -98,7 +98,10 @@ public class BankingSystemController implements Initializable {
     @FXML
     private TextField txt_forgetPasswordUsername, txt_forgetPasswordEmailid, txt_forgetPasswordMobileno;
     @FXML
-    private Button but_forgetPasswordSubmit;
+    private Button but_forgetPasswordSubmit ;
+   
+    
+    
     
     //////////reset password
     @FXML private PasswordField txt_resetPasswordNewPassword, txt_ResetRasswordConformPassword;
@@ -436,7 +439,7 @@ public class BankingSystemController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+	int accno = 0;
 	public void forgetpassword(ActionEvent event) {
 		conn = sqlconnect.dbconnect();
 		try {
@@ -458,7 +461,7 @@ public class BankingSystemController implements Initializable {
 			if(rs.next()) {
 				// ////user id found
 				resetpassword.setVisible(true);
-				
+				accno = rs.getInt("accno");
 					
 				
 			}else {
@@ -475,9 +478,10 @@ public class BankingSystemController implements Initializable {
 		try {
 			conn = sqlconnect.dbconnect();
 			if(txt_resetPasswordNewPassword.getText().equals(txt_ResetRasswordConformPassword.getText())) {
-				prst = conn.prepareStatement("update user set password = ? where accno = "+ rs.getInt("accno"));
+				prst = conn.prepareStatement("update user set password = ? where accno = ?");
 				prst.setString(1, txt_resetPasswordNewPassword.getText());
-				prst.execute();
+				prst.setInt(2, accno);
+				prst.executeUpdate();
 				JOptionPane.showMessageDialog(null,"Password Update Successfully.");
 				login1.setVisible(true);
 	    		signup1.setVisible(true);
@@ -493,7 +497,7 @@ public class BankingSystemController implements Initializable {
 			}
 			conn.close();
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
 	

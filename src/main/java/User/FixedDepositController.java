@@ -7,9 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
+
 
 import application.sendMail;
 import application.sqlconnect;
@@ -26,6 +28,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import userDom.Debit;
+import userDom.RemoveComma;
 import userDom.dateCalculator;
 import userDom.interestCalculator;
 
@@ -216,7 +219,9 @@ public class FixedDepositController implements Initializable{
 							Statement stmt = conn.createStatement();
 							ResultSet rs = stmt.executeQuery("select * from user where accno = "+data.getAccno());
 							String email = rs.getString("emailid");
-							sendMail.sendmail("\t\tFIXED DEPOSIT CREATED\n"+"Fixed Deposit created of Rs."+amount.getText()+". With interest rate of "+rate.getText()+"%. And it's Maturity date is "+maturity+". And its expected profit is Rs."+profit.getText()+".", email, "UPDATE");
+							NumberFormat foramter = new DecimalFormat("#0.00");
+							
+							sendMail.sendmail("\t\tFIXED DEPOSIT CREATED\n"+"Fixed Deposit created of Rs."+amount.getText()+". With interest rate of "+rate.getText()+"%. And it's Maturity date is "+maturity+". And its expected profit is Rs."+foramter.format((RemoveComma.remove(profit.getText()) - RemoveComma.remove(amount.getText())))+".", email, "UPDATE");
 							conn.close();
     					} catch (SQLException e) {
 							JOptionPane.showMessageDialog(null, "email id -->>"+e);

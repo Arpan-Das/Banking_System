@@ -2,10 +2,10 @@ package User;
 
 public class activitylog {
 
-	double amount;
+	String amount;
 	String type, remark, date,balance;
 	
-	public void setAmount(double amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 
@@ -24,7 +24,7 @@ public class activitylog {
 		this.balance = balance;
 	}
 
-	public double getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
@@ -43,7 +43,7 @@ public class activitylog {
 		return balance;
 	}
 
-	public activitylog(double amount, String type, String remark, String date, String balance) {
+	public activitylog(String amount, String type, String remark, String date, String balance) {
 		super();
 		this.amount = amount;
 		this.type = type;

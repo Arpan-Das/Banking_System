@@ -210,7 +210,7 @@ public class LoansAppliedController implements Initializable {
         				JOptionPane.showMessageDialog(null, "error in email "+e);
         			}
         			
-        			if(sendMail.sendmail("Dear Customer,\n\t Your Loan requested for "+type+" of Rs."+col_amount.getCellData(index)+" has been accepted on "+ today +".\n\t\tLoan Detail:\n\tLoan Type:"+col_why.getCellData(index)+"\n\tLoan Amount:Rs. "+col_amount.getCellData(index)+"\n\tInterest Rate:"+rate+"%\n\tTime Period:"+timeperiod+" year\n\tMonthly EMI: Rs."+emi+"\nYour amount will credit shortly.\nYour due date for emi is "+duedate.getDate()+"/"+duedate.getMonth()+"/"+duedate.getYear()+". And Please pay your monthly EMI in time for your convinient.\n\n\n**This is system generated e-mail please do not replay.", email, "Loan Update")) {
+        			if(sendMail.sendmail("Dear Customer,\n\t Your Loan requested for "+type+" of Rs."+col_amount.getCellData(index)+" has been accepted on "+ today +".\n\t\tLoan Detail:\n\tLoan Type:"+type+"\n\tLoan Amount:Rs. "+col_amount.getCellData(index)+"\n\tInterest Rate:"+rate+"%\n\tTime Period:"+timeperiod+" year\n\tMonthly EMI: Rs."+emi+"\nYour amount will credit shortly.\nYour due date for emi is "+duedate.getDate()+"/"+duedate.getMonth()+"/"+duedate.getYear()+". And Please pay your monthly EMI in time for your convinient.\n\n\n**This is system generated e-mail please do not replay.", email, "Loan Update")) {
         				
         				//*************************** update approve in loan table -status to approve and due date 
         				conn = sqlconnect.dbconnect();

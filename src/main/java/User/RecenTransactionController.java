@@ -32,7 +32,7 @@ public class RecenTransactionController implements Initializable {
 	    private TableView<activitylog> tabel_log;
 
 	    @FXML
-	    private TableColumn<activitylog, Double> col_amount;
+	    private TableColumn<activitylog, String> col_amount;
 
 	    @FXML
 	    private TableColumn<activitylog, String> col_date;
@@ -122,7 +122,7 @@ public class RecenTransactionController implements Initializable {
 	    }
 	    
 	    public void Update() {
-	    	col_amount.setCellValueFactory(new PropertyValueFactory<activitylog, Double>("amount"));
+	    	col_amount.setCellValueFactory(new PropertyValueFactory<activitylog, String>("amount"));
 			col_type.setCellValueFactory(new PropertyValueFactory<activitylog, String>("type"));
 			col_remark.setCellValueFactory(new PropertyValueFactory<activitylog, String>("remark")); 
 			col_date.setCellValueFactory(new PropertyValueFactory<activitylog, String>("date"));

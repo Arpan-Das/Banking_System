@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="560.0" prefWidth="800.0" style="-fx-background-color: #8fb7e7;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BankingSystemController">
    <children>
-      <AnchorPane fx:id="forgetpassword" layoutX="181.0" layoutY="69.0" style="-fx-background-color: #286bb8;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <AnchorPane fx:id="forgetpassword" layoutX="181.0" layoutY="69.0" style="-fx-background-color: #286bb8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
          <children>
             <Label layoutX="336.0" layoutY="38.0" text="Forgrt Password" textFill="WHITE">
                <font>
@@ -40,7 +40,7 @@
             </Label>
             <TextField fx:id="txt_forgetPasswordMobileno" layoutX="375.0" layoutY="216.0" promptText="Mobile No.*" />
             <Label layoutX="328.0" layoutY="185.0" text="-----------OR-----------" textFill="WHITE" />
-            <Button fx:id="but_forgetPasswordSubmit" layoutX="349.0" layoutY="277.0" mnemonicParsing="false" onAction="#forgetpassword" text="Submit" />
+            <Button fx:id="but_forgetPasswordSubmit" layoutX="348.0" layoutY="267.0" mnemonicParsing="false" onAction="#forgetpassword" text="Submit" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="resetpassword" layoutX="100.0" layoutY="110.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #286bb8;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
@@ -144,7 +144,7 @@
             <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="191.0" prefHeight="25.0" prefWidth="114.0" text="PAN/Aadhaar No.*  :" textFill="WHITE" AnchorPane.rightAnchor="255.0" />
             <Label alignment="CENTER_RIGHT" layoutX="47.0" layoutY="369.0" prefHeight="25.0" prefWidth="100.0" text="Username*  :" textFill="WHITE" AnchorPane.rightAnchor="255.0" />
          </children></AnchorPane>
-      <AnchorPane fx:id="signup1" layoutX="97.0" layoutY="110.0" style="-fx-background-color: #8fb7e7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="60.0">
+      <AnchorPane fx:id="signup1" layoutX="97.0" layoutY="110.0" style="-fx-background-color: #8fb7e7;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="60.0">
          <children>
             <Label fx:id="gotosignin" alignment="CENTER" layoutX="129.0" layoutY="331.0" onMouseClicked="#visibility" prefHeight="57.0" prefWidth="303.0" text="   Join our Family and Enjoy Benifits!!  &#10;Click here to Apply for a new Account!!" textFill="#800000" underline="true" wrapText="true">
                <font>
@@ -158,7 +158,7 @@
                </effect>
             </Label>
          </children></AnchorPane>
-      <AnchorPane fx:id="login1" layoutX="708.0" layoutY="66.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #286bb8;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <AnchorPane fx:id="login1" layoutX="708.0" layoutY="66.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #286bb8;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
          <children>
             <Label alignment="CENTER" layoutX="44.0" layoutY="30.0" prefHeight="31.0" prefWidth="124.0" text="Log In" textFill="#062332">
                <font>

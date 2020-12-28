@@ -112,7 +112,7 @@ public class sqlconnect {
 			String sql = "SELECT * FROM trx" + user + anumber;
 			ResultSet rs= stmt.executeQuery(sql);
 			while(rs.next()) {
-				list.add(new activitylog(rs.getDouble("amount"), rs.getString("type"), rs.getString("remarks"),
+				list.add(new activitylog(DecimalFormat.getNumberInstance().format(rs.getDouble("amount")), rs.getString("type"), rs.getString("remarks"),
 						rs.getString("date"), DecimalFormat.getNumberInstance().format(rs.getDouble("balance"))));
 			}
 			conn.close();

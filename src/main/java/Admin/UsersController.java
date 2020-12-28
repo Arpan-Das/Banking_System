@@ -330,5 +330,6 @@ public class UsersController implements Initializable  {
 		// TODO Auto-generated method stub
 		Update();
 		lab_name.setVisible(false);
+		txt_username.setEditable(false);
 	}
 }

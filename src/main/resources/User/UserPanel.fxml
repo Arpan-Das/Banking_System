@@ -42,7 +42,7 @@
             <Button layoutX="535.0" layoutY="457.0" mnemonicParsing="false" onAction="#out4" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FEEDBACKS" />
             <Button layoutX="58.0" layoutY="458.0" mnemonicParsing="false" onAction="#out3" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOANS" />
             <Button layoutX="535.0" layoutY="257.0" mnemonicParsing="false" onAction="#out2" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="MONEY TRANSFER" />
-            <Button layoutX="58.0" layoutY="257.0" mnemonicParsing="false" onAction="#out1" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="ACTIVITY LOG" />
+            <Button layoutX="58.0" layoutY="257.0" mnemonicParsing="false" onAction="#out1" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="PASSBOOK" />
  
             <Button layoutX="299.0" layoutY="339.0" mnemonicParsing="false" onAction="#out5" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FIXED DEPOSIT" />
             <Label fx:id="lab_accno" alignment="CENTER" layoutX="655.0" layoutY="20.0" prefHeight="33.0" prefWidth="71.0" text="1236">
