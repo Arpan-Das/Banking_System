@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.WithrawController">
+<AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #286bb8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.WithrawController">
    <children>
       <Pane layoutX="50.0" layoutY="50.0" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #8fb7e7; -fx-border-color: #b38600; -fx-border-width: 5px;">
          <children>
@@ -22,7 +22,7 @@
                </effect>
             </Label>
             <Button layoutX="298.0" layoutY="455.0" mnemonicParsing="false" onAction="#submit" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="SUBMIT" />
-            <ComboBox fx:id="combobox" layoutX="232.0" layoutY="93.0" prefHeight="31.0" prefWidth="286.0" />
+            <ComboBox fx:id="combobox" layoutX="232.0" layoutY="93.0" prefHeight="31.0" prefWidth="286.0" promptText="                        TRANSACTION TYPE" />
             <Label layoutX="40.0" layoutY="224.0" prefHeight="21.0" prefWidth="214.0" text="Amount">
                <font>
                   <Font name="Berlin Sans FB" size="27.0" />

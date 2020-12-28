@@ -20,7 +20,7 @@
             <artifactId>javafx-fxml</artifactId>
             <version>13</version>
         </dependency>
-       <!-- https://mvnrepository.com/artifact/javax.activation/activation -->
+         <!-- https://mvnrepository.com/artifact/javax.activation/activation -->
 <dependency>
     <groupId>javax.activation</groupId>
     <artifactId>activation</artifactId>
@@ -30,7 +30,7 @@
 <dependency>
     <groupId>javax.mail</groupId>
     <artifactId>mail</artifactId>
-    <version>1.4</version>
+    <version>1.4.7</version>
 </dependency>
 <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
        <dependency>
