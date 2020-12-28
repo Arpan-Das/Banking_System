@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.Properties;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -17,6 +19,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 
+import application.sendMail;
 import application.sqlconnect;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -139,7 +142,7 @@ public class WithrawController implements Initializable {
 }
    
     public void submit(ActionEvent event) {
-    	if(combobox.getValue() != "WITHDRAW" || combobox.getValue() != "DEPOSIT"){
+    	if(!(combobox.getValue() == ("WITHDRAW") || combobox.getValue() == ("DEPOSIT"))){
     		JOptionPane.showMessageDialog(null,"Please select Tranction Type");
     	}else {
     		if(uname.getText().trim().isEmpty() || anumber.getText().trim().isEmpty() || amount.getText().trim().isEmpty()
@@ -173,28 +176,44 @@ public class WithrawController implements Initializable {
     										
     								if(balance > Float.valueOf(amount.getText()) ) {
     							
-    									//********************** insert data into trx. table *******************************
-    							
-    									stmt2.execute("update "+uname.getText()+anumber.getText()+"  set balance = " + (balance - Float.valueOf(amount.getText())));
-    							
-    									stmt2.execute("create table IF NOT EXISTS temp (date text, remarks text, type text, amount real, balance real)");
-    							
-    									prst = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
-    									prst.setString(1, remark.getText());
-    									prst.setString(2, "Debit");
-    									prst.setFloat(3, Float.valueOf(amount.getText()));
-    									prst.setFloat(4, (balance - Float.valueOf(amount.getText())));
-    									prst.execute();
-    							
-    									stmt2.execute("insert into temp select * from trx" +uname.getText()+anumber.getText() );
-    							
-    									stmt2.execute("drop table trx" + uname.getText()+anumber.getText());
-    							
-    									stmt2.execute("alter table temp rename to trx" + uname.getText()+anumber.getText());
-    					
-    							
-    									JOptionPane.showMessageDialog(null, "Transection Successfully.");	
-    	    							normal();
+    									
+    									LocalDate date = java.time.LocalDate.now();
+   									    									
+    									if(sendMail.sendmail("Dear Customer,\n"
+    											+ "\tThe below trancation has been done using your AV-Bank Account.\n"
+    											+ "\t\tTransaction Type: Debit\n"
+    											+ "\t\tDate: "+date
+    											+ "\n\t\tAmount: Rs."+Float.valueOf(amount.getText())
+    											+ "\n\t\tAvailable Balance: Rs."+DecimalFormat.getNumberInstance().format((balance - Float.valueOf(amount.getText())))
+    											+ "\n\n\n*If not done by you - Please  contact admin.\n"
+    											+ "*This is a system generated email please do no replay.", emailid, "Transction Alert")) 
+    									 {
+    										
+    										//********************** insert data into trx. table *******************************
+    		    							
+        									stmt2.execute("update "+uname.getText()+anumber.getText()+"  set balance = " + (balance - Float.valueOf(amount.getText())));
+        							
+        									stmt2.execute("create table IF NOT EXISTS temp (date text, remarks text, type text, amount real, balance real)");
+        							
+        									prst = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
+        									prst.setString(1, remark.getText());
+        									prst.setString(2, "Debit");
+        									prst.setFloat(3, Float.valueOf(amount.getText()));
+        									prst.setFloat(4, (balance - Float.valueOf(amount.getText())));
+        									prst.execute();
+        							
+        									stmt2.execute("insert into temp select * from trx" +uname.getText()+anumber.getText() );
+        							
+        									stmt2.execute("drop table trx" + uname.getText()+anumber.getText());
+        							
+        									stmt2.execute("alter table temp rename to trx" + uname.getText()+anumber.getText());
+        									
+        									JOptionPane.showMessageDialog(null, "Trancation Successfully.");	
+        	    							normal();
+    									}else {// no need this thing is done in sendmail class
+//    										JOptionPane.showMessageDialog(null, "Please Check your Internet Connection.");
+    									}
+    									
     									
     								}else {
     									JOptionPane.showMessageDialog(null, "Insufficient Balance");
@@ -213,33 +232,46 @@ public class WithrawController implements Initializable {
     					
     							conn = sqlconnect.dbconnect();
     							try {
-    								// to get the previous balance
-    								String query = "select * from "+ uname.getText()+anumber.getText();
-    								stmt2 = conn.createStatement();
-    								rs = stmt2.executeQuery(query);
-    								float balance = rs.getFloat("balance") ;
-    										
-    								stmt2.execute("update "+uname.getText()+anumber.getText()+" set balance = " + (balance + Float.valueOf(amount.getText())));
-    							
-    								//********************** insert data into trx. table *******************************
+    								LocalDate date = java.time.LocalDate.now();
+    								if(sendMail.sendmail("Dear Customer,\n"
+											+ "\tThe below trancation has been done using your AV-Bank Account.\n"
+											+ "\t\tTransaction Type: Credit\n"
+											+ "\t\tDate: "+date
+											+ "\n\t\tAmount: Rs."+Float.valueOf(amount.getText())
+											+ "\n\n\n*If not done by you - Please  contact admin.\n"
+											+ "*This is a system generated email please do no replay.", emailid, "Transction Alert")) 
+									 {
+    									// to get the previous balance
+        								String query = "select * from "+ uname.getText()+anumber.getText();
+        								stmt2 = conn.createStatement();
+        								rs = stmt2.executeQuery(query);
+        								float balance = rs.getFloat("balance") ;
+        										
+        								stmt2.execute("update "+uname.getText()+anumber.getText()+" set balance = " + (balance + Float.valueOf(amount.getText())));
+        							
+        								//********************** insert data into trx. table *******************************
+        								
+        								stmt2.execute("create table IF NOT EXISTS temp (date text, remarks text, type text, amount real, balance real)");
+        							
+        								prst = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
+        								prst.setString(1, remark.getText());
+        								prst.setString(2, "Credit");
+        								prst.setFloat(3, Float.valueOf(amount.getText()));
+        								prst.setFloat(4, (balance + Float.valueOf(amount.getText())));
+        								prst.execute();
+        							
+        								stmt2.execute("insert into temp select * from trx" +uname.getText()+anumber.getText() );
+        							
+        								stmt2.execute("drop table trx" + uname.getText()+anumber.getText());
+        							
+        								stmt2.execute("alter table temp rename to trx"+uname.getText() +anumber.getText());
+        							
+        								JOptionPane.showMessageDialog(null, "Transection Successfully.");
+        								normal();
+									 }else {// no need this thing is done in sendmail class
+//										 JOptionPane.showMessageDialog(null, "Please Check Your Internet Connection");
+									 }
     								
-    								stmt2.execute("create table IF NOT EXISTS temp (date text, remarks text, type text, amount real, balance real)");
-    							
-    								prst = conn.prepareStatement("insert into temp values(datetime('now','localtime'), ?, ?, ?,?)");
-    								prst.setString(1, remark.getText());
-    								prst.setString(2, "Credit");
-    								prst.setFloat(3, Float.valueOf(amount.getText()));
-    								prst.setFloat(4, (balance + Float.valueOf(amount.getText())));
-    								prst.execute();
-    							
-    								stmt2.execute("insert into temp select * from trx" +uname.getText()+anumber.getText() );
-    							
-    								stmt2.execute("drop table trx" + uname.getText()+anumber.getText());
-    							
-    								stmt2.execute("alter table temp rename to trx"+uname.getText() +anumber.getText());
-    							
-    								JOptionPane.showMessageDialog(null, "Transection Successfully.");
-    								normal();
     								conn.close();
     							} catch (SQLException e) {
     								// TODO Auto-generated catch block
