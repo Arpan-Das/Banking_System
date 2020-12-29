@@ -510,7 +510,7 @@ public class BankingSystemController implements Initializable {
     		Properties props=new Properties();
             props.put("mail.smtp.host","smtp.gmail.com");
             props.put("mail.smtp.port",465);
-            props.put("mail.smtp.user","ad0084763@gmail.com"); // your email id
+            props.put("mail.smtp.user","avbank2@gmail.com"); // your email id
             props.put("mail.smtp.auth",true);
             props.put("mail.smtp.starttls.enable",true);
             props.put("mail.smtp.debug",true);
@@ -524,13 +524,13 @@ public class BankingSystemController implements Initializable {
                     MimeMessage message = new MimeMessage(session);
                     message.setText("Your OTP is " + hide.getText());	// msg send to the email id
                     message.setSubject("AV Bank ... Bank of Benifits - Email Verfication");
-                    message.setFrom(new InternetAddress("ad0084763@gmail.com"));
+                    message.setFrom(new InternetAddress("avbank2@gmail.com"));
                     message.addRecipient(RecipientType.TO, new InternetAddress(txt_emailverify.getText().trim()));		// email of the reciever
                     message.saveChanges();
                     try
                     {
                     Transport transport = session.getTransport("smtp");
-                    transport.connect("smtp.gmail.com","ad0084763@gmail.com","Light@2020");
+                    transport.connect("smtp.gmail.com","avbank2@gmail.com","Logitech@2");
                     transport.sendMessage(message, message.getAllRecipients());
                     transport.close();
                                   
@@ -550,7 +550,7 @@ public class BankingSystemController implements Initializable {
 		Properties props=new Properties();
         props.put("mail.smtp.host","smtp.gmail.com");
         props.put("mail.smtp.port",465);
-        props.put("mail.smtp.user","ad0084763@gmail.com"); // your email id
+        props.put("mail.smtp.user","avbank2@gmail.com"); // your email id
         props.put("mail.smtp.auth",true);
         props.put("mail.smtp.starttls.enable",true);
         props.put("mail.smtp.debug",true);
@@ -564,13 +564,13 @@ public class BankingSystemController implements Initializable {
                 MimeMessage message = new MimeMessage(session);
                 message.setText("Your Account Created Successfully. Login to your account using your credentials. And Enjoy Bank Benifits.!!!  |:)|");	// msg send to the email id
                 message.setSubject("AV Bank ... Bank of Benifits - Welcome");
-                message.setFrom(new InternetAddress("ad0084763@gmail.com"));
+                message.setFrom(new InternetAddress("avbank2@gmail.com"));
                 message.addRecipient(RecipientType.TO, new InternetAddress(txt_emailverify.getText().trim()));		// email of the reciever
                 message.saveChanges();
                 try
                 {
                 Transport transport = session.getTransport("smtp");
-                transport.connect("smtp.gmail.com","ad0084763@gmail.com","Light@2020");
+                transport.connect("smtp.gmail.com","avbank2@gmail.com","Logitech@2");
                 transport.sendMessage(message, message.getAllRecipients());
                 transport.close();
                               
