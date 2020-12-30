@@ -26,7 +26,10 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Label>
-            <Button layoutX="341.0" layoutY="125.0" mnemonicParsing="false" onAction="#out" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT" />
+            <Button layoutX="341.0" layoutY="125.0" mnemonicParsing="false" onAction="#out" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOGOUT">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
                 <ImageView fitHeight="141.0" fitWidth="155.0" layoutX="53.0" layoutY="110.0" onMouseClicked="#transaction" pickOnBounds="true">
                <image>
                   <Image url="Images/img4.jpg" />
@@ -47,17 +50,35 @@
                   <Image url="Images/img2.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="536.0" layoutY="453.0" mnemonicParsing="false" onAction="#out4" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FEEDBACKS" />
-            <Button layoutX="54.0" layoutY="454.0" mnemonicParsing="false" onAction="#out3" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOANS" />
-            <Button layoutX="536.0" layoutY="252.0" mnemonicParsing="false" onAction="#out2" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="USERS DETAILS" />
-            <Button layoutX="54.0" layoutY="251.0" mnemonicParsing="false" onAction="#out1" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="WITHRAW/DEPOSIT" />
+            <Button layoutX="536.0" layoutY="453.0" mnemonicParsing="false" onAction="#out4" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FEEDBACKS">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Button layoutX="54.0" layoutY="454.0" mnemonicParsing="false" onAction="#out3" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="LOANS">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Button layoutX="536.0" layoutY="252.0" mnemonicParsing="false" onAction="#out2" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="USERS DETAILS">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+            <Button layoutX="54.0" layoutY="251.0" mnemonicParsing="false" onAction="#out1" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="TRANSACTION">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
             <ImageView fitHeight="141.0" fitWidth="155.0" layoutX="302.0" layoutY="198.0" onMouseClicked="#fixed" pickOnBounds="true">
                <image>
                   <Image url="Images/img10.png" />
                </image>
             </ImageView>
-            <Button layoutX="303.0" layoutY="339.0" mnemonicParsing="false" onAction="#out5" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FIXED DEPOSITS" />
+            <Button layoutX="303.0" layoutY="339.0" mnemonicParsing="false" onAction="#out5" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="FIXED DEPOSITS">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
          </children></Pane>
-      <Button layoutX="785.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT" />
+      <Button layoutX="785.0" layoutY="1.0" mnemonicParsing="false" onAction="#exxit" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: WHITE;" text="EXIT">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
    </children>
 </AnchorPane>
