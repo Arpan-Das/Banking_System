@@ -381,6 +381,17 @@ public class BankingSystemController implements Initializable {
 		}else {
 			JOptionPane.showMessageDialog(null, "Please enter the Correct OTP or Check your Email id.");
 		}
+		txt_firstname.setText(null);
+    	txt_lastname.setText(null);
+    	txt_id.setText(null);
+    	txt_address.setText(null);
+    	txt_mobileno.setText(null);
+    	txt_emailid.setText(null);
+    	txt_username.setText(null);
+    	txt_password.setText(null);
+    	datepicker_dob.setValue(null);
+    	drop_gender.setValue(null);
+    	txt_otp.setText(null);
 	}
 
 	public void createaccount() {
@@ -398,6 +409,8 @@ public class BankingSystemController implements Initializable {
     		emailverification.setVisible(true);
     		
     	}
+    	
+    	
     	    	
     }
     
@@ -420,7 +433,11 @@ public class BankingSystemController implements Initializable {
 			
 			if(rs.next()) {
 				// ////user id found
-				JOptionPane.showMessageDialog(null, "Hello "+ rs.getString("firstname")+", Your Username is "+rs.getString("username"));
+				if(sendMail.sendmail("Dear Customer,\n" + "\tYour Username is : "+ rs.getString("username") , txt_forgetUsernameEmailid.getText(), "Forget Username")) {
+					JOptionPane.showMessageDialog(null, "Your Username is sent to your email id.");
+				}
+				
+				
 				login1.setVisible(true);
 	    		signup1.setVisible(true);
 	    		login2.setVisible(false);
@@ -429,6 +446,7 @@ public class BankingSystemController implements Initializable {
 	    		forgetpassword.setVisible(false);
 	    		emailverification.setVisible(false);
 	    		resetpassword.setVisible(false);
+	    		
 			}else {
 				///////// user id not found
 				JOptionPane.showMessageDialog(null, "Please Enter the Correct Details");
@@ -438,6 +456,9 @@ public class BankingSystemController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		txt_forgetUsernameName.setText(null);
+		txt_forgetUsernameEmailid.setText(null);
+		txt_forgetUsernameMobileno.setText(null);
 	}
 	int accno = 0;
 	public void forgetpassword(ActionEvent event) {
@@ -473,6 +494,9 @@ public class BankingSystemController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		txt_forgetPasswordUsername.setText(null);
+		txt_forgetPasswordEmailid.setText(null);
+		txt_forgetPasswordMobileno.setText(null);
 	}
 	public void resetpassword() {
 		try {
@@ -499,6 +523,8 @@ public class BankingSystemController implements Initializable {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		txt_resetPasswordNewPassword.setText(null);
+		txt_ResetRasswordConformPassword.setText(null);
 	}
 	
 
@@ -537,7 +563,7 @@ public class BankingSystemController implements Initializable {
                     JOptionPane.showMessageDialog(null,"OTP send to your Email id"); 
                     }catch(Exception e)
                     {
-                        JOptionPane.showMessageDialog(null,e);
+                        JOptionPane.showMessageDialog(null,"Invalid Emailid.");
                     }              
                 
             } catch (Exception e) {
@@ -607,3 +633,7 @@ public class BankingSystemController implements Initializable {
 		System.exit(0);
 	}
 }
+/* after 115 
+
+ */
+ 

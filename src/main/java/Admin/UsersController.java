@@ -331,5 +331,6 @@ public class UsersController implements Initializable  {
 		Update();
 		lab_name.setVisible(false);
 		txt_username.setEditable(false);
+		txt_name.setEditable(false);
 	}
 }
