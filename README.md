@@ -1,4 +1,4 @@
-# Electricity-Billing-System  
+# Banking-System  
 
 ## This app is built for following purpose:-  
 * For controlling authorized users login.  
