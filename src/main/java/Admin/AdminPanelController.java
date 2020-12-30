@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -17,6 +18,112 @@ public class AdminPanelController implements Initializable{
 
 
 	@FXML private Label Adminlbl;
+	
+	public void transaction(MouseEvent  event) {
+		try {
+			
+			((Node)event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("/Admin/Withdraw.fxml").openStream());
+			
+			WithrawController withrawcomplaints = (WithrawController)loader.getController();
+			withrawcomplaints.setName(Adminlbl.getText());
+			
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			primaryStage.show();
+			
+		} catch (Exception e) {
+			
+		}
+		
+	}
+	public void users(MouseEvent  event) {
+		try {
+			
+			((Node)event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("/Admin/Users.fxml").openStream());
+			
+			UsersController userscontroller = (UsersController)loader.getController();
+			userscontroller.setName(Adminlbl.getText());
+			
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			primaryStage.show();
+			
+		} catch (Exception e) {
+			
+		}
+		
+	}
+	public void fixed(MouseEvent  event) {
+		try {
+			
+			((Node)event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("/Admin/FixedDeposits.fxml").openStream());
+			
+			FixedDepositController fixedcomplaints = (FixedDepositController)loader.getController();
+			fixedcomplaints.setName(Adminlbl.getText());
+			
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			primaryStage.show();
+			
+		} catch (Exception e) {
+			
+		}
+		
+	}
+	public void loan(MouseEvent  event) {
+		try {
+			
+			((Node)event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("/Admin/LoanApplied.fxml").openStream());
+			
+			LoansAppliedController loanapplied = (LoansAppliedController)loader.getController();
+			loanapplied.setName(Adminlbl.getText());
+			
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			primaryStage.show();
+			
+		} catch (Exception e) {
+			
+		}
+		
+	}
+	public void complaint(MouseEvent  event) {
+		try {
+			
+			((Node)event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("/Admin/AdminComplaints.fxml").openStream());
+			
+			AdminComplaintsController admincomplaints = (AdminComplaintsController)loader.getController();
+			admincomplaints.setName(Adminlbl.getText());
+			
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			primaryStage.show();
+			
+		} catch (Exception e) {
+			
+		}
+		
+	}
 	
 		
 		public void SetAdminName(String admin) {
