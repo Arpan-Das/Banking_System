@@ -32,7 +32,7 @@
 * SQLite 
 * Email API
 
-**Database: A file named as tabel in BankingSystem.db folder filled with some dummy database.**
+**Database: A file named as BankingSystem.db filled with some dummy database.**
 
 **"Suggestions and project Improvements are Invited!"**  
   
