@@ -61,6 +61,94 @@ public class UserPanelController implements Initializable {
 	public void exxit(ActionEvent event) {
 		System.exit(0);	
 	}
+	
+	public void deposit(MouseEvent event) {
+	try {
+			
+			((Node)event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("/User/ActiveDeposit.fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			primaryStage.show();
+			
+		} catch (Exception e) {
+			
+		}
+	}
+	
+	public void loan(MouseEvent event) {
+     try {
+			
+			((Node)event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("/User/ActiveLoans.fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			primaryStage.show();
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
+	
+	public void transfer(MouseEvent event) {
+try {
+			
+			((Node)event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("/User/MoneyTransfer.fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			primaryStage.show();
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "open" + e);
+		}
+		
+	}
+	
+	public void transaction(MouseEvent event) {
+		try {
+			
+			((Node)event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("/User/RecentTransaction.fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			primaryStage.show();
+			
+		} catch (Exception e) {
+					
+		}
+		
+	}
+	
+	public void feedback(MouseEvent event) {
+		
+try {
+			
+			((Node)event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("/User/userComplaints.fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			primaryStage.show();
+			
+		} catch (Exception e) {
+			
+		}
+	}
 			
 	@FXML
 	void view_balance(MouseEvent event) {

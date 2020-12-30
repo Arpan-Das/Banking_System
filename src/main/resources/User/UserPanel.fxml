@@ -55,27 +55,27 @@
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="58.0" layoutY="107.0" pickOnBounds="true">
+            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="58.0" layoutY="107.0" onMouseClicked="#transaction" pickOnBounds="true">
                <image>
                   <Image url="Images/img3.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="299.0" layoutY="189.0" pickOnBounds="true">
+            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="299.0" layoutY="189.0" onMouseClicked="#deposit" pickOnBounds="true">
                <image>
                   <Image url="Images/img9.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="535.0" layoutY="308.0" pickOnBounds="true">
+            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="535.0" layoutY="308.0" onMouseClicked="#feedback" pickOnBounds="true">
                <image>
                   <Image url="Images/img5.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="58.0" layoutY="308.0" pickOnBounds="true">
+            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="58.0" layoutY="308.0" onMouseClicked="#loan" pickOnBounds="true">
                <image>
                   <Image url="Images/img8.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="535.0" layoutY="107.0" pickOnBounds="true">
+            <ImageView fitHeight="150.0" fitWidth="155.0" layoutX="535.0" layoutY="107.0" onMouseClicked="#transfer" pickOnBounds="true">
                <image>
                   <Image url="Images/img7.jpg" />
                </image>
