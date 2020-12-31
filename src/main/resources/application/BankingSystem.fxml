@@ -9,41 +9,51 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="560.0" prefWidth="800.0" style="-fx-background-color: #8fb7e7;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BankingSystemController">
+<AnchorPane prefHeight="560.0" prefWidth="800.0" style="-fx-background-color: #8fb7e7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BankingSystemController">
    <children>
-      <AnchorPane fx:id="login2" layoutX="209.0" layoutY="-197.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #8fb7e7;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <AnchorPane fx:id="login2" layoutX="209.0" layoutY="70.0" prefHeight="490.0" prefWidth="400.0" style="-fx-background-color: #8fb7e7;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="70.0">
          <children>
-            <TextArea editable="false" layoutX="33.0" layoutY="96.0" prefHeight="228.0" prefWidth="334.0" style="-fx-background-color: #8fb7e7;" text="1)  Please Enter a Valid mail Id. . As its important to verify your Identity and needed for furthur banking process.&#10;2)  Your Email Id will be Your Username.&#10;3)  All the (*) marks are mandetary.&#10;4) Only one user can register from 1 mail id.&#10;5) Enjoy our policies!!!!" wrapText="true">
+            <TextArea editable="false" layoutX="33.0" layoutY="75.0" prefHeight="228.0" prefWidth="334.0" style="-fx-background-color: #8fb7e7;" text="1)  Please Enter a Valid mail Id. . As its important to verify your Identity and needed for furthur banking process.&#10;2)  Your Email Id will be Your Username.&#10;3)  All the (*) marks are mandetary.&#10;4) Only one user can register from 1 mail id.&#10;5) Enjoy our policies!!!!" wrapText="true">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </TextArea>
-            <Label layoutX="68.0" layoutY="31.0" text="Important Instruction" underline="true">
+            <Label layoutX="68.0" layoutY="17.0" text="Important Instruction" underline="true">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="forgetpassword" layoutX="181.0" layoutY="69.0" style="-fx-background-color: #286bb8;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <AnchorPane fx:id="forgetpassword" layoutX="181.0" layoutY="70.0" prefHeight="490.0" prefWidth="800.0" style="-fx-background-color: #286bb8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
          <children>
             <Label layoutX="272.0" layoutY="35.0" prefHeight="44.0" prefWidth="296.0" text="Forget Password" textFill="#1b1a1a">
                <font>
                   <Font name="Berlin Sans FB Demi Bold" size="38.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="257.0" layoutY="124.0" prefHeight="20.0" prefWidth="86.0" text="Username* :" textFill="WHITE" AnchorPane.rightAnchor="457.0" />
+            <Label alignment="TOP_LEFT" layoutX="232.0" layoutY="122.0" prefHeight="25.0" prefWidth="111.0" text="Username* :" textFill="WHITE" AnchorPane.rightAnchor="457.0">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></Label>
             <TextField fx:id="txt_forgetPasswordUsername" layoutX="375.0" layoutY="122.0" prefHeight="31.0" prefWidth="193.0" promptText="Username*" />
-            <Label layoutX="257.0" layoutY="170.0" prefHeight="20.0" prefWidth="86.0" text="Email Id* :" textFill="WHITE" AnchorPane.rightAnchor="457.0" />
+            <Label layoutX="232.0" layoutY="168.0" prefHeight="25.0" prefWidth="111.0" text="Email Id* :" textFill="WHITE" AnchorPane.rightAnchor="457.0">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></Label>
             <TextField fx:id="txt_forgetPasswordEmailid" layoutX="375.0" layoutY="168.0" prefHeight="25.0" prefWidth="193.0" promptText="Email Id*" />
-            <Label alignment="TOP_LEFT" layoutX="257.0" layoutY="240.0" prefHeight="20.0" prefWidth="86.0" text="Mobile No.* :" textFill="WHITE" AnchorPane.rightAnchor="457.0" />
+            <Label alignment="TOP_LEFT" layoutX="232.0" layoutY="239.0" prefHeight="25.0" prefWidth="111.0" text="Mobile No.* :" textFill="WHITE" AnchorPane.rightAnchor="457.0">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></Label>
             <TextField fx:id="txt_forgetPasswordMobileno" layoutX="375.0" layoutY="238.0" prefHeight="31.0" prefWidth="193.0" promptText="Mobile No.*" />
-            <Label layoutX="331.0" layoutY="208.0" text="-------------OR-------------" textFill="WHITE" />
+            <Label layoutX="295.0" layoutY="208.0" text="----------------OR----------------" textFill="WHITE" />
             <Button fx:id="but_forgetPasswordSubmit" layoutX="346.0" layoutY="301.0" mnemonicParsing="false" onAction="#forgetpassword" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: white;" text="Submit">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -136,10 +146,13 @@
       </AnchorPane>
       <AnchorPane fx:id="login1" layoutX="708.0" prefHeight="560.0" prefWidth="200.0" style="-fx-background-color: #286bb8;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" layoutX="34.0" layoutY="111.0" prefHeight="31.0" prefWidth="124.0" text="Log In" textFill="#062332">
+            <Label alignment="CENTER" layoutX="31.0" layoutY="111.0" prefHeight="53.0" prefWidth="139.0" style="-fx-border-color: black; -fx-border-width: 2.5px;" text="Log In" textFill="#062332">
                <font>
                   <Font name="Arial Bold" size="40.0" />
                </font>
+               <effect>
+                  <Glow level="0.5" />
+               </effect>
             </Label>
             <TextField fx:id="txt_loginusername" layoutX="22.0" layoutY="210.0" prefHeight="25.0" prefWidth="156.0" promptText="Username*" style="-fx-background-color: white;" />
             <PasswordField fx:id="txt_loginpassword" layoutX="22.0" layoutY="271.0" prefHeight="25.0" prefWidth="156.0" promptText="Password*" style="-fx-background-color: white;" />
@@ -165,19 +178,22 @@
             </Label>
          </children>
       </AnchorPane>
-      <Label fx:id="home" alignment="CENTER" layoutX="44.0" layoutY="8.0" onMouseClicked="#visibility" prefHeight="50.0" prefWidth="187.0" style="-fx-border-color: black;" text="AV Bank" AnchorPane.topAnchor="8.0">
+      <Label fx:id="home" alignment="CENTER" layoutX="19.0" layoutY="13.0" onMouseClicked="#visibility" prefHeight="54.0" prefWidth="208.0" style="-fx-border-color: black; -fx-border-width: 3px;" text="AV Bank" AnchorPane.topAnchor="13.0">
          <font>
-            <Font name="System Bold" size="29.0" />
+            <Font name="Arial Bold" size="40.0" />
          </font>
          <cursor>
             <Cursor fx:constant="CLOSED_HAND" />
          </cursor>
+         <effect>
+            <Glow level="0.5" />
+         </effect>
       </Label>
       <Button fx:id="but_exit" layoutX="730.0" layoutY="2.0" mnemonicParsing="false" onAction="#exit" prefHeight="31.0" prefWidth="69.0" style="-fx-background-color: #4d4d4d; -fx-text-fill: white;" text="Exit" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="2.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <AnchorPane fx:id="resetpassword" layoutX="100.0" layoutY="110.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #286bb8;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <AnchorPane fx:id="resetpassword" layoutX="100.0" layoutY="70.0" prefHeight="490.0" prefWidth="800.0" style="-fx-background-color: #286bb8;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
          <children>
             <Label layoutX="288.0" layoutY="22.0" text="Reset Password" textFill="#282727">
                <font>
@@ -189,7 +205,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="241.0" layoutY="142.0" text="Conform Password* :" textFill="WHITE" AnchorPane.rightAnchor="420.0">
+            <Label layoutX="241.0" layoutY="142.0" text="Confirm Password* :" textFill="WHITE" AnchorPane.rightAnchor="420.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -206,7 +222,7 @@
             <PasswordField fx:id="txt_resetPasswordNewPassword" layoutX="418.0" layoutY="92.0" promptText="New Password*" />
             <PasswordField fx:id="txt_ResetRasswordConformPassword" layoutX="418.0" layoutY="142.0" promptText="Conform Password*" />
          </children></AnchorPane>
-      <AnchorPane fx:id="emailverification" layoutX="138.0" layoutY="110.0" prefHeight="319.0" prefWidth="511.0" style="-fx-background-color: #2b7ad0; -fx-border-color: black;" visible="false" AnchorPane.bottomAnchor="171.0" AnchorPane.leftAnchor="138.0" AnchorPane.rightAnchor="151.0" AnchorPane.topAnchor="70.0">
+      <AnchorPane fx:id="emailverification" layoutX="138.0" layoutY="73.0" prefHeight="319.0" prefWidth="511.0" style="-fx-background-color: #2b7ad0; -fx-border-color: black;" visible="false" AnchorPane.bottomAnchor="168.0" AnchorPane.leftAnchor="138.0" AnchorPane.rightAnchor="151.0" AnchorPane.topAnchor="73.0">
          <children>
             <Label layoutX="184.0" layoutY="31.0" text="Email Verification" textFill="WHITE" underline="true">
                <font>
@@ -231,7 +247,7 @@
             <TextField fx:id="hide" editable="false" layoutX="10.0" layoutY="223.0" prefHeight="25.0" prefWidth="98.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="forgetusername" layoutX="233.0" layoutY="96.0" style="-fx-background-color: #286bb8;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <AnchorPane fx:id="forgetusername" layoutX="233.0" layoutY="70.0" prefHeight="490.0" prefWidth="800.0" style="-fx-background-color: #286bb8;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
          <children>
             <Label layoutX="282.0" layoutY="29.0" prefHeight="45.0" prefWidth="320.0" text="Forget Username" textFill="#2c2a2a">
                <font>
