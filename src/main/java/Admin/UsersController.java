@@ -27,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import userDom.SplitTheName;
 
 public class UsersController implements Initializable  {
 	
@@ -94,17 +95,18 @@ public class UsersController implements Initializable  {
     PreparedStatement ps = null;
     Statement stmt;
     
-    public void Add_user() {
+    public void Add_user(){
     	
     	//*************************** new account created by admin ****************************************
     	
     	if(!(txt_name.getText().trim().isEmpty() && txt_gender.getText().trim().isEmpty()&& txt_id.getText().trim().isEmpty() && txt_email.getText().trim().isEmpty() && txt_username.getText().trim().isEmpty())){
     		conn = sqlconnect.dbconnect();
+    		SplitTheName.split(txt_name.getText());
     		try {
     			ps = conn.prepareStatement("insert into user(firstname, lastname,gender, dob, id, address, emailid, mobileno,username,password, datetime) values(?,?,?,?,?,?,?,?,?,?, datetime('now','localtime'))");
 			
-    			ps.setString(1, txt_name.getText());
-    			ps.setString(2, " ");
+    			ps.setString(1, SplitTheName.getFirstname());
+    			ps.setString(2, SplitTheName.getLastname());
     			ps.setString(3, txt_gender.getText());
     			ps.setString(4, "Nil");
     			ps.setString(5, txt_id.getText());
@@ -189,23 +191,26 @@ public class UsersController implements Initializable  {
     public void Edit(ActionEvent event){
     	if(!txt_anumber.getText().isEmpty()){
     		try{
+    			SplitTheName.split(txt_name.getText());
     			conn = sqlconnect.dbconnect();
     			String id = txt_id.getText();
     			String username = txt_username.getText();
     			String gender = txt_gender.getText();
     			String email = txt_email.getText();
-    			String name = txt_name.getText();
+    			String firstname = SplitTheName.getFirstname();
+    			String lastname = SplitTheName.getLastname();
     			String anumber = txt_anumber.getText();
     			String mnumber = txt_mnumber.getText();
     		
-    			ps = conn.prepareStatement("update user set firstname = ? , lastname = ' ', gender = ? , id = ?, emailid = ? , mobileno = ? , username = ? where accno = ?  ");
-    			ps.setString(1, name);
-    			ps.setString(2, gender);
-    			ps.setString(3, id);
-    			ps.setString(4, email);
-    			ps.setString(5, mnumber);
-    			ps.setString(6, username);
-    			ps.setString(7, anumber);
+    			ps = conn.prepareStatement("update user set firstname = ? , lastname = ? , gender = ? , id = ?, emailid = ? , mobileno = ? , username = ? where accno = ?  ");
+    			ps.setString(1, firstname);
+    			ps.setString(2, lastname);
+    			ps.setString(3, gender);
+    			ps.setString(4, id);
+    			ps.setString(5, email);
+    			ps.setString(6, mnumber);
+    			ps.setString(7, username);
+    			ps.setString(8, anumber);
     			ps.execute();
     			
     			JOptionPane.showMessageDialog(null, "Successfully Updated");
@@ -330,7 +335,7 @@ public class UsersController implements Initializable  {
 		// TODO Auto-generated method stub
 		Update();
 		lab_name.setVisible(false);
-		txt_username.setEditable(false);
-		txt_name.setEditable(false);
+
+		txt_anumber.setEditable(false);
 	}
 }

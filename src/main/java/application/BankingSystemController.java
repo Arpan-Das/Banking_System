@@ -40,6 +40,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import userDom.SplitTheName;
 
 public class BankingSystemController implements Initializable {
     @FXML
@@ -417,17 +418,19 @@ public class BankingSystemController implements Initializable {
 	public void forgetusername() {
 		conn = sqlconnect.dbconnect();
 		try {
-			prst= conn.prepareStatement("select *from user where (firstname = ?) and (emailid = ? or mobileno = ?)");
-			prst.setString(1, txt_forgetUsernameName.getText());
+			SplitTheName.split(txt_forgetUsernameName.getText()); // it will split the name into firstname and lastname
+			prst= conn.prepareStatement("select *from user where (firstname = ?) and (lastname = ?) and (emailid = ? or mobileno = ?)");
+			prst.setString(1, SplitTheName.getFirstname());
+			prst.setString(2, SplitTheName.getLastname());
 			
-			if(txt_forgetUsernameMobileno.getText().trim().isEmpty()) {
+			if(txt_forgetUsernameMobileno.getText().isEmpty()) {
 				/////user enter the email id
-				prst.setString(2, txt_forgetUsernameEmailid.getText());
-				prst.setString(3, null);
+				prst.setString(3, txt_forgetUsernameEmailid.getText());
+				prst.setString(4, null);
 			}else {
 				//////user enter the mobile no
-				prst.setString(2, null);
-				prst.setString(3, txt_forgetUsernameMobileno.getText());
+				prst.setString(3, null);
+				prst.setString(4, txt_forgetUsernameMobileno.getText());
 			}
 			rs = prst.executeQuery();
 			
@@ -456,17 +459,19 @@ public class BankingSystemController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		txt_forgetUsernameName.setText(null);
-		txt_forgetUsernameEmailid.setText(null);
-		txt_forgetUsernameMobileno.setText(null);
+		txt_forgetUsernameName.setText("");
+		txt_forgetUsernameEmailid.setText("");
+		txt_forgetUsernameMobileno.setText("");
+		SplitTheName.setFirstname(null);
+		SplitTheName.setLastname(null);
 	}
 	int accno = 0;
 	public void forgetpassword(ActionEvent event) {
 		conn = sqlconnect.dbconnect();
 		try {
-			
+						
 			prst = conn.prepareStatement("select *from user where username = ? and (emailid =? or mobileno =?)");
-			prst.setString(1, txt_forgetPasswordUsername.getText());
+			prst.setString(1, txt_forgetPasswordUsername.getText().trim());
 			
 			if(txt_forgetUsernameMobileno.getText().trim().isEmpty()) {
 				/////user enter the email id
@@ -494,9 +499,9 @@ public class BankingSystemController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		txt_forgetPasswordUsername.setText(null);
-		txt_forgetPasswordEmailid.setText(null);
-		txt_forgetPasswordMobileno.setText(null);
+		txt_forgetPasswordUsername.setText("");
+		txt_forgetPasswordEmailid.setText("");
+		txt_forgetPasswordMobileno.setText("");
 	}
 	public void resetpassword() {
 		try {
